@@ -151,7 +151,7 @@
 
 
   var Override = {
-    name : 'yukiverride',
+    name : 'yukiOverride',
     scriptid : 'GtHueEHH',
     initialize : function () {
       Override.general.registerSettings();
