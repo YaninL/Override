@@ -1,15 +1,15 @@
 // ==UserScript==
 // @name         yukiOverride
 // @namespace    yukiOverride
-// @version      2.2.0
+// @version      2.2.4
 // @description  Allow copy novel to clipboard or text file for backup
 // @author       Ann
 // @icon         https://raw.githubusercontent.com/YaninL/Override/master/logo.png
 // @homepage     https://github.com/YaninL/Override
-// @updateURL    https://raw.githubusercontent.com/YaninL/Override/master/yukiOverride.js
-// @downloadURL  https://raw.githubusercontent.com/YaninL/Override/master/yukiOverride.js
-// @require      https://raw.githubusercontent.com/YaninL/Override/master/jquery.js
-// @require      https://raw.githubusercontent.com/YaninL/Override/master/filesaver.js
+// @updateURL    https://raw.githubusercontent.com/YaninL/Override/master/yuki/yukiOverride.js
+// @downloadURL  https://raw.githubusercontent.com/YaninL/Override/master/yuki/yukiOverride.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js
 // @include      http://*
 // @include      https://*
 // @connect      githubusercontent.com
