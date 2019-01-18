@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         yukiOverride
-// @namespace    yukiOverride
-// @version      2.2.4
+// @homepage     https://github.com/YaninL/Override/yuki
+// @version      2.3.0
 // @description  Allow copy novel to clipboard or text file for backup
 // @author       Ann
 // @icon         https://raw.githubusercontent.com/YaninL/Override/master/logo.png
-// @homepage     https://github.com/YaninL/Override
+// @homepage     https://github.com/YaninL/Override/yuki
+// @supportURL   https://github.com/YaninL/Override/yuki
 // @updateURL    https://raw.githubusercontent.com/YaninL/Override/master/yuki/yukiOverride.js
 // @downloadURL  https://raw.githubusercontent.com/YaninL/Override/master/yuki/yukiOverride.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js
@@ -80,7 +81,7 @@
         contentArea : [$('.chaptername, #content-area')][0]
       },
       'writer.dek-d.com' : {
-        acceptPath : /writer\/viewlongc/i,
+        acceptPath : /story\/viewlongc/i,
         remove : $('script'),
         doubleClickArea : $('#story-content')[0],
         contentArea : [$('.chaptername, #story-content')][0]
@@ -101,6 +102,7 @@
         contentArea : [$('.entry-title, .entry-content')][0]
       },
       'facebook.com' : {
+        skipbypass : true,
         acceptPath : /notes/i,
         doubleClickArea : $('._39k5')[0],
         contentArea : [$('._4lmk, ._39k5')][0]
@@ -134,6 +136,7 @@
         acceptPath : /read/i
       },
       'docs.google.com' : {
+        skipbypass : true,
         acceptPath : /document\/d\/.*mobilebasic/i,
         doubleClickArea : $('.doc-container')[0],
         contentArea : [$('.doc-container')][0]
@@ -146,8 +149,9 @@
     }
   };
 
+
   var Override = {
-    name : 'Copy Override',
+    name : 'yukiverride',
     scriptid : 'GtHueEHH',
     initialize : function () {
       Override.general.registerSettings();
@@ -172,9 +176,9 @@
         runScript : true,
         hideOptionMunu : false
       },
-      scriptUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/yukiScript.json',
-      charUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/yukiencryptchardb.json',
-      cleanwordUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/cleanupword.json',
+      scriptUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/yuki/EncryptScripts.json',
+      charUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/yuki/EncryptChar.json',
+      cleanwordUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/Data/CleanupWord.json',
       handlerName : [
         'contextmenu', 'copy', 'cut', 'paste', 'mousedown', 'mouseup', 'beforeunload', 'beforeprint', 'keyup',
         'keydown', 'select', 'selectstart', 'selectionchang'
@@ -198,20 +202,24 @@
       ]
     },
     contentAddCopy : function () {
+      if (Override.helper.getValue('runScript') == false) return;
       if (NovelSetting.webElement.hasOwnProperty(Override.hostName)) {
-        Override.removeProtection.removeProtectionWindow(window);
-        Override.removeProtection.removeProtectionWindow(document);
-        Override.removeProtection.removeCssProtection();
         if(Override.options.hideOptionMunu == false) {
           Override.optionMunu();
         }
-        if (Override.helper.getValue('runScript') == false) return;
         var webElement = NovelSetting.webElement[Override.hostName];
+        if (webElement.hasOwnProperty('acceptPath')) {
+          console.log('Override : Accept path', webElement.acceptPath.test(Override.pathName));
+          if (webElement.acceptPath.test(Override.pathName) == false){
+            if (webElement.hasOwnProperty('skipbypass') == false) {
+              Override.removeProtection.removeProtection();
+            }
+            return;
+          }
+        }
+        Override.removeProtection.removeProtection();
         if (webElement.hasOwnProperty('remove')) {
           webElement.remove.remove();
-        }
-        if (webElement.hasOwnProperty('acceptPath')) {
-          if (webElement.acceptPath.test(Override.pathName) == false) return;
         }
         if (NovelSetting.specialDecrypt.hasOwnProperty(Override.hostName)) {
           NovelSetting.specialDecrypt[Override.hostName]();
@@ -230,6 +238,11 @@
       }
     },
     removeProtection : {
+      removeProtection: function () {
+        Override.removeProtection.removeProtectionWindow(window);
+        Override.removeProtection.removeProtectionWindow(document);
+        Override.removeProtection.removeCssProtection();
+      },
       removeProtectionWindow : function (protectedWindow) {
         for(var i in Override.scriptSetting.handlerName) {
           var handlerName = Override.scriptSetting.handlerName[i];
@@ -251,14 +264,14 @@
       },
     },
     addCommands : function () {
-      GM_registerMenuCommand('Override update database', function(){Override.updateDB();})
+      GM_registerMenuCommand(Override.name + ' update database', function(){Override.updateDB();})
     },
     optionMunu : function () {
       GM_addStyle(Override.scriptSetting.customCss.join('\n'));
       if(window.parent == window.self) {
       var menu = [
         '<div class="dropoverride"><div class="dropup">',
-        '<button class="dropbtn">◆◇ yukiOverride ◇◆</button><div class="dropup-content">',
+        '<button class="dropbtn">◆◇ ' + Override.name + ' ◇◆</button><div class="dropup-content">',
         '<div><input type="checkbox" id="saveFile" style=""' + (Override.helper.getValue('saveFile') ? ' checked':'') + '>Copy to file</div>',
         '<div><input type="checkbox" id="autoCopy"' + (Override.helper.getValue('autoCopy') ? ' checked':'') + '>Auto Copy</div>',
         '</div></div></div>'
@@ -303,7 +316,7 @@
       if(Override.helper.getValue('saveFile')) {
         var text = selection.toString();
         var filename = Override.getFilename(text.replace(/http.*/i, '').substring(0, 100));
-        var blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
+        var blob = new Blob([text.replace(/\n\n/g, '\r\n\r\n')], {type: 'text/plain;charset=utf-8'});
         saveAs(blob, filename);
       } else {
         GM_setClipboard();
@@ -342,7 +355,7 @@
         }
         if(in_line >= 1 && textline == input_line[0].trim()) continue;
         if(textline == '') continue;
-        output += textline + '\r\n\r\n';
+        output += textline + '\n\n';
       }
       return output.trim();
     },
