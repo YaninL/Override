@@ -1,16 +1,17 @@
 // ==UserScript==
 // @name         Copy Override - Master
-// @namespace    Copy-Override
-// @version      2.3.0
+// @homepage     https://github.com/YaninL/Override
+// @version      2.5.0
 // @description  Allow copy novel to clipboard or text file for backup
 // @author       Rin
-// @icon         https://i.imgur.com/Fvu5RPq.png
+// @icon         https://raw.githubusercontent.com/YaninL/Override/master/logo.png
 // @homepage     https://github.com/YaninL/Override
-// @updateURL    https://pastebin.com/raw/GtHueEHH
-// @downloadURL  https://pastebin.com/raw/GtHueEHH
-// @require      https://pastebin.com/raw/0u3LFHqH
-// @require      https://pastebin.com/raw/jnUcPyWK
-// @require      https://pastebin.com/raw/5LC3d9rs
+// @supportURL   https://github.com/YaninL/Override
+// @updateURL    https://raw.githubusercontent.com/YaninL/Override/master/Override.js
+// @downloadURL  https://raw.githubusercontent.com/YaninL/Override/master/Override.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js
+// @require      https://raw.githubusercontent.com/YaninL/Override/master/GoshujinDecoder.min.js
 // @include      http://*
 // @include      https://*
 // @connect      githubusercontent.com
@@ -30,146 +31,28 @@
 
   'use strict';
 
+  jQuery.noConflict();
+
   var NovelSetting = {
     webElement : {
-      'amnovel.com' : {
-        acceptPath : /subcon\.php/i,
-        remove : $('#background'),
-        doubleClickArea : $('#buttons')[0],
-        contentArea : $('div[style^="font-size: 22px"], #buttons')
-      },
-      'kawebook.com' : {
-        acceptPath : /story\/\d+\/\d+/i,
-        remove : $('#protect'),
-        doubleClickArea : $('#read_content')[0],
-        contentArea : [$('.readstory-storyname, #read_content')][0]
-      },
-      'spoilsoc.com' : {
-        remove : $('#background'),
-        doubleClickArea : $('#content')[0],
-        contentArea : [$('#content')[0]]
-      },
-      'hellfact.com' : {
-        acceptPath : /chapter/i,
-        remove : $('.headline-top, .seed-social'),
-        doubleClickArea : $('.entry-content')[0],
-        contentArea : [$('.main-title, .entry-content')][0]
-      },
-      'thai-novel.com' : {
-        doubleClickArea : $('.td-post-content')[0],
-        contentArea : $('h1.entry-title, .td-post-content')
-      },
-      'tunwalai.com' : {
-        acceptPath : /chapter/i,
-        doubleClickArea : $('#story-detail')[0],
-        contentArea : [$('.story-title-bar, #story-detail')][0]
-      },
-      'hongsamut.com' : {
-        acceptPath : /fiction\/chapter/i,
-        doubleClickArea : $('#changecolor')[0],
-        contentArea : [$('#changecolor')[0]]
-      },
-      'nekopost.net' : {
-        acceptPath : /novel\/\d+\/\d+/i,
-        doubleClickArea : $('.display_content')[0],
-        contentArea : [$('.display_content h4, .display_content p')][0]
-      },
-      'my.dek-d.com' : {
-        acceptPath : /writer\/viewlongc/i,
-        doubleClickArea : $('#content-area')[0],
-        remove : $('script'),
-        contentArea : [$('.chaptername, #content-area')][0]
-      },
-      'writer.dek-d.com' : {
-        acceptPath : /writer\/viewlongc/i,
-        remove : $('script'),
-        doubleClickArea : $('#story-content')[0],
-        contentArea : [$('.chaptername, #story-content')][0]
-      },
-      'sainamrin.blogspot.com' : {
-        acceptPath : /\d{4,}\/\d{1,}/i,
-        doubleClickArea : $('.entry-content')[0],
-        contentArea : [$('.entry-content')][0]
-      },
-      'ispoil.blogspot.com' : {
-        acceptPath : /\d{4,}\/\d{1,}/i,
-        doubleClickArea : $('#content-wrapper')[0],
-        contentArea : [$('.entry-content')][0]
-      },
-      'imakeuread.blogspot.com' : {
-        acceptPath : /\d{4,}\/\d{1,}/i,
-        doubleClickArea : $('.entry-content')[0],
-        contentArea : [$('.entry-title, .entry-content')][0]
-      },
-      'facebook.com' : {
-        acceptPath : /notes/i,
-        doubleClickArea : $('._39k5')[0],
-        contentArea : [$('._4lmk, ._39k5')][0]
-      },
-      'readgos.yuki2th.xyz' : {},
-      'rakeaan.com' : {
-        acceptPath : /th\/tofiction_story/i,
-        remove : $('.post-meta'),
-        doubleClickArea : $('.contents')[0],
-        contentArea : [$('.page-info h3, .contents .postdtl-info')][0]
-      },
-      'seek-novel.com' : {
-        specialDecrypt : 'seek-novel.com'
-      },
-      'nonbiri.yuki2th.xyz' : {
-        specialDecrypt : 'seek-novel.com'
-      },
-      'vision.yuki2th.xyz' : {
-        specialDecrypt : 'seek-novel.com'
-      },
-      'storynovelclub.com' : {
-        acceptPath : /novels/i,
-        doubleClickArea : $('.single-movie-player')[0],
-        contentArea : [$('div h2:not(.widgettitle), .single-movie-player p')][0]
-      },
-      'clubzap.org' : {},
-      'fictionlog.co' : {},
-      'tard-niyai.com' : {
-      acceptPath : /read/i
-      },
-      'readawrite.com' : {
-        acceptPath : /c\//i,
-      },
-      'novelrealm.com' : {
-        acceptPath : /read/i
-      },
-      'og-thai.blogspot.com' : {},
-      'bjknovel.com' : {
-        acceptPath : /pdfReader\.php/i
-      },
-      'goshujin.tk' : {},
-      'numberxxi.blogspot.com' : {},
-      'docs.google.com' : {
-        acceptPath : /document\/d\/.*mobilebasic/i,
-        doubleClickArea : $('.doc-container')[0],
-        contentArea : [$('.doc-container')][0]
-      },
-      'read-thai.com' : {}
-    },
-    validationWord : ['ได้', 'ไม่', 'ที่'],
-    specialDecrypt : {
-      'amnovel.com' : function () {
-        if(Override.pathName.startsWith('/subcon.php') == false) return;
-        //var html = $('body')[0].innerHTML.replace(/view\.php\?id=/g, 'subcon.php?idchkx=');
-        //$('body')[0].innerHTML = html;
-        if(Override.pathName.startsWith('/subcon.php') && $('input[type="submit"]').length) {
-          //$('input[type="submit"]').trigger('click');
-          return;
-        }
-      },
-      'tunwalai.com': function () {
-        if(Override.helper.getValue("botDownload")){setTimeout(function(){
-          $('.fs-17')[1].click();
-        }, 500);}
-        if(Override.helper.getValue("botDownload")){setTimeout(function(){
-          //$('.btn-tunwalai-new')[2].click();
-        }, 5000);}
+      // your script here
+      'template' : function (){
+        Override.webElement = {
+          acceptPath : /ba/i,
+          skipbypass : false,
+          skipsource : false,
+          selectDecrypt : '',
+          remove : '',
+          doubleClickArea : jQuery('#buttons')[0],
+          contentArea : jQuery('div[style^="font-size: 22px"], #buttons'),
+          decrypt : function () {
+            // your decrypt script here
+          }
+        };
       }
+    },
+    cleanupWord : {
+      // your word here
     }
   };
 
@@ -183,25 +66,23 @@
       Override.contentAddCopy()
     },
     options : {},
-    Script : {},
+    webElement : {},
+    Decrypt : {},
+    cleanupWord : {},
     thaiChar : {},
-    DecryptChar : {},
     encryptChar : {},
     novelContent : null,
     novelDecrypt : null,
-    specialDecrypt : {},
     scriptSetting : {
       scriptOption : {
         saveFile : true,
         autoCopy : false,
         addUri : false,
         botDownload : false,
-        runScript : true,
-        hideOptionMunu : false
+        runScript : true
       },
-      scriptUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/scripts.json',
-      charUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/encryptchardb.json',
-      cleanwordUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/cleanupword.json',
+      decryptUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/Data/DecryptScripts.json',
+      cleanwordUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/Data/CleanupWord.json',
       handlerName : [
         'contextmenu', 'copy', 'cut', 'paste', 'mousedown', 'mouseup', 'beforeunload', 'beforeprint', 'keyup',
         'keydown', 'select', 'selectstart', 'selectionchang'
@@ -222,41 +103,53 @@
         '.dropup-content div:hover {background: #9fbeff;}',
         '.dropup:hover .dropup-content {display: block;}',
         '.dropup:hover .dropbtn {background: #2980B9;}'
-      ]
+      ],
+      validationWord : ['ได้', 'ไม่', 'ที่']
     },
     contentAddCopy : function () {
+      if (Override.helper.getValue('runScript') == false) return;
       if (NovelSetting.webElement.hasOwnProperty(Override.hostName)) {
-        Override.removeProtection.removeProtectionWindow(window);
-        Override.removeProtection.removeProtectionWindow(document);
-        Override.removeProtection.removeCssProtection();
-        if(Override.options.hideOptionMunu == false) {
-          Override.optionMunu();
-        }
-        if (Override.helper.getValue('runScript') == false) return;
-        var webElement = NovelSetting.webElement[Override.hostName];
-        if (webElement.hasOwnProperty('remove')) {
-          webElement.remove.remove();
-        }
-        if (webElement.hasOwnProperty('acceptPath')) {
-          if (webElement.acceptPath.test(Override.pathName) == false) return;
-        }
-        if (NovelSetting.specialDecrypt.hasOwnProperty(Override.hostName)) {
-          NovelSetting.specialDecrypt[Override.hostName]();
-        }else if (Override.Script.hasOwnProperty(Override.hostName)) {
-          eval(Override.helper.base64Decode(Override.Script[Override.hostName]));
-        }else if (webElement.hasOwnProperty('specialDecrypt')) {
-          NovelSetting.specialDecrypt[webElement.specialDecrypt]();
-        }
-        if (webElement.hasOwnProperty('doubleClickArea')) {
-          if(webElement.doubleClickArea.length == 0 || webElement.contentArea.length == 0) {
-            return;
-          }else{
-            Override.addDoubleClickEvent(webElement.doubleClickArea, webElement.contentArea);
+        Override.webElement = NovelSetting.webElement[Override.hostName];
+      } else if (Override.Decrypt.hasOwnProperty(Override.hostName)) {
+        eval(Override.helper.base64Decode(Override.Decrypt[Override.hostName]));
+      } else {
+        return;
+      }
+      if (Override.webElement.hasOwnProperty('selectDecrypt')) {
+        eval(Override.helper.base64Decode(Override.webElement[Override.webElement.selectDecrypt]));
+      }
+      Override.optionMunu();
+      console.log(Override.webElement);
+      if (Override.webElement.hasOwnProperty('acceptPath')) {
+        console.log('Override : Accept path', Override.webElement.acceptPath.test(Override.pathName));
+        if (Override.webElement.acceptPath.test(Override.pathName) == false){
+          if (Override.webElement.hasOwnProperty('skipbypass') == false) {
+            Override.removeProtection.removeProtection();
           }
+          return false;
+        }
+      }
+      Override.removeProtection.removeProtection();
+      if (Override.webElement.hasOwnProperty('remove')) {
+        Override.webElement.remove.remove();
+      }
+      if (Override.webElement.hasOwnProperty('decrypt')) {
+        Override.webElement.decrypt();
+      }
+      if (Override.webElement.hasOwnProperty('doubleClickArea')) {
+        if(Override.webElement.doubleClickArea.length == 0 || Override.webElement.contentArea.length == 0) {
+          return;
+        }else{
+          Override.addDoubleClickEvent(Override.webElement.doubleClickArea, Override.webElement.contentArea);
         }
       }
     },
     removeProtection : {
+      removeProtection: function () {
+        Override.removeProtection.removeProtectionWindow(window);
+        Override.removeProtection.removeProtectionWindow(document);
+        Override.removeProtection.removeCssProtection();
+      },
       removeProtectionWindow : function (protectedWindow) {
         for(var i in Override.scriptSetting.handlerName) {
           var handlerName = Override.scriptSetting.handlerName[i];
@@ -278,14 +171,14 @@
       },
     },
     addCommands : function () {
-      GM_registerMenuCommand('CopyOverride update database', function(){Override.updateDB();})
+      GM_registerMenuCommand(Override.name + ' update database', function(){Override.updateDB();})
     },
     optionMunu : function () {
       GM_addStyle(Override.scriptSetting.customCss.join('\n'));
       if(window.parent == window.self) {
       var menu = [
         '<div class="dropoverride"><div class="dropup">',
-        '<button class="dropbtn">◆◇ Copy Override ◇◆</button><div class="dropup-content">',
+        '<button class="dropbtn">◆◇ ' + Override.name + ' ◇◆</button><div class="dropup-content">',
         '<div><input type="checkbox" id="runScript"' + (Override.helper.getValue('runScript') ? ' checked':'') + '>Run Script</div>',
         '<div><input type="checkbox" id="saveFile" style=""' + (Override.helper.getValue('saveFile') ? ' checked':'') + '>Copy to file</div>',
         '<div><input type="checkbox" id="autoCopy"' + (Override.helper.getValue('autoCopy') ? ' checked':'') + '>Auto Copy</div>',
@@ -293,20 +186,20 @@
         '<div><input type="checkbox" id="botDownload"' + (Override.helper.getValue('botDownload') ? ' checked':'') + '>Bot Download</div>',
         '</div></div></div>'
       ];
-      $('body').append(menu.join(''));
-      $('#saveFile')[0].addEventListener('click', function(){Override.helper.setValue('saveFile', $('#saveFile')[0].checked);});
-      $('#autoCopy')[0].addEventListener('click', function(){Override.helper.setValue('autoCopy', $('#autoCopy')[0].checked);});
-      $('#addUri')[0].addEventListener('click', function(){Override.helper.setValue('addUri', $('#addUri')[0].checked);});
-      $('#botDownload')[0].addEventListener('click', function(){
-        Override.helper.setValue('botDownload', $('#botDownload')[0].checked);
-        Override.helper.setValue('autoCopy', $('#autoCopy')[0].checked);
+      jQuery('body').append(menu.join(''));
+      jQuery('#saveFile')[0].addEventListener('click', function(){Override.helper.setValue('saveFile', jQuery('#saveFile')[0].checked);});
+      jQuery('#autoCopy')[0].addEventListener('click', function(){Override.helper.setValue('autoCopy', jQuery('#autoCopy')[0].checked);});
+      jQuery('#addUri')[0].addEventListener('click', function(){Override.helper.setValue('addUri', jQuery('#addUri')[0].checked);});
+      jQuery('#botDownload')[0].addEventListener('click', function(){
+        Override.helper.setValue('botDownload', jQuery('#botDownload')[0].checked);
+        Override.helper.setValue('autoCopy', jQuery('#autoCopy')[0].checked);
       });
-      $('#runScript')[0].addEventListener('click', function(){Override.helper.setValue('runScript', $('#runScript')[0].checked);});
+      jQuery('#runScript')[0].addEventListener('click', function(){Override.helper.setValue('runScript', jQuery('#runScript')[0].checked);});
       }
     },
     decryptValidation : function () {
       for (var i in NovelSetting.validationWord) {
-        if(Override.novelDecrypt.indexOf(NovelSetting.validationWord[i]) == -1) return false;
+        if(Override.novelDecrypt.indexOf(Override.scriptSetting.validationWord[i]) == -1) return false;
       }
       return true;
     },
@@ -319,33 +212,33 @@
       }
     },
     setClipboard : function (target) {
-      $('body').append('<div id="clipboard"></div>');
-      if(Override.helper.getValue('addUri') && Override.hostName.indexOf('clubzap') == -1) {
-        $('#clipboard').append(Override.helper.uriDocode(window.location)+ '<br>');
+      jQuery('body').append('<div id="clipboard"></div>');
+      if(Override.helper.getValue('addUri') && Override.webElement.hasOwnProperty('skipsource') == false) {
+        jQuery('#clipboard').append(Override.helper.uriDocode(window.location)+ '<br>');
       }
       for(var i=0;i<target.length;i++) {
         var textContent = Override.cleanup(target[i].innerText).replace(/\n/g, '<br>');
-        $('#clipboard').append(textContent);
-        (i+1) < target.length ? $('#clipboard').append('<br><br>') : null;
+        jQuery('#clipboard').append(textContent);
+        (i+1) < target.length ? jQuery('#clipboard').append('<br><br>') : null;
         console.log(target[i]);
       }
       var selection = window.getSelection();
       selection = window.getSelection();
       var range = document.createRange();
-      range.selectNodeContents($('#clipboard')[0]);
+      range.selectNodeContents(jQuery('#clipboard')[0]);
       selection.removeAllRanges();
       setTimeout(function(){}, 50);
       selection.addRange(range);
       if(Override.helper.getValue('saveFile')) {
         var text = selection.toString();
         var filename = Override.getFilename(text.replace(/http.*/i, '').substring(0, 100));
-        var blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
+        var blob = new Blob([text.replace(/\n\n/g, '\r\n\r\n')], {type: 'text/plain;charset=utf-8'});
         saveAs(blob, filename);
       } else {
         GM_setClipboard();
         Override.helper.notification('คัดลอกเนื้อหาไปยังคลิปบอร์ดแล้ว', 3000);
       }
-      $('#clipboard').remove();
+      jQuery('#clipboard').remove();
       selection.removeAllRanges();
     },
     getFilename : function (content){
@@ -364,9 +257,12 @@
       return filename + '.txt';
     },
     cleanup : function (input) {
-      var regexCleanup = Object.entries(Override.options.cleanupWord.common);
-      if(Override.options.cleanupWord.hasOwnProperty(Override.hostName)){
-        Array.prototype.push.apply(regexCleanup, Object.entries(Override.options.cleanupWord[Override.hostName]));
+      var regexCleanup = Object.entries(Override.cleanupWord.common);
+      if(Override.cleanupWord.hasOwnProperty(Override.hostName)){
+        Array.prototype.push.apply(regexCleanup, Object.entries(Override.cleanupWord[Override.hostName]));
+      }
+      if(NovelSetting.cleanupWord.hasOwnProperty(Override.hostName)){
+        Array.prototype.push.apply(regexCleanup, Object.entries(NovelSetting.cleanupWord[Override.hostName]));
       }
       var input_line = input.split('\n');
       var output = '';
@@ -378,7 +274,7 @@
         }
         if(in_line >= 1 && textline == input_line[0].trim()) continue;
         if(textline == '') continue;
-        output += textline + '\r\n\r\n';
+        output += textline + '\n\n';
       }
       return output.trim();
     },
@@ -395,14 +291,14 @@
       return str;
     },
     decode : function (s) {
-      return Override.helper.base64Decode($.isArray(s)? s.join('') : s).split('');
+      return Override.helper.base64Decode(jQuery.isArray(s)? s.join('') : s).split('');
     },
     general : {
       windowLocation : function () {
         Override.helper.uriDocode(window.location)
       },
       addSourcetoHead : function () {
-        $('head').prepend('<link href="' + window.location + '" rel="canonical"/>')
+        jQuery('head').prepend('<link href="' + window.location + '" rel="canonical"/>')
       },
       registerSettings : function () {
         for (var optionName in Override.scriptSetting.scriptOption) {
@@ -411,32 +307,21 @@
               ? Override.helper.getValue(optionName) : Override.scriptSetting.scriptOption[optionName];
           }
         }
-        if (Override.helper.getValue('DecryptChar') == null
+        if (Override.helper.getValue('Decrypt') == null
             || Override.helper.getValue('cleanupWord') == null) {
           Override.updateDB();
         }
-        Override.DecryptChar = Override.helper.getValue('DecryptChar');
-        Override.Script = Override.helper.getValue('Script');
-        Override.options.cleanupWord = Override.helper.getValue('cleanupWord');
+        Override.Decrypt = Override.helper.getValue('Decrypt');
+        Override.cleanupWord = Override.helper.getValue('cleanupWord');
       },
     },
     updateDB : function () {
       GM_xmlhttpRequest ( {
         method: 'GET',
-        url: Override.scriptSetting.scriptUpdate + '?' + Date.now(),
+        url: Override.scriptSetting.decryptUpdate + '?' + Date.now(),
         onload: function(response) {
-          Override.helper.setValue('Script', JSON.parse(response.responseText));
-          Override.Script = Override.helper.getValue('Script');
-          Override.helper.notification('Scripts has been update... ' + Override.Script.updatetime, 3000);
-        }
-      });
-      GM_xmlhttpRequest ( {
-        method: 'GET',
-        url: Override.scriptSetting.charUpdate + '?' + Date.now(),
-        onload: function(response) {
-          Override.helper.setValue('DecryptChar', JSON.parse(response.responseText));
-          Override.DecryptChar = Override.helper.getValue('DecryptChar');
-          Override.helper.notification('Char has been update... ' + Override.DecryptChar.updatetime, 3000);
+          Override.helper.setValue('Decrypt', JSON.parse(response.responseText));
+          Override.helper.notification('Decrypt has been update... ' + Override.Decrypt.updatetime, 3000);
         }
       });
       GM_xmlhttpRequest ( {
@@ -444,7 +329,7 @@
         url: Override.scriptSetting.cleanwordUpdate + '?' + Date.now(),
         onload: function(response) {
           Override.helper.setValue('cleanupWord', JSON.parse(response.responseText));
-          Override.options.cleanupWord = Override.helper.getValue('cleanupWord');
+          Override.general.registerSettings();
         }
       });
     },
@@ -484,7 +369,7 @@
     }
   };
 
-  $(document).ready(function() {
+  jQuery(document).ready(function() {
     Override.initialize();
   });
 
