@@ -27,6 +27,8 @@
 
   'use strict';
 
+  jQuery.noConflict();
+
   var NovelSetting = {
     webElement : {
       // your script here
@@ -159,22 +161,13 @@
       var menu = [
         '<div class="dropoverride"><div class="dropup">',
         '<button class="dropbtn">◆◇ ' + Override.name + ' ◇◆</button><div class="dropup-content">',
-        '<div><input type="checkbox" id="runScript"' + (Override.helper.getValue('runScript') ? ' checked':'') + '>Run Script</div>',
         '<div><input type="checkbox" id="saveFile" style=""' + (Override.helper.getValue('saveFile') ? ' checked':'') + '>Copy to file</div>',
         '<div><input type="checkbox" id="autoCopy"' + (Override.helper.getValue('autoCopy') ? ' checked':'') + '>Auto Copy</div>',
-        '<div><input type="checkbox" id="addUri"' + (Override.helper.getValue('addUri') ? ' checked':'') + '>Source url</div>',
-        '<div><input type="checkbox" id="botDownload"' + (Override.helper.getValue('botDownload') ? ' checked':'') + '>Bot Download</div>',
         '</div></div></div>'
       ];
-      $('body').append(menu.join(''));
-      $('#saveFile')[0].addEventListener('click', function(){Override.helper.setValue('saveFile', $('#saveFile')[0].checked);});
-      $('#autoCopy')[0].addEventListener('click', function(){Override.helper.setValue('autoCopy', $('#autoCopy')[0].checked);});
-      $('#addUri')[0].addEventListener('click', function(){Override.helper.setValue('addUri', $('#addUri')[0].checked);});
-      $('#botDownload')[0].addEventListener('click', function(){
-        Override.helper.setValue('botDownload', $('#botDownload')[0].checked);
-        Override.helper.setValue('autoCopy', $('#autoCopy')[0].checked);
-      });
-      $('#runScript')[0].addEventListener('click', function(){Override.helper.setValue('runScript', $('#runScript')[0].checked);});
+      jQuery('body').append(menu.join(''));
+      jQuery('#saveFile')[0].addEventListener('click', function(){Override.helper.setValue('saveFile', jQuery('#saveFile')[0].checked);});
+      jQuery('#autoCopy')[0].addEventListener('click', function(){Override.helper.setValue('autoCopy', jQuery('#autoCopy')[0].checked);});
       }
     },
     decryptValidation : function () {
@@ -192,20 +185,20 @@
       }
     },
     setClipboard : function (target) {
-      $('body').append('<div id="clipboard"></div>');
+      jQuery('body').append('<div id="clipboard"></div>');
       if(Override.helper.getValue('addUri') && Override.webElement.hasOwnProperty('skipsource') == false) {
-        $('#clipboard').append(Override.helper.uriDocode(window.location)+ '<br>');
+        jQuery('#clipboard').append(Override.helper.uriDocode(window.location)+ '<br>');
       }
       for(var i=0;i<target.length;i++) {
         var textContent = Override.cleanup(target[i].innerText).replace(/\n/g, '<br>');
-        $('#clipboard').append(textContent);
-        (i+1) < target.length ? $('#clipboard').append('<br><br>') : null;
+        jQuery('#clipboard').append(textContent);
+        (i+1) < target.length ? jQuery('#clipboard').append('<br><br>') : null;
         console.log(target[i]);
       }
       var selection = window.getSelection();
       selection = window.getSelection();
       var range = document.createRange();
-      range.selectNodeContents($('#clipboard')[0]);
+      range.selectNodeContents(jQuery('#clipboard')[0]);
       selection.removeAllRanges();
       setTimeout(function(){}, 50);
       selection.addRange(range);
@@ -218,7 +211,7 @@
         GM_setClipboard();
         Override.helper.notification('คัดลอกเนื้อหาไปยังคลิปบอร์ดแล้ว', 3000);
       }
-      $('#clipboard').remove();
+      jQuery('#clipboard').remove();
       selection.removeAllRanges();
     },
     getFilename : function (content){
@@ -271,14 +264,14 @@
       return str;
     },
     decode : function (s) {
-      return Override.helper.base64Decode($.isArray(s)? s.join('') : s).split('');
+      return Override.helper.base64Decode(jQuery.isArray(s)? s.join('') : s).split('');
     },
     general : {
       windowLocation : function () {
         Override.helper.uriDocode(window.location)
       },
       addSourcetoHead : function () {
-        $('head').prepend('<link href="' + window.location + '" rel="canonical"/>')
+        jQuery('head').prepend('<link href="' + window.location + '" rel="canonical"/>')
       },
       registerSettings : function () {
         for (var optionName in Override.scriptSetting.scriptOption) {
@@ -349,7 +342,7 @@
     }
   };
 
-  $(document).ready(function() {
+  jQuery(document).ready(function() {
     Override.initialize();
   });
 
