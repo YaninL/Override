@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Copy Override - Master
 // @homepage     https://github.com/YaninL/Override
-// @version      2.5.0
+// @version      2.5.1
 // @description  Allow copy novel to clipboard or text file for backup
 // @author       Rin
 // @icon         https://raw.githubusercontent.com/YaninL/Override/master/logo.png
@@ -115,7 +115,7 @@
         eval(Override.helper.base64Decode(Override.webElement[Override.webElement.selectDecrypt]));
       }
       Override.optionMunu();
-      console.log('Override : Element', Override.webElement);
+      console.log('Override : Element', Override.hostName, Override.webElement);
       if (Override.webElement.hasOwnProperty('acceptPath')) {
         console.log('Override : Accept path', Override.webElement.acceptPath.test(Override.pathName));
         if (Override.webElement.acceptPath.test(Override.pathName) == false){
@@ -175,7 +175,6 @@
       var menu = [
         '<div class="dropoverride"><div class="dropup">',
         '<button class="dropbtn">◆◇ ' + Override.name + ' ◇◆</button><div class="dropup-content">',
-        '<div><input type="checkbox" id="runScript"' + (Override.helper.getValue('runScript') ? ' checked':'') + '>Run Script</div>',
         '<div><input type="checkbox" id="saveFile" style=""' + (Override.helper.getValue('saveFile') ? ' checked':'') + '>Copy to file</div>',
         '<div><input type="checkbox" id="autoCopy"' + (Override.helper.getValue('autoCopy') ? ' checked':'') + '>Auto Copy</div>',
         '<div><input type="checkbox" id="addUri"' + (Override.helper.getValue('addUri') ? ' checked':'') + '>Source url</div>',
@@ -190,11 +189,10 @@
         Override.helper.setValue('botDownload', jQuery('#botDownload')[0].checked);
         Override.helper.setValue('autoCopy', jQuery('#autoCopy')[0].checked);
       });
-      jQuery('#runScript')[0].addEventListener('click', function(){Override.helper.setValue('runScript', jQuery('#runScript')[0].checked);});
       }
     },
     decryptValidation : function () {
-      for (var i in NovelSetting.validationWord) {
+      for (var i in Override.scriptSetting.validationWord) {
         if(Override.novelDecrypt.indexOf(Override.scriptSetting.validationWord[i]) == -1) return false;
       }
       return true;
