@@ -35,9 +35,7 @@
 
   var NovelSetting = {
     webElement : {
-      // your script here
-      'template' : function (){
-        Override.webElement = {
+        /* Override.webElement = {
           acceptPath : /ba/i,
           skipbypass : false,
           skipsource : false,
@@ -48,11 +46,9 @@
           decrypt : function () {
             // your decrypt script here
           }
-        };
-      }
+        }; */
     },
     cleanupWord : {
-      // your word here
     }
   };
 
@@ -78,8 +74,7 @@
         saveFile : true,
         autoCopy : false,
         addUri : false,
-        botDownload : false,
-        runScript : true
+        botDownload : false
       },
       decryptUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/Data/DecryptScripts.json',
       cleanwordUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/Data/CleanupWord.json',
@@ -107,19 +102,20 @@
       validationWord : ['ได้', 'ไม่', 'ที่']
     },
     contentAddCopy : function () {
-      if (Override.helper.getValue('runScript') == false) return;
+      if(Override.Decrypt == null) return;
       if (NovelSetting.webElement.hasOwnProperty(Override.hostName)) {
         Override.webElement = NovelSetting.webElement[Override.hostName];
       } else if (Override.Decrypt.hasOwnProperty(Override.hostName)) {
         eval(Override.helper.base64Decode(Override.Decrypt[Override.hostName]));
       } else {
+        console.log('Override : not support', Override.hostName);
         return;
       }
       if (Override.webElement.hasOwnProperty('selectDecrypt')) {
         eval(Override.helper.base64Decode(Override.webElement[Override.webElement.selectDecrypt]));
       }
       Override.optionMunu();
-      console.log(Override.webElement);
+      console.log('Override : Element', Override.webElement);
       if (Override.webElement.hasOwnProperty('acceptPath')) {
         console.log('Override : Accept path', Override.webElement.acceptPath.test(Override.pathName));
         if (Override.webElement.acceptPath.test(Override.pathName) == false){
@@ -310,6 +306,7 @@
         if (Override.helper.getValue('Decrypt') == null
             || Override.helper.getValue('cleanupWord') == null) {
           Override.updateDB();
+          return;
         }
         Override.Decrypt = Override.helper.getValue('Decrypt');
         Override.cleanupWord = Override.helper.getValue('cleanupWord');
@@ -320,8 +317,9 @@
         method: 'GET',
         url: Override.scriptSetting.decryptUpdate + '?' + Date.now(),
         onload: function(response) {
-          Override.helper.setValue('Decrypt', JSON.parse(response.responseText));
-          Override.helper.notification('Decrypt has been update... ' + Override.Decrypt.updatetime, 3000);
+          var updateData = JSON.parse(response.responseText);
+          Override.helper.setValue('Decrypt', updateData);
+          Override.helper.notification('Decrypt has been update... ' + updateData.updatetime, 3000);
         }
       });
       GM_xmlhttpRequest ( {
@@ -329,7 +327,6 @@
         url: Override.scriptSetting.cleanwordUpdate + '?' + Date.now(),
         onload: function(response) {
           Override.helper.setValue('cleanupWord', JSON.parse(response.responseText));
-          Override.general.registerSettings();
         }
       });
     },
