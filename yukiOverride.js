@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         yukiOverride
-// @version      2.5.0
+// @version      2.5.1
 // @description  Allow copy novel to clipboard or text file for backup
 // @author       Ann
 // @icon         https://raw.githubusercontent.com/YaninL/Override/master/logo.png
@@ -60,8 +60,7 @@
         saveFile : true,
         autoCopy : false,
         addUri : false,
-        botDownload : false,
-        runScript : true
+        botDownload : false
       },
       decryptUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/Data/yukiDecryptScripts.json',
       cleanwordUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/Data/CleanupWord.json',
@@ -89,7 +88,7 @@
       validationWord : ['ได้', 'ไม่', 'ที่']
     },
     contentAddCopy : function () {
-      if (Override.helper.getValue('runScript') == false) return;
+      if(Override.Decrypt == null) return;
       if (NovelSetting.webElement.hasOwnProperty(Override.hostName)) {
         Override.webElement = NovelSetting.webElement[Override.hostName];
       } else if (Override.Decrypt.hasOwnProperty(Override.hostName)) {
@@ -101,9 +100,7 @@
         eval(Override.helper.base64Decode(Override.webElement[Override.webElement.selectDecrypt]));
       }
       Override.optionMunu();
-      console.log(Override.webElement);
       if (Override.webElement.hasOwnProperty('acceptPath')) {
-        console.log('Override : Accept path', Override.webElement.acceptPath.test(Override.pathName));
         if (Override.webElement.acceptPath.test(Override.pathName) == false){
           if (Override.webElement.hasOwnProperty('skipbypass') == false) {
             Override.removeProtection.removeProtection();
@@ -171,7 +168,7 @@
       }
     },
     decryptValidation : function () {
-      for (var i in NovelSetting.validationWord) {
+      for (var i in Override.scriptSetting.validationWord) {
         if(Override.novelDecrypt.indexOf(Override.scriptSetting.validationWord[i]) == -1) return false;
       }
       return true;
@@ -193,7 +190,6 @@
         var textContent = Override.cleanup(target[i].innerText).replace(/\n/g, '<br>');
         jQuery('#clipboard').append(textContent);
         (i+1) < target.length ? jQuery('#clipboard').append('<br><br>') : null;
-        console.log(target[i]);
       }
       var selection = window.getSelection();
       selection = window.getSelection();
@@ -293,8 +289,9 @@
         method: 'GET',
         url: Override.scriptSetting.decryptUpdate + '?' + Date.now(),
         onload: function(response) {
-          Override.helper.setValue('Decrypt', JSON.parse(response.responseText));
-          Override.helper.notification('Decrypt has been update... ' + Override.Decrypt.updatetime, 3000);
+          var updateData = JSON.parse(response.responseText);
+          Override.helper.setValue('Decrypt', updateData);
+          Override.helper.notification('Decrypt has been update... ' + updateData.updatetime, 3000);
         }
       });
       GM_xmlhttpRequest ( {
@@ -302,7 +299,6 @@
         url: Override.scriptSetting.cleanwordUpdate + '?' + Date.now(),
         onload: function(response) {
           Override.helper.setValue('cleanupWord', JSON.parse(response.responseText));
-          Override.general.registerSettings();
         }
       });
     },
