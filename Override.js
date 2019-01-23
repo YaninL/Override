@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Copy Override - Master
 // @homepage     https://github.com/YaninL/Override
-// @version      2.5.1
+// @version      2.5.2
 // @description  Allow copy novel to clipboard or text file for backup
 // @author       Rin
 // @icon         https://raw.githubusercontent.com/YaninL/Override/master/logo.png
@@ -11,7 +11,6 @@
 // @downloadURL  https://raw.githubusercontent.com/YaninL/Override/master/Override.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js
-// @require      https://raw.githubusercontent.com/YaninL/Override/master/GoshujinDecoder.min.js
 // @include      http://*
 // @include      https://*
 // @connect      githubusercontent.com
@@ -34,22 +33,8 @@
   jQuery.noConflict();
 
   var NovelSetting = {
-    webElement : {
-        /* Override.webElement = {
-          acceptPath : /ba/i,
-          skipbypass : false,
-          skipsource : false,
-          selectDecrypt : '',
-          remove : '',
-          doubleClickArea : jQuery('#buttons')[0],
-          contentArea : jQuery('div[style^="font-size: 22px"], #buttons'),
-          decrypt : function () {
-            // your decrypt script here
-          }
-        }; */
-    },
-    cleanupWord : {
-    }
+    webElement : {},
+    cleanupWord : {}
   };
 
   var Override = {
