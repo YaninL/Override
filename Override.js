@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Copy Override - Master
+// @name         Copy Override
 // @homepage     https://github.com/YaninL/Override
-// @version      2.5.2
+// @version      2.5.3
 // @description  Allow copy novel to clipboard or text file for backup
 // @author       Rin
 // @icon         https://raw.githubusercontent.com/YaninL/Override/master/logo.png
@@ -33,48 +33,49 @@
   jQuery.noConflict();
 
   var NovelSetting = {
-    webElement : {},
-    cleanupWord : {}
+    webElement: {},
+    cleanupWord: {}
   };
 
   var Override = {
-    name : 'Copy Override',
-    scriptid : 'GtHueEHH',
-    initialize : function () {
+    name: 'Copy Override',
+    scriptid: 'GtHueEHH',
+    initialize: function() {
       Override.general.registerSettings();
       Override.general.addSourcetoHead();
       Override.addCommands();
       Override.contentAddCopy()
     },
-    options : {},
-    webElement : {},
-    Decrypt : {},
-    cleanupWord : {},
-    thaiChar : {},
-    encryptChar : {},
-    novelContent : null,
-    novelDecrypt : null,
-    scriptSetting : {
-      scriptOption : {
-        saveFile : true,
-        autoCopy : false,
-        addUri : false,
-        botDownload : false
+    options: {},
+    webElement: {},
+    Decrypt: {},
+    cleanupWord: {},
+    thaiChar: {},
+    encryptChar: {},
+    novelContent: null,
+    novelDecrypt: null,
+    scriptSetting: {
+      scriptOption: {
+        saveFile: false,
+        autoCopy: false,
+        addUri: false,
+        botDownload: false,
+        cleanup: false
       },
       decryptUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/Data/DecryptScripts.json',
       cleanwordUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/Data/CleanupWord.json',
-      handlerName : [
+      handlerName: [
         'contextmenu', 'copy', 'cut', 'paste', 'mousedown', 'mouseup', 'beforeunload', 'beforeprint', 'keyup',
         'keydown', 'select', 'selectstart', 'selectionchang'
       ],
-      cssProtection : [
+      cssProtection: [
         '* {-webkit-user-select: text! important;',
         '-moz-user-select: text! important;',
         '-ms-user-select: text! important;',
         '-o-user-select: text! important;',
         'user-select: text! important;}'
       ],
-      customCss : [
+      customCss: [
         '.dropoverride {background: transparent; position: fixed; right: 5px; bottom: 0; width: 100%; text-align: right; z-index: 9999999999; font: initial;}',
         '.dropup {position: relative; display: inline-block;width: 160px;}',
         '.dropbtn {font: bold 12px "tahoma"; background: #3366cc; color: white;width: 100%; height: 20px; margin: 0px; padding: 2px; border: none; border-radius: 3px 3px 0px 0px}',
@@ -84,10 +85,11 @@
         '.dropup:hover .dropup-content {display: block;}',
         '.dropup:hover .dropbtn {background: #2980B9;}'
       ],
-      validationWord : ['ได้', 'ไม่', 'ที่']
+      validationWord: ['ได้', 'ไม่', 'ที่'],
+      newline: '\n\n'
     },
-    contentAddCopy : function () {
-      if(Override.Decrypt == null) return;
+    contentAddCopy: function() {
+      if (Override.Decrypt == null) return;
       if (NovelSetting.webElement.hasOwnProperty(Override.hostName)) {
         Override.webElement = NovelSetting.webElement[Override.hostName];
       } else if (Override.Decrypt.hasOwnProperty(Override.hostName)) {
@@ -103,7 +105,7 @@
       console.log('Override : Element', Override.hostName, Override.webElement);
       if (Override.webElement.hasOwnProperty('acceptPath')) {
         console.log('Override : Accept path', Override.webElement.acceptPath.test(Override.pathName));
-        if (Override.webElement.acceptPath.test(Override.pathName) == false){
+        if (Override.webElement.acceptPath.test(Override.pathName) == false) {
           if (Override.webElement.hasOwnProperty('skipbypass') == false) {
             Override.removeProtection.removeProtection();
           }
@@ -118,87 +120,103 @@
         Override.webElement.decrypt();
       }
       if (Override.webElement.hasOwnProperty('doubleClickArea')) {
-        if(Override.webElement.doubleClickArea.length == 0 || Override.webElement.contentArea.length == 0) {
+        if (Override.webElement.doubleClickArea.length == 0 || Override.webElement.contentArea.length == 0) {
           return;
-        }else{
+        } else {
           Override.addDoubleClickEvent(Override.webElement.doubleClickArea, Override.webElement.contentArea);
         }
       }
     },
-    removeProtection : {
-      removeProtection: function () {
+    removeProtection: {
+      removeProtection: function() {
         Override.removeProtection.removeProtectionWindow(window);
         Override.removeProtection.removeProtectionWindow(document);
         Override.removeProtection.removeCssProtection();
       },
-      removeProtectionWindow : function (protectedWindow) {
-        for(var i in Override.scriptSetting.handlerName) {
+      removeProtectionWindow: function(protectedWindow) {
+        for (var i in Override.scriptSetting.handlerName) {
           var handlerName = Override.scriptSetting.handlerName[i];
           var handlerOnName = 'on' + handlerName;
-          if(protectedWindow[handlerOnName]){protectedWindow[handlerOnName] = null;}
-          protectedWindow.addEventListener(handlerName, function(e){ e.stopPropagation(); }, true);
+          if (protectedWindow[handlerOnName]) {
+            protectedWindow[handlerOnName] = null;
+          }
+          protectedWindow.addEventListener(handlerName, function(e) {
+            e.stopPropagation();
+          }, true);
         }
       },
-      removeFrameProtectionWindow : function () {
+      removeFrameProtectionWindow: function() {
         var frameList = window.frames;
-        for(var i = 0; i < frameList.length; i++) {
+        for (var i = 0; i < frameList.length; i++) {
           try {
             Override.removeProtection.removeProtectionWindow(frameList[i]);
-          } catch(e) {}
+          } catch (e) {}
         }
       },
-      removeCssProtection : function () {
+      removeCssProtection: function() {
         GM_addStyle(Override.scriptSetting.cssProtection.join('\n'));
       },
     },
-    addCommands : function () {
-      GM_registerMenuCommand(Override.name + ' update database', function(){Override.updateDB();})
+    addCommands: function() {
+      GM_registerMenuCommand(Override.name + ' update database', function() {
+        Override.updateDB();
+      })
     },
-    optionMunu : function () {
+    optionMunu: function() {
       GM_addStyle(Override.scriptSetting.customCss.join('\n'));
-      if(window.parent == window.self) {
-      var menu = [
-        '<div class="dropoverride"><div class="dropup">',
-        '<button class="dropbtn">◆◇ ' + Override.name + ' ◇◆</button><div class="dropup-content">',
-        '<div><input type="checkbox" id="saveFile" style=""' + (Override.helper.getValue('saveFile') ? ' checked':'') + '>Copy to file</div>',
-        '<div><input type="checkbox" id="autoCopy"' + (Override.helper.getValue('autoCopy') ? ' checked':'') + '>Auto Copy</div>',
-        '<div><input type="checkbox" id="addUri"' + (Override.helper.getValue('addUri') ? ' checked':'') + '>Source url</div>',
-        '<div><input type="checkbox" id="botDownload"' + (Override.helper.getValue('botDownload') ? ' checked':'') + '>Bot Download</div>',
-        '</div></div></div>'
-      ];
-      jQuery('body').append(menu.join(''));
-      jQuery('#saveFile')[0].addEventListener('click', function(){Override.helper.setValue('saveFile', jQuery('#saveFile')[0].checked);});
-      jQuery('#autoCopy')[0].addEventListener('click', function(){Override.helper.setValue('autoCopy', jQuery('#autoCopy')[0].checked);});
-      jQuery('#addUri')[0].addEventListener('click', function(){Override.helper.setValue('addUri', jQuery('#addUri')[0].checked);});
-      jQuery('#botDownload')[0].addEventListener('click', function(){
-        Override.helper.setValue('botDownload', jQuery('#botDownload')[0].checked);
-        Override.helper.setValue('autoCopy', jQuery('#autoCopy')[0].checked);
-      });
+      if (window.parent == window.self) {
+        jQuery('body').append([
+          '<div class="dropoverride"><div class="dropup">',
+          '<button class="dropbtn">◆◇ ' + Override.name + ' ◇◆</button><div class="dropup-content">',
+          '<div><input type="checkbox" id="saveFile" style=""' + (Override.helper.getValue('saveFile') ? ' checked' : '') + '>Copy to file</div>',
+          '<div><input type="checkbox" id="autoCopy"' + (Override.helper.getValue('autoCopy') ? ' checked' : '') + '>Auto Copy</div>',
+          '<div><input type="checkbox" id="addUri"' + (Override.helper.getValue('addUri') ? ' checked' : '') + '>Source url</div>',
+          '<div><input type="checkbox" id="botDownload"' + (Override.helper.getValue('botDownload') ? ' checked' : '') + '>Bot Download</div>',
+          '<div><input type="checkbox" id="cleanup"' + (Override.helper.getValue('cleanup') ? ' checked' : '') + '>Cleanup Novel</div>',
+          '</div></div></div>'
+        ].join(''));
+        jQuery('#saveFile')[0].addEventListener('click', function() {
+          Override.helper.setValue('saveFile', jQuery('#saveFile')[0].checked);
+        });
+        jQuery('#autoCopy')[0].addEventListener('click', function() {
+          Override.helper.setValue('autoCopy', jQuery('#autoCopy')[0].checked);
+        });
+        jQuery('#addUri')[0].addEventListener('click', function() {
+          Override.helper.setValue('addUri', jQuery('#addUri')[0].checked);
+        });
+        jQuery('#botDownload')[0].addEventListener('click', function() {
+          Override.helper.setValue('botDownload', jQuery('#botDownload')[0].checked);
+          Override.helper.setValue('autoCopy', jQuery('#autoCopy')[0].checked);
+        });
+        jQuery('#cleanup')[0].addEventListener('click', function() {
+          Override.helper.setValue('cleanup', jQuery('#cleanup')[0].checked);
+        });
       }
     },
-    decryptValidation : function () {
+    decryptValidation: function() {
       for (var i in Override.scriptSetting.validationWord) {
-        if(Override.novelDecrypt.indexOf(Override.scriptSetting.validationWord[i]) == -1) return false;
+        if (Override.novelDecrypt.indexOf(Override.scriptSetting.validationWord[i]) == -1) return false;
       }
       return true;
     },
-    addDoubleClickEvent : function (clickArea, contentArea) {
+    addDoubleClickEvent: function(clickArea, contentArea) {
       clickArea.addEventListener('dblclick', function() {
         Override.setClipboard(contentArea);
       });
-      if(Override.helper.getValue('autoCopy')) {
+      if (Override.options.autoCopy) {
         Override.setClipboard(contentArea);
       }
     },
-    setClipboard : function (target) {
+    setClipboard: function(target) {
       jQuery('body').append('<div id="clipboard"></div>');
-      if(Override.helper.getValue('addUri') && Override.webElement.hasOwnProperty('skipsource') == false) {
-        jQuery('#clipboard').append(Override.helper.uriDocode(window.location)+ '<br>');
+      if (Override.options.addUri && Override.webElement.hasOwnProperty('skipsource') == false) {
+        jQuery('#clipboard').append(Override.helper.uriDocode(window.location) + '<br>');
       }
-      for(var i=0;i<target.length;i++) {
-        var textContent = Override.cleanup(target[i].innerText).replace(/\n/g, '<br>');
-        jQuery('#clipboard').append(textContent);
-        (i+1) < target.length ? jQuery('#clipboard').append('<br><br>') : null;
+      for (var i = 0; i < target.length; i++) {
+        var textContent = target[i].innerText;
+        textContent = Override.options.cleanup ? Override.cleanup(textContent) : textContent;
+        jQuery('#clipboard').append(textContent.replace(/\n/g, '<br>'));
+        (i + 1) < target.length ? jQuery('#clipboard').append('<br><br>') : null;
         console.log(target[i]);
       }
       var selection = window.getSelection();
@@ -206,88 +224,90 @@
       var range = document.createRange();
       range.selectNodeContents(jQuery('#clipboard')[0]);
       selection.removeAllRanges();
-      setTimeout(function(){}, 50);
+      setTimeout(function() {}, 50);
       selection.addRange(range);
-      if(Override.helper.getValue('saveFile')) {
+      if (Override.options.saveFile) {
         var text = selection.toString();
-        var filename = Override.getFilename(text.replace(/http.*/i, '').substring(0, 100));
-        var blob = new Blob([text.replace(/\n\n/g, '\r\n\r\n')], {type: 'text/plain;charset=utf-8'});
+        var filename = Override.getFilename(text.replace(/http.*/i, ''));
+        var blob = new Blob([text.replace(/\n\n/g, '\r\n\r\n')], {
+          type: 'text/plain;charset=utf-8'
+        });
         saveAs(blob, filename);
+        Override.helper.notification('บันทึกไฟล์ ' + filename + ' แล้ว', 1500);
       } else {
         GM_setClipboard();
-        Override.helper.notification('คัดลอกเนื้อหาไปยังคลิปบอร์ดแล้ว', 3000);
+        Override.helper.notification('คัดลอกเนื้อหาไปยังคลิปบอร์ดแล้ว', 1500);
       }
       jQuery('#clipboard').remove();
       selection.removeAllRanges();
     },
-    getFilename : function (content){
-      var filename = 'filename';
-      var title_line = content.replace(/\s\r\n/i, '').trim();
-      var name1 = new RegExp(/(บทที่|ตอนที่|ch|Chapter)\s?(\d+)/i);
-      var name2 = new RegExp(/\d+/i);
-      var name3 = new RegExp(/(บทที่|ตอนที่|ch|Chapter)?\s?(\d+)\s?\-\s?(\d+)/i);
-      if(name3.test(title_line)){
-        filename = Override.helper.padLeft(title_line.match(name3)[2], 3) + '-' + title_line.match(name3)[3];
-      }else if(name1.test(title_line)){
-        filename = Override.helper.padLeft(title_line.match(name1)[2], 3);
-      }else if(name2.test(title_line)){
-        filename = Override.helper.padLeft(title_line.match(name2), 3);
+    getFilename: function(content) {
+      var title_line = content.substring(0, 200).replace(/[\s\r\t\n]/g, '').replace('(', '-');
+      var name = new RegExp(/(บทที่|ตอนที่|ch|Chapter)(\d+)([\-\.])?(\d+)?/);
+      if (name.test(title_line)) {
+        var chapter = title_line.match(name);
+        chapter[3] = (typeof chapter[3] !== 'undefined' && typeof chapter[4] !== 'undefined') ? chapter[3] : '';
+        chapter[4] = (typeof chapter[4] !== 'undefined') ? chapter[4] : '';
+        return Override.helper.padLeft(chapter[2], 3) + chapter[3] + chapter[4] + '.txt';
+      } else if (/\d+/.test(title_line)) {
+        return Override.helper.padLeft(title_line.match(/\d+/), 3) + '.txt';
+      } else {
+        return 'filename.txt';
       }
-      return filename + '.txt';
     },
-    cleanup : function (input) {
+    cleanup: function(input) {
       var regexCleanup = Object.entries(Override.cleanupWord.common);
-      if(Override.cleanupWord.hasOwnProperty(Override.hostName)){
+      if (Override.cleanupWord.hasOwnProperty(Override.hostName)) {
         Array.prototype.push.apply(regexCleanup, Object.entries(Override.cleanupWord[Override.hostName]));
       }
-      if(NovelSetting.cleanupWord.hasOwnProperty(Override.hostName)){
+      if (NovelSetting.hasOwnProperty('cleanupWord') && NovelSetting.cleanupWord.hasOwnProperty(Override.hostName)) {
         Array.prototype.push.apply(regexCleanup, Object.entries(NovelSetting.cleanupWord[Override.hostName]));
       }
       var input_line = input.split('\n');
       var output = '';
-      for(var in_line in input_line){
+      for (var in_line in input_line) {
         var textline = input_line[in_line].trim();
-        if(textline == '') continue;
-        for(var line in regexCleanup){
+        if (textline == '') continue;
+        for (var line in regexCleanup) {
           textline = textline.replace(new RegExp(regexCleanup[line][0], 'g'), regexCleanup[line][1]);
         }
-        if(in_line >= 1 && textline == input_line[0].trim()) continue;
-        if(textline == '') continue;
-        output += textline + '\n\n';
+        if (in_line >= 1 && textline == input_line[0].trim()) continue;
+        if (textline == '') continue;
+        output += textline + Override.scriptSetting.newline;
       }
       return output.trim();
     },
-    contentDecrypt : function() {
+    contentDecrypt: function() {
       Override.novelDecrypt = Override.textReplace(Override.novelContent, Override.encryptChar, Override.thaiChar);
     },
-    textReplace : function(str, find, replace) {
-      if(find.length != replace.length) {
-        console.log('Both arrays are not equal fine:' + find.length +'/replace:'+ replace.length);
+    textReplace: function(str, find, replace) {
+      if (find.length != replace.length) {
+        console.log('Both arrays are not equal fine:' + find.length + '/replace:' + replace.length);
       }
-      for(var i = 0; i < find.length; i++) {
+      for (var i = 0; i < find.length; i++) {
         str = str.replace(new RegExp(find[i], 'g'), replace[i]);
       }
       return str;
     },
-    decode : function (s) {
-      return Override.helper.base64Decode(jQuery.isArray(s)? s.join('') : s).split('');
+    decode: function(s) {
+      return Override.helper.base64Decode(jQuery.isArray(s) ? s.join('') : s).split('');
     },
-    general : {
-      windowLocation : function () {
+    general: {
+      windowLocation: function() {
         Override.helper.uriDocode(window.location)
       },
-      addSourcetoHead : function () {
+      addSourcetoHead: function() {
         jQuery('head').prepend('<link href="' + window.location + '" rel="canonical"/>')
       },
-      registerSettings : function () {
+      registerSettings: function() {
         for (var optionName in Override.scriptSetting.scriptOption) {
           if (Override.scriptSetting.scriptOption.hasOwnProperty(optionName)) {
-            Override.options[optionName] = Override.helper.getValue(optionName) != null
-              ? Override.helper.getValue(optionName) : Override.scriptSetting.scriptOption[optionName];
+            Override.options[optionName] = Override.helper.getValue(optionName) != null ?
+              Override.helper.getValue(optionName) : Override.scriptSetting.scriptOption[optionName];
           }
         }
-        if (Override.helper.getValue('Decrypt') == null
-            || Override.helper.getValue('cleanupWord') == null) {
+        if (Override.helper.getValue('Decrypt') == null ||
+          Override.helper.getValue('cleanupWord') == null) {
           Override.updateDB();
           return;
         }
@@ -295,8 +315,8 @@
         Override.cleanupWord = Override.helper.getValue('cleanupWord');
       },
     },
-    updateDB : function () {
-      GM_xmlhttpRequest ( {
+    updateDB: function() {
+      GM_xmlhttpRequest({
         method: 'GET',
         url: Override.scriptSetting.decryptUpdate + '?' + Date.now(),
         onload: function(response) {
@@ -305,7 +325,7 @@
           Override.helper.notification('Decrypt has been update... ' + updateData.updatetime, 3000);
         }
       });
-      GM_xmlhttpRequest ( {
+      GM_xmlhttpRequest({
         method: 'GET',
         url: Override.scriptSetting.cleanwordUpdate + '?' + Date.now(),
         onload: function(response) {
@@ -313,38 +333,45 @@
         }
       });
     },
-    hostName : window.location.hostname.replace('www.', ''),
-    pathName : window.location.pathname,
-    helper : {
-      notification : function (text, time = 1500) {
-        GM_notification ({ title: 'แจ้งเตือน', text: text, timeout: time });
+    hostName: window.location.hostname.replace('www.', ''),
+    pathName: window.location.pathname,
+    helper: {
+      notification: function(text, time) {
+        time = typeof time !== 'undefined' ? time : 1500;
+        GM_notification({
+          title: 'แจ้งเตือน',
+          text: text,
+          timeout: time
+        });
       },
-      setValue : function (name, value) {
+      setValue: function(name, value) {
         if (typeof GM_setValue !== "undefined") {
           GM_setValue(name, value);
         }
+        Override.general.registerSettings();
       },
-      getValue : function (name) {
+      getValue: function(name) {
         if (typeof GM_getValue !== "undefined" && typeof GM_getValue(name) !== "undefined") {
           return GM_getValue(name);
         } else {
           return null;
         }
       },
-      padLeft : function (nr, n, str) {
-        return Array(n-String(nr).length + 1).join(str||'0') + nr;
+      padLeft: function(nr, n, str) {
+        return Array(n - String(nr).length + 1).join(str || '0') + nr;
       },
-      base64Decode : function (s) {
+      base64Decode: function(s) {
         return decodeURIComponent(escape(window.atob(s)));
       },
-      unicodeUnescape : function (s) {
+      unicodeUnescape: function(s) {
         return decodeURIComponent(JSON.parse('"' + s.replace(/\"/g, '\\"') + '"'));
       },
-      uriDocode : function (s) {
+      uriDocode: function(s) {
         return decodeURIComponent(s);
       },
-      reload : function () {
-        window.location.reload(true);
+      reload: function(t) {
+        t = typeof t !== 'undefined' ? t : 0;
+        setTimeout(function(){window.location.reload(true)}, t);
       },
     }
   };
