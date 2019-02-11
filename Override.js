@@ -171,7 +171,6 @@
           '<div><input type="checkbox" id="saveFile" style=""' + (Override.helper.getValue('saveFile') ? ' checked' : '') + '>Copy to file</div>',
           '<div><input type="checkbox" id="autoCopy"' + (Override.helper.getValue('autoCopy') ? ' checked' : '') + '>Auto Copy</div>',
           '<div><input type="checkbox" id="addUri"' + (Override.helper.getValue('addUri') ? ' checked' : '') + '>Source url</div>',
-          '<div><input type="checkbox" id="botDownload"' + (Override.helper.getValue('botDownload') ? ' checked' : '') + '>Bot Download</div>',
           '<div><input type="checkbox" id="cleanup"' + (Override.helper.getValue('cleanup') ? ' checked' : '') + '>Cleanup Novel</div>',
           '</div></div></div>'
         ].join(''));
@@ -183,10 +182,6 @@
         });
         jQuery('#addUri')[0].addEventListener('click', function() {
           Override.helper.setValue('addUri', jQuery('#addUri')[0].checked);
-        });
-        jQuery('#botDownload')[0].addEventListener('click', function() {
-          Override.helper.setValue('botDownload', jQuery('#botDownload')[0].checked);
-          Override.helper.setValue('autoCopy', jQuery('#autoCopy')[0].checked);
         });
         jQuery('#cleanup')[0].addEventListener('click', function() {
           Override.helper.setValue('cleanup', jQuery('#cleanup')[0].checked);
