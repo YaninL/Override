@@ -1,24 +1,22 @@
 // ==UserScript==
-// @name         Copy Override
+// @name         Override - Master
 // @homepage     https://github.com/YaninL/Override
-// @version      2.5.3
+// @version      3.0.0
 // @description  Allow copy novel to clipboard or text file for backup
-// @author       Rin
+// @author       Ann
 // @icon         https://raw.githubusercontent.com/YaninL/Override/master/logo.png
 // @homepage     https://github.com/YaninL/Override
 // @supportURL   https://github.com/YaninL/Override
 // @updateURL    https://raw.githubusercontent.com/YaninL/Override/master/Override.js
 // @downloadURL  https://raw.githubusercontent.com/YaninL/Override/master/Override.js
-// @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js
 // @include      http://*
 // @include      https://*
 // @connect      githubusercontent.com
-// @grant        unsafeWindow
-// @grant        GM_setClipboard
 // @grant        GM_addStyle
 // @grant        GM_getValue
 // @grant        GM_setValue
+// @grant        GM_setClipboard
 // @grant        GM_notification
 // @grant        GM_xmlhttpRequest
 // @grant        GM_registerMenuCommand
@@ -30,21 +28,28 @@
 
   'use strict';
 
-  jQuery.noConflict();
-
   var NovelSetting = {
     webElement: {
+      /*"example.com": {
+        //Override.webElement = {};
+        acceptPath: /ba/i,
+        skipbypass: false,
+        skipsource: false,
+        selectDecrypt: '',
+        remove: document.querySelectorAll(''),
+        doubleClickArea: document.querySelector(''),
+        contentArea: document.querySelectorAll(''),
+        decrypt : function () {}
+      },*/
       "wuxiaworld.com": {
         acceptPath: /novel\/.*\/.*\d+/i,
         doubleClickArea: document.querySelector('.panel-default'),
         contentArea: document.querySelectorAll('.p-15 h4[class=""], .p-15 .fr-view p'),
       }
-    },
-    cleanupWord: {}
   };
 
   var Override = {
-    name: 'Copy Override',
+    name: 'Override',
     scriptid: 'GtHueEHH',
     initialize: function() {
       Override.general.registerSettings();
@@ -68,7 +73,7 @@
         botDownload: false,
         cleanup: false
       },
-      decryptUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/Data/DecryptScripts.json',
+      decryptUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/Data/Decrypt.json',
       cleanwordUpdate : 'https://raw.githubusercontent.com/YaninL/Override/master/Data/CleanupWord.json',
       handlerName: [
         'contextmenu', 'copy', 'cut', 'paste', 'mousedown', 'mouseup', 'beforeunload', 'beforeprint', 'keyup',
@@ -83,7 +88,7 @@
       ],
       customCss: [
         '.dropoverride {background: transparent; position: fixed; right: 5px; bottom: 0; width: 100%; text-align: right; z-index: 9999999999; font: initial;}',
-        '.dropup {position: relative; display: inline-block;width: 160px;}',
+        '.dropup {position: relative; display: inline-block;width: 120px;}',
         '.dropbtn {font: bold 12px "tahoma"; background: #3366cc; color: white;width: 100%; height: 20px; margin: 0px; padding: 2px; border: none; border-radius: 3px 3px 0px 0px}',
         '.dropup-content {background: #b9dff4; display: none;width: 100%; bottom: 20px; z-index: 9999999999;}',
         '.dropup-content div {font: normal 12px tahoma; text-align: left; display: block; color: black; padding: 2px 5px;}',
@@ -95,6 +100,7 @@
       newline: '\n\n'
     },
     contentAddCopy: function() {
+      console.log('Override :', Override.hostName, Override.pathName);
       if (Override.Decrypt == null) return;
       if (NovelSetting.webElement.hasOwnProperty(Override.hostName)) {
         Override.webElement = NovelSetting.webElement[Override.hostName];
@@ -120,18 +126,22 @@
       }
       Override.removeProtection.removeProtection();
       if (Override.webElement.hasOwnProperty('remove')) {
-        Override.webElement.remove.remove();
+        Override.webElement.remove.forEach(e => e.parentNode.removeChild(e));
       }
       if (Override.webElement.hasOwnProperty('decrypt')) {
         Override.webElement.decrypt();
       }
       if (Override.webElement.hasOwnProperty('doubleClickArea')) {
-        if (Override.webElement.doubleClickArea.length == 0 || Override.webElement.contentArea.length == 0) {
+        if (typeof Override.webElement.doubleClickArea === 'undefined'
+            || typeof Override.webElement.contentArea === 'undefined') {
           return;
         } else {
           Override.addDoubleClickEvent(Override.webElement.doubleClickArea, Override.webElement.contentArea);
         }
       }
+    },
+    eval: function evil(script) {
+      return ((unsafeWindow, window) => {return eval(script);})();
     },
     removeProtection: {
       removeProtection: function() {
@@ -171,26 +181,31 @@
     optionMunu: function() {
       GM_addStyle(Override.scriptSetting.customCss.join('\n'));
       if (window.parent == window.self) {
-        jQuery('body').append([
+        document.body.insertAdjacentHTML('beforeend', [
           '<div class="dropoverride"><div class="dropup">',
           '<button class="dropbtn">◆◇ ' + Override.name + ' ◇◆</button><div class="dropup-content">',
           '<div><input type="checkbox" id="saveFile" style=""' + (Override.helper.getValue('saveFile') ? ' checked' : '') + '>Copy to file</div>',
           '<div><input type="checkbox" id="autoCopy"' + (Override.helper.getValue('autoCopy') ? ' checked' : '') + '>Auto Copy</div>',
           '<div><input type="checkbox" id="addUri"' + (Override.helper.getValue('addUri') ? ' checked' : '') + '>Source url</div>',
+          '<div><input type="checkbox" id="botDownload"' + (Override.helper.getValue('botDownload') ? ' checked' : '') + '>Bot Download</div>',
           '<div><input type="checkbox" id="cleanup"' + (Override.helper.getValue('cleanup') ? ' checked' : '') + '>Cleanup Novel</div>',
           '</div></div></div>'
         ].join(''));
-        jQuery('#saveFile')[0].addEventListener('click', function() {
-          Override.helper.setValue('saveFile', jQuery('#saveFile')[0].checked);
+        document.getElementById('saveFile').addEventListener('click', function() {
+          Override.helper.setValue('saveFile', document.getElementById('saveFile').checked);
         });
-        jQuery('#autoCopy')[0].addEventListener('click', function() {
-          Override.helper.setValue('autoCopy', jQuery('#autoCopy')[0].checked);
+        document.getElementById('autoCopy').addEventListener('click', function() {
+          Override.helper.setValue('autoCopy', document.getElementById('autoCopy').checked);
         });
-        jQuery('#addUri')[0].addEventListener('click', function() {
-          Override.helper.setValue('addUri', jQuery('#addUri')[0].checked);
+        document.getElementById('addUri').addEventListener('click', function() {
+          Override.helper.setValue('addUri', document.getElementById('addUri').checked);
         });
-        jQuery('#cleanup')[0].addEventListener('click', function() {
-          Override.helper.setValue('cleanup', jQuery('#cleanup')[0].checked);
+        document.getElementById('botDownload').addEventListener('click', function() {
+          Override.helper.setValue('botDownload', document.getElementById('botDownload').checked);
+          Override.helper.setValue('autoCopy', document.getElementById('autoCopy').checked);
+        });
+        document.getElementById('cleanup').addEventListener('click', function() {
+          Override.helper.setValue('cleanup', document.getElementById('cleanup').checked);
         });
       }
     },
@@ -209,21 +224,23 @@
       }
     },
     setClipboard: function(target) {
-      jQuery('body').append('<div id="clipboard"></div>');
+      document.body.insertAdjacentHTML('beforeend', '<div id="clipboard"></div>');
+      var clipboard = document.getElementById('clipboard');
       if (Override.options.addUri && Override.webElement.hasOwnProperty('skipsource') == false) {
-        jQuery('#clipboard').append(Override.helper.uriDocode(window.location) + '<br>');
+        clipboard.insertAdjacentHTML('beforeend', Override.helper.uriDocode(window.location) + '<br>');
       }
       for (var i = 0; i < target.length; i++) {
         var textContent = target[i].innerText;
         textContent = Override.options.cleanup ? Override.cleanup(textContent) : textContent;
-        jQuery('#clipboard').append(textContent.replace(/\n/g, '<br>'));
-        (i + 1) < target.length ? jQuery('#clipboard').append('<br><br>') : null;
-        console.log(target[i]);
+        if (textContent == '') continue;
+        clipboard.insertAdjacentHTML('beforeend', textContent.replace(/\n/g, '<br>'));
+        (i + 1) < target.length ? clipboard.insertAdjacentHTML('beforeend', '<br><br>') : null;
+        console.log(target[i].innerText);
       }
       var selection = window.getSelection();
       selection = window.getSelection();
       var range = document.createRange();
-      range.selectNodeContents(jQuery('#clipboard')[0]);
+      range.selectNodeContents(clipboard);
       selection.removeAllRanges();
       setTimeout(function() {}, 50);
       selection.addRange(range);
@@ -239,17 +256,21 @@
         GM_setClipboard();
         Override.helper.notification('คัดลอกเนื้อหาไปยังคลิปบอร์ดแล้ว', 1500);
       }
-      jQuery('#clipboard').remove();
+      clipboard.parentNode.removeChild(clipboard);
       selection.removeAllRanges();
     },
     getFilename: function(content) {
       var title_line = content.substring(0, 200).replace(/[\s\r\t\n]/g, '').replace('(', '-');
-      var name = new RegExp(/(บทที่|ตอนที่|ch|Chapter)(\d+)([\-\.])?(\d+)?/);
+      var name = /(บทที่|ตอนที่|ch|chapter|volume|เล่ม|เล่มที่)(\d+)(\-|\.|บทที่|ตอนที่)?(\d+)?/i;
       if (name.test(title_line)) {
         var chapter = title_line.match(name);
+        var type = /บทที่|ตอนที่/i.test(chapter[3]);
         chapter[3] = (typeof chapter[3] !== 'undefined' && typeof chapter[4] !== 'undefined') ? chapter[3] : '';
         chapter[4] = (typeof chapter[4] !== 'undefined') ? chapter[4] : '';
-        return Override.helper.padLeft(chapter[2], 3) + chapter[3] + chapter[4] + '.txt';
+        chapter[2] = type ? chapter[2] : Override.helper.padLeft(chapter[2], 3);
+        chapter[3] = type ? '-' : chapter[3];
+        chapter[4] = type ? Override.helper.padLeft(chapter[4], 3) : chapter[4];
+        return chapter[2] + chapter[3] + chapter[4] + '.txt';
       } else if (/\d+/.test(title_line)) {
         return Override.helper.padLeft(title_line.match(/\d+/), 3) + '.txt';
       } else {
@@ -264,7 +285,7 @@
       if (NovelSetting.hasOwnProperty('cleanupWord') && NovelSetting.cleanupWord.hasOwnProperty(Override.hostName)) {
         Array.prototype.push.apply(regexCleanup, Object.entries(NovelSetting.cleanupWord[Override.hostName]));
       }
-      var input_line = input.split('\n');
+      var input_line = input.replace('\r', '\n').split('\n');
       var output = '';
       for (var in_line in input_line) {
         var textline = input_line[in_line].trim();
@@ -291,14 +312,14 @@
       return str;
     },
     decode: function(s) {
-      return Override.helper.base64Decode(jQuery.isArray(s) ? s.join('') : s).split('');
+      return Override.helper.base64Decode(Array.isArray(s) ? s.join('') : s).split('');
     },
     general: {
       windowLocation: function() {
         Override.helper.uriDocode(window.location)
       },
       addSourcetoHead: function() {
-        jQuery('head').prepend('<link href="' + window.location + '" rel="canonical"/>')
+        document.querySelector('head').insertAdjacentHTML('afterbegin', '<link href="' + window.location + '" rel="canonical"/>')
       },
       registerSettings: function() {
         for (var optionName in Override.scriptSetting.scriptOption) {
@@ -373,12 +394,10 @@
       reload: function(t) {
         t = typeof t !== 'undefined' ? t : 0;
         setTimeout(function(){window.location.reload(true)}, t);
-      },
+      }
     }
   };
 
-  jQuery(document).ready(function() {
-    Override.initialize();
-  });
+  Override.initialize();
 
 })();
