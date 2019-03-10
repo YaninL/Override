@@ -46,6 +46,7 @@
         doubleClickArea: document.querySelector('.panel-default'),
         contentArea: document.querySelectorAll('.p-15 h4[class=""], .p-15 .fr-view p'),
       }
+    }
   };
 
   var Override = {
