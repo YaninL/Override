@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Override - Master
 // @homepage     https://github.com/YaninL/Override
-// @version      3.0.0
+// @version      3.0.1
 // @description  Allow copy novel to clipboard or text file for backup
 // @author       Ann
 // @icon         https://raw.githubusercontent.com/YaninL/Override/master/logo.png
