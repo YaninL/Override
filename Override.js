@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Override - Master
+// @name         Override
 // @homepage     https://github.com/YaninL/Override
 // @version      3.0.1
 // @description  Allow copy novel to clipboard or text file for backup
