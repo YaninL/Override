@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Override
 // @homepage     https://github.com/YaninL/Override
-// @version      3.0.1
+// @version      3.0.2
 // @description  Allow copy novel to clipboard or text file for backup
 // @author       Ann
 // @icon         https://raw.githubusercontent.com/YaninL/Override/master/logo.png
@@ -256,7 +256,7 @@
       selection.removeAllRanges();
     },
     getFilename: function(content) {
-      var title_line = content.substring(0, 200).replace(/[\s\r\t\n]/g, '').replace('(', '-');
+      var title_line = content.substring(0, 200).replace(/[\s\r\t\n,]/g, '').replace('(', '-');
       var name = /(บทที่|ตอนที่|ch|chapter|volume|เล่ม|เล่มที่)(\d+)(\-|\.|บทที่|ตอนที่)?(\d+)?/i;
       if (name.test(title_line)) {
         var chapter = title_line.match(name);
@@ -266,7 +266,7 @@
         chapter[2] = type ? chapter[2] : Override.helper.padLeft(chapter[2], 3);
         chapter[3] = type ? '-' : chapter[3];
         chapter[4] = type ? Override.helper.padLeft(chapter[4], 3) : chapter[4];
-        return chapter[2] + chapter[3] + chapter[4] + '.txt';
+        return chapter[2] + chapter[3].trim() + chapter[4] + '.txt';
       } else if (/\d+/.test(title_line)) {
         return Override.helper.padLeft(title_line.match(/\d+/), 3) + '.txt';
       } else {
