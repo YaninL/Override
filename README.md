@@ -1,5 +1,5 @@
-# Override
-Allow copy novel to clipboard or text file for backup
+# Override UserScript 
+allow copy novel to clipboard or text file for backup
 
 # Option
 - select double click to save or copy
