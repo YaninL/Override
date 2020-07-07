@@ -289,7 +289,13 @@
     "execpath": "\\d{4,}/\\d{1,}",
     "remove": ".actionbar",
     "title": ".entry-title",
-    "content": ".entry-content p:not(.author-bio)"
+    "content": ".entry-content p:not(.author-bio)",
+    "cleanup": {
+       "http.*XiaoPiakLee/?": "",
+       "^เล่ม \\d{1,3}.*": "",
+       "^ตอนที่ \\d{1,3}.*": "",
+       "DE": ""
+    }
   },
   "thai-novel.com": {
     "remove": "div.gdrts-shortcode-wrapper",
