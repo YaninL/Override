@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name              Override
-// @version           4.0.4
+// @version           4.0.5
 // @description       Allow copy novel to clipboard or text file for backup
 // @author            Ann
 // @icon              https://i.imgur.com/Fvu5RPq.png
@@ -16,6 +16,8 @@
 // @grant             GM_addStyle
 // @grant             GM_getValue
 // @grant             GM_setValue
+// @grant             GM_deleteValue
+// @grant             GM_addValueChangeListener
 // @grant             GM_setClipboard
 // @grant             GM_notification
 // @grant             GM_xmlhttpRequest
@@ -222,6 +224,21 @@ ovr.prototype = {
     clipboard.parentNode.removeChild(clipboard);
     selection.removeAllRanges();
   },
+  next: function() {
+    var next = this.setting.webElement.next || false;
+    if(next == false) return;
+    var node = document.getElementById(next) || false;
+    if(node && this.setting.wait == false) {
+      this.setting.wait = true;
+      if(node.nodeName == 'a') {
+        node.click();
+      }else if (node.nodeName == 'button' || node.nodeName == 'form'){
+        node.submit();
+      }
+    }else{
+      console.log('[Override] Next node name', next, 'not found...');
+    }
+  },
   removeprotection: function() {
     this.removeprotectionwindow(window);
     this.removeprotectionwindow(document);
@@ -284,7 +301,9 @@ ovr.prototype = {
         '<button class="dropbtn">◆◇ Override ◇◆</button><div class="dropup-content">',
         '<div><input type="checkbox" id="saveFile" style=""' + (this.getValue('saveFile') ? ' checked' : '') + '>Copy to file</div>',
         '<div><input type="checkbox" id="autoCopy"' + (this.getValue('autoCopy') ? ' checked' : '') + '>Auto Copy</div>',
+        '<div><input type="checkbox" id="autoBuy"' + (this.getValue('autoBuy') ? ' checked' : '') + '>Auto Buy</div>',
         '<div><input type="checkbox" id="addUri"' + (this.getValue('addUri') ? ' checked' : '') + '>Source url</div>',
+        '<div><input type="checkbox" id="botDownload"' + (this.getValue('botDownload') ? ' checked' : '') + '>Bot Download</div>',
         '<div><input type="checkbox" id="contentcleanup"' + (this.getValue('contentcleanup') ? ' checked' : '') + '>Cleanup Novel</div>',
         '</div></div></div>'
       ].join(''));
@@ -294,8 +313,15 @@ ovr.prototype = {
       document.getElementById('autoCopy').addEventListener('click', function() {
         self.setValue('autoCopy', document.getElementById('autoCopy').checked);
       });
+      document.getElementById('autoBuy').addEventListener('click', function() {
+        self.setValue('autoBuy', document.getElementById('autoBuy').checked);
+      });
       document.getElementById('addUri').addEventListener('click', function() {
         self.setValue('addUri', document.getElementById('addUri').checked);
+      });
+      document.getElementById('botDownload').addEventListener('click', function() {
+        self.setValue('botDownload', document.getElementById('botDownload').checked);
+        self.setValue('autoCopy', document.getElementById('autoCopy').checked);
       });
       document.getElementById('contentcleanup').addEventListener('click', function() {
         self.setValue('contentcleanup', document.getElementById('contentcleanup').checked);
@@ -424,11 +450,15 @@ ovr.prototype = {
       }
     }
     if (this.getValue('host') == null ||
-      this.getValue('cleanup') == null) {
-    this.updatedb();
-    this.updateword();
+        this.getValue('cleanup') == null) {
+      this.updatedb();
+      this.updateword();
     }
+    // add user host
     if(this.getValue('userhost') == null) this.setValue('userhost', {})
+    // delete old version value
+    if(this.getValue('cleanupWord') != null) GM_deleteValue('cleanupWord');
+    if(this.getValue('Decrypt') != null) GM_deleteValue('Decrypt');
     console.log('[Override] Setting', this.setting);
   },
   nodes: [],
