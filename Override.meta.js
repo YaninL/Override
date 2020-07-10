@@ -6,7 +6,7 @@
 // @icon              https://i.imgur.com/Fvu5RPq.png
 // @homepage          https://github.com/YaninL/Override
 // @supportURL        https://github.com/YaninL/Override
-// @updateURL         https://raw.githubusercontent.com/YaninL/Override/master/Override.meta.js
+// @updateURL         https://raw.githubusercontent.com/YaninL/Override/master/Override.user.js
 // @downloadURL       https://raw.githubusercontent.com/YaninL/Override/master/Override.user.js
 // @require           https://raw.githubusercontent.com/YaninL/Override/master/FileSaver.min.js
 // @require           https://raw.githubusercontent.com/YaninL/Override/master/Readability.min.js
