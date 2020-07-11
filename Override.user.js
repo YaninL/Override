@@ -430,7 +430,6 @@ ovr.prototype = {
       this.updatedb();
       this.updateword();
     }
-    // add user host
     if(this.getValue('userhost') == null) this.setValue('userhost', {})
     // delete old version value
     if(this.getValue('cleanupWord') != null) GM_deleteValue('cleanupWord');
