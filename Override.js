@@ -224,21 +224,6 @@ ovr.prototype = {
     clipboard.parentNode.removeChild(clipboard);
     selection.removeAllRanges();
   },
-  next: function() {
-    var next = this.setting.webElement.next || false;
-    if(next == false) return;
-    var node = document.getElementById(next) || false;
-    if(node && this.setting.wait == false) {
-      this.setting.wait = true;
-      if(node.nodeName == 'a') {
-        node.click();
-      }else if (node.nodeName == 'button' || node.nodeName == 'form'){
-        node.submit();
-      }
-    }else{
-      console.log('[Override] Next node name', next, 'not found...');
-    }
-  },
   removeprotection: function() {
     this.removeprotectionwindow(window);
     this.removeprotectionwindow(document);
@@ -300,7 +285,7 @@ ovr.prototype = {
         '<div class="dropovr"><div class="dropup">',
         '<button class="dropbtn">◆◇ Override ◇◆</button><div class="dropup-content">',
         '<div><input type="checkbox" id="saveFile" style=""' + (this.getValue('saveFile') ? ' checked' : '') + '>Copy to file</div>',
-        '<div><input type="checkbox" id="autoBuy"' + (this.getValue('autoBuy') ? ' checked' : '') + '>Auto Buy</div>',
+        '<div><input type="checkbox" id="autoCopy"' + (this.getValue('autoCopy') ? ' checked' : '') + '>Auto Copy</div>',
         '<div><input type="checkbox" id="addUri"' + (this.getValue('addUri') ? ' checked' : '') + '>Source url</div>',
         '<div><input type="checkbox" id="contentcleanup"' + (this.getValue('contentcleanup') ? ' checked' : '') + '>Cleanup Novel</div>',
         '</div></div></div>'
@@ -308,8 +293,8 @@ ovr.prototype = {
       document.getElementById('saveFile').addEventListener('click', function() {
         self.setValue('saveFile', document.getElementById('saveFile').checked);
       });
-      document.getElementById('autoBuy').addEventListener('click', function() {
-        self.setValue('autoBuy', document.getElementById('autoBuy').checked);
+      document.getElementById('autoCopy').addEventListener('click', function() {
+        self.setValue('autoCopy', document.getElementById('autoCopy').checked);
       });
       document.getElementById('addUri').addEventListener('click', function() {
         self.setValue('addUri', document.getElementById('addUri').checked);
