@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name              Override
-// @version           4.0.5
+// @version           4.0.6
 // @description       Allow copy novel to clipboard or text file for backup
 // @author            Ann
 // @icon              https://i.imgur.com/Fvu5RPq.png
