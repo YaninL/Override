@@ -1,5 +1,5 @@
 {
-  "updatetime" : "09-06-63 19:00",
+  "updatetime" : "13-06-63 22:22",
   "axelms.blogspot.com": {
     "execpath": "p/",
     "title": ".entry-title",
@@ -23,10 +23,6 @@
   "boxnovel.com": {
     "execpath": "novel/.*/chapter.*",
     "content": ".reading-content"
-  },
-  "docs.google.com": {
-    "execpath": "document/.*mobilebasic",
-    "content": ".doc-container"
   },
   "c-novelbyemptymind.blogspot.com": {
     "execpath": "\\d{4}/\\d{2}",
