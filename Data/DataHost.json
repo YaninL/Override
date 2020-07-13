@@ -43,7 +43,7 @@
     }
   },
   "facebook.com": {
-    "removeprotection": false,
+    "skipremove": true,
     "execpath": "notes",
     "title": "._4lmk",
     "content": "._39k5"
