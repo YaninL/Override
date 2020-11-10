@@ -1,5 +1,5 @@
 {
-  "updatetime" : "10-11-63 14:45",
+  "updatetime" : "10-11-63 19:30",
   "axelms.blogspot.com": {
     "execpath": "p/",
     "title": ".entry-title",
@@ -7,10 +7,8 @@
   },
   "amnovel.com": {
     "skipsource": true,
-    "execpath": "view-new-xc.php",
-    "remove": "#background",
-    "title": ".sizecontent div[style^=\"font-size: 24px\"]",
-    "content": ".sizecontent p:not(.bg-text)"
+    "next": "img[src*='file-icon/a2.png']",
+    "script": "let iframe = document.getElementsByTagName('iframe')[0] || false;\nif(iframe){\nsetTimeout(function() {\n let select = '.sizecontent div[style^=\"font-size: 24px\"], .sizecontent p:not(.bg-text)';\nlet selectcontent = iframe.contentWindow.document.body.querySelectorAll(select);\novr.prototype.copycontent(selectcontent, iframe.contentWindow.document.body);\n}, 1000);\n}"
   },
   "beginsbook.com": {
     "execpath": "read-",
@@ -262,12 +260,9 @@
     "content": ".entry-content"
   },
   "spoilsoc.com": {
-    "execpath": "view-new-xc.php",
     "skipsource": true,
-    "remove": "#background",
-    "title": ".sizecontent div[style^=\"font-size: 24px\"]",
-    "content": ".sizecontent p:not(.bg-text)",
-    "script": "if(ovr.prototype.setting.botDownload){setTimeout(function(){\ntop.document.querySelector('img[src*=\"file-icon/a2.png\"]').click();\n}, 3000);}",
+    "next": "img[src*='file-icon/a2.png']",
+    "script": "let iframe = document.getElementsByTagName('iframe')[0] || false;\nif(iframe){\nsetTimeout(function() {\n let select = '.sizecontent div[style^=\"font-size: 24px\"], .sizecontent p:not(.bg-text)';\nlet selectcontent = iframe.contentWindow.document.body.querySelectorAll(select);\novr.prototype.copycontent(selectcontent, iframe.contentWindow.document.body);\n}, 1000);\n}",
     "cleanup": {
       "\\d{1,2}/\\d{1,2}/\\d{4}": "",
       "ประมาน": "ประมาณ",
