@@ -187,7 +187,7 @@
     "cleanup": {
       "\\(ฟรี\\)": ""
     }
-  ,
+  },
   "numberxxi.blogspot.com": {
     "script": "document.addEventListener('dblclick', function() {\nvar xhttp = new XMLHttpRequest();\nxhttp.open('POST', 'https://translation.lazywizardmaster.com/ajax/view_canvas.php', true);\nxhttp.setRequestHeader(\"Content-Type\", \"application/x-www-form-urlencoded\");\nxhttp.onreadystatechange = function() {\nif (this.readyState === XMLHttpRequest.DONE && this.status === 200) {\nvar html = xhttp.responseText.replace(/<style[^\\0]*?<\\/style>/, '');\ndocument.body.insertAdjacentHTML('beforeend', '<div id=\"tempclip\">' + html + '<\/div>');\nvar tempclip = document.getElementById('tempclip');\novr.prototype.copycontent([tempclip]);\ntempclip.parentNode.removeChild(tempclip);\n}\n}\nxhttp.send('action=getContent&chapter=' + window.chapter);\n});"
   },
