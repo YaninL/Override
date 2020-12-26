@@ -183,12 +183,11 @@
     ]
   },
   "novelrealm.com": {
-    "execpath": "read/chapter",
-    "script": "document.addEventListener('DOMNodeInserted', function handler() {\nif(document.querySelector('input.btn.btn-danger') != null && ovr.prototype.setting.autoBuy){\ndocument.querySelector('input.btn.btn-danger').click();\nthis.removeEventListener('DOMNodeInserted', handler);\n}\n});\nvar loop = setInterval(function() {\nif(document.querySelector('.mt-5').childElementCount == 2){\novr.prototype.copycontent([document.querySelectorAll('.mt-5')[0]]);\nif(ovr.prototype.setting.botDownload){\nsetTimeout(function(){document.querySelectorAll('button.f-size.btn.btn-danger')[1].click();}, 2000);\n}\nclearInterval(loop);\n}\n}, 100);",
+    "script": "document.addEventListener('DOMNodeInserted', function () {\nlet iscontent = document.querySelector('.readNovel') || false;\nlet istitle = document.querySelector('.chapterName') || false;\nlet iscopy = document.querySelector('#ctn-enable-c') || false;\nlet ispath = /novel\\/\\d+\\/chapter/.test(window.location.pathname);\nlet isnext = document.querySelector('.backNextBtn[style^=\"float\"]') || false;\nlet ispurchasebutton = document.querySelector('[id*=__BVID__] p.addCoin') || false;\nlet ispurchasealready = document.querySelector('#ctn-enable-b') || false;\nif(ispath && ovr.prototype.setting.autoBuy\n && ispurchasebutton.innerText == 'ซื้อเลย' && ispurchasealready == false){\nispurchasebutton.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-b\"></em>');\nsetTimeout(function(){ispurchasebutton.click();}, 1000);\n}\nif(ispath && iscontent.childElementCount > 2 && iscopy == false && ispurchasebutton == false){\niscontent.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"></em>');\novr.prototype.copycontent([istitle, iscontent], iscontent);\nif(ovr.prototype.setting.botDownload && isnext){\nsetTimeout(()=>{isnext.click();}, 2000);\n}\n}\n});",
     "cleanup": {
       "\\(ฟรี\\)": ""
     }
-  },
+  ,
   "numberxxi.blogspot.com": {
     "script": "document.addEventListener('dblclick', function() {\nvar xhttp = new XMLHttpRequest();\nxhttp.open('POST', 'https://translation.lazywizardmaster.com/ajax/view_canvas.php', true);\nxhttp.setRequestHeader(\"Content-Type\", \"application/x-www-form-urlencoded\");\nxhttp.onreadystatechange = function() {\nif (this.readyState === XMLHttpRequest.DONE && this.status === 200) {\nvar html = xhttp.responseText.replace(/<style[^\\0]*?<\\/style>/, '');\ndocument.body.insertAdjacentHTML('beforeend', '<div id=\"tempclip\">' + html + '<\/div>');\nvar tempclip = document.getElementById('tempclip');\novr.prototype.copycontent([tempclip]);\ntempclip.parentNode.removeChild(tempclip);\n}\n}\nxhttp.send('action=getContent&chapter=' + window.chapter);\n});"
   },
