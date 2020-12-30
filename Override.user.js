@@ -220,7 +220,7 @@ ovr.prototype = {
     } else if (/\d+/.test(title_line)) {
       return this.padLeft(title_line.match(/\d+/)) + '.txt';
     } else {
-      let name = content.trim().split('\n')[0].substring(0, 80) + '.txt';
+      let name = titlename;
       return name == '.txt' ? 'filename.txt' : name;
     }
   },
