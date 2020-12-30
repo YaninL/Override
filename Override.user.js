@@ -94,7 +94,8 @@ ovr.prototype = {
       '.ovrselect{margin:0 10px 0 10px;display:inline-block}',
       '.hiddenbox{width:1px;height:1px;overflow:hidden}'
     ],
-    title: /(ep\.?|ภาค|ภาคที่|ตอนพิเศษ|บทที่|ตอนที่|ch|chapter|volume|arc|เล่ม|เล่มที่)\s{0,4}(\d+)\s{0,4}:?\s?(\-|\.|บทที่|\-?ตอนที่?).*?\s{0,4}(\d+)?/i
+    title: /(ep\.?|ภาค|ภาคที่|ตอนพิเศษ|บทที่|ตอนที่|ch|chapter|volume|arc|เล่ม|เล่มที่)\s{0,4}(\d+)\s{0,4}:?\s?(\-|\.|บทที่|\-?ตอนที่?).*?\s{0,4}(\d+)?/i,
+    unsafecharacters : /["<>#%\{\}\|\\/\^~\[\]`;\?:@=&*]/g
   },
   addcontentcopy() {
     let hostname = window.location.hostname.replace('www.', '');
@@ -191,16 +192,18 @@ ovr.prototype = {
     }
   },
   getfilename(content) {
-    let title_line = content.substring(0, 200).replace(/\s+/g, ' ').replace(/[\r\t\n,]/g, '').replace('(', '-');
+    content = content.substring(0, 200).replace(this.appsetting.unsafecharacters, '');
+    let title_line = content.replace(/\s{2,}/g, ' ').replace(/[\r\t\n,]/g, '');
+    let titlename = content.trim().split('\n')[0].substring(0, 100).trim() + '.txt';
     if(this.setting.namedigit == 0 || this.setting.namedigit == 9){
-      let index = '';
+      let count = '';
       if(this.setting.namedigit == 9){
-        index = parseInt(this.setting.countindex);
-        this.setValue('countindex', index + 1);
-        document.getElementById('countindex').value = index + 1;
-        index = this.padLeft(index, 3) + ' - ';
+        count = parseInt(this.setting.countindex);
+        this.setValue('countindex', count + 1);
+        document.getElementById('countindex').value = count + 1;
+        count = this.padLeft(count, 3) + ' - ';
       }
-      return index + content.trim().split('\n')[0].substring(0, 80) + '.txt';
+      return count + titlename
     }
     if(this.appsetting.title.test(title_line)) {
       let chapter = title_line.match(this.appsetting.title);
