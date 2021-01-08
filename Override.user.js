@@ -290,7 +290,6 @@ ovr.prototype = {
         '<div class="countindex"><label>ตัวนับเริ่มต้นที่<input type="text" id="countindex" style="width:80px"></label></div>',
         '<div class="ovrhead">อื่นๆ</div>',
         '<div><label><input type="checkbox" id="notification">เปิดแจ้งเตือน</label></div>',
-        '<div><a href="https://buymeacoffee.com/sunsettia" target="_blank">☕ ช่วยแมวซื้อกาแฟ</a></div>',
         '</div>'
       ].join(''));
       document.querySelectorAll('#ovrsidenav input[id], #ovrsidenav select').forEach((input)=>{
