@@ -5,7 +5,7 @@
     "execpath": "novel/\\d+/.*",
     "content": ".read-container",
     "next": ".next_page"
-  }
+  },
   "axelms.blogspot.com": {
     "execpath": "p/",
     "title": ".entry-title",
