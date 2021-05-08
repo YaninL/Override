@@ -1,5 +1,5 @@
 {
-  "updatetime" : "04-05-64 23:40",
+  "updatetime" : "08-05-64 14:50",
   "aileen-novel.online": {
     "skipsource": true,
     "execpath": "novel/\\d+/.*",
@@ -13,8 +13,13 @@
   },
   "amnovel.com": {
     "skipsource": true,
-    "next": "img[src*='file-icon/a2.png']",
-    "script": "let iframe = document.getElementsByTagName('iframe')[0] || false;\nif(iframe){\nsetTimeout(function() {\n let select = '.sizecontent div[style^=\"font-size: 24px\"], .sizecontent p:not(.bg-text)';\nlet selectcontent = iframe.contentWindow.document.body.querySelectorAll(select);\novr.prototype.copycontent(selectcontent, iframe.contentWindow.document.body);\n}, 1000);\n}"
+    "execpath": "/view.php",
+    "title": ".container > h1",
+    "content": ".container > p",
+    "next": "#next1",
+    "cleanup": {
+       "เรื่อง : .*": ""
+    }
   },
   "beginsbook.com": {
     "execpath": "read-",
@@ -251,9 +256,9 @@
     }
   },
   "reeeed.com": {
-    "script": "document.addEventListener('DOMNodeInserted', function () {\nvar istitle = ovr('[class*=\"reader-content__title\"]').nodes[0] || false;\nvar iscontent = ovr('[class=\"reader-content__draft\"]').nodes[0] || false;\nvar iscopy = ovr('#ctn-enable-c').nodes[0] || false;\nif(iscontent && istitle && iscopy == false) {\nistitle.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"><\/em>');\novr.prototype.copycontent([istitle, iscontent], iscontent);\n}\n}, false);",
+    "script": "document.addEventListener('DOMNodeInserted', function () {\nvar istitle = ovr('[class*=\"reader-content__label\"]').nodes[0] || false;\nvar iscontent = ovr('[class=\"public-DraftEditor-content\"]').nodes[0] || false;\nvar iscopy = ovr('#ctn-enable-c').nodes[0] || false;\nif(iscontent && istitle && iscopy == false) {\nistitle.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"></em>');\novr.prototype.copycontent([istitle, iscontent], iscontent);\n}\n}, false);",
     "cleanup": {
-      "- โปรดติดตามตอนต่อไป -": ""
+      ".*โปรดติดตามตอนต่อไป.*": ""
     }
   },
   "sainamrin.blogspot.com": {
