@@ -1,5 +1,5 @@
 {
-  "updatetime" : "23-05-64 20:50",
+  "updatetime" : "23-05-64 21:35",
   "aileen-novel.online": {
     "skipsource": true,
     "execpath": "novel/\\d+/.*",
@@ -168,7 +168,7 @@
   },
   "my-novel.co":{
     "execpath": "novel/.*/.*/.*/",
-    "title": ".reading-content h1",
+    "title": ".entry-header li.active",
     "content": ".reading-content p",
     "next": ".nav-next a"
   },
