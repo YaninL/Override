@@ -166,6 +166,12 @@
     "title": ".entry-title",
     "content": ".entry-content"
   },
+  "my-novel.co":{
+    "execpath": "novel/.*/.*/.*/",
+    "title": ".reading-content h1",
+    "content": ".reading-content p",
+    "next": ".nav-next a"
+  },
   "my-novel.com": {
     "execpath": "\\d{4}/\\d{2}",
     "title": ".entry-title",
