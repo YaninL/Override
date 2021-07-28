@@ -1,8 +1,9 @@
 {
-  "updatetime" : "28-07-64 21:20",
+  "updatetime" : "28-07-64 23:00",
   "aileen-novel.online": {
     "skipsource": true,
     "execpath": "novel/\\d+/.*",
+    "title": "#chapter-heading",
     "content": ".read-container",
     "next": ".next_page"
   },
