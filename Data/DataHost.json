@@ -1,5 +1,5 @@
 {
-  "updatetime" : "28-07-64 20:55",
+  "updatetime" : "28-07-64 21:20",
   "aileen-novel.online": {
     "skipsource": true,
     "execpath": "novel/\\d+/.*",
@@ -32,6 +32,13 @@
   "boxnovel.com": {
     "execpath": "novel/.*/chapter.*",
     "content": ".reading-content"
+  },
+  "cat2auto.com": {
+    "skipsource": true,
+    "execpath": "novel/.*/.*\\d+/.*",
+    "title": "#chapter-heading",
+    "content": ".read-container",
+    "next": ".next_page"
   },
   "c-novelbyemptymind.blogspot.com": {
     "execpath": "\\d{4}/\\d{2}",
@@ -103,6 +110,18 @@
       "ตอนนี้กลุ่มลับ.*": ""
     }
   },
+  "hf-novel-thai.blogspot.com": {
+    "execpath": "\\d{4,}/\\d{1,}",
+    "title": ".post-title",
+    "content": "#fontSize",
+    "css": [
+      "#lock{display:none}",
+      "#unread{display:block !important;}"
+    ],
+    "cleanup": {
+      "TB :": ""
+    }
+  },
   "hongsamut.com": {
     "execpath": "fiction/chapter",
     "script": "document.addEventListener('DOMNodeInserted', function () {\nvar istitle = ovr('h3 strong').nodes[0] || false;\nvar iscontent = ovr('#fiction-detail').nodes[0] || false;\nvar iscopy = ovr('#ctn-enable-c').nodes[0] || false;\nif(iscontent.childElementCount > 10 && iscopy == false){\nistitle.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"><\/em>');\novr.prototype.copycontent([istitle, iscontent], iscontent);\n}\n});"
@@ -122,6 +141,11 @@
     "cleanup": {
       "เดชคัมภีร์เทพฤทธิ์": ""
     }
+  },
+  "i-here.info": {
+    "execpath": "novel/\\d+",
+    "title": "h1.header",
+    "content": "#article"
   },
   "laosoofung.com": {
     "execpath": "Readers/Read",
@@ -196,6 +220,11 @@
       ".dropovr input[type=\"checkbox\"] {display: inline !important;}"
     ]
   },
+  "novelfull.com": {
+    "execpath": "/[0-z-]+/[0-z-]+",
+    "title": "h2 .chapter-title",
+    "content": "#chapter-content p"
+  }
   "novelrealm.com": {
     "script": "document.addEventListener('DOMNodeInserted', function () {\nlet iscontent = document.querySelector('.readNovel') || false;\nlet istitle = document.querySelector('.ant-select-selection-selected-value') || false;\nlet iscopy = document.querySelector('#ctn-enable-c') || false;\nlet ispath = /novel\\/\\d+\\/chapter/.test(window.location.pathname);\nlet isnext = document.querySelector('.backNextBtn[style^=\"float\"]') || false;\nlet ispurchasebutton = document.querySelector('[id*=__BVID__] p.addCoin') || false;\nlet ispurchasealready = document.querySelector('#ctn-enable-b') || false;\nif(ispath && ovr.prototype.setting.autoBuy\n && ispurchasebutton.innerText == 'ซื้อเลย' && ispurchasealready == false){\nispurchasebutton.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-b\"></em>');\nsetTimeout(()=>{ispurchasebutton.click();}, 1000);\n}\nif(ispath && iscontent.childElementCount > 2 && iscopy == false && ispurchasebutton == false){\niscontent.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"></em>');\nsetTimeout(()=>{\novr.prototype.copycontent([istitle, iscontent], iscontent);\nif(ovr.prototype.setting.botDownload && isnext){\nsetTimeout(()=>{isnext.click();}, 2000);\n}\n}, 1000);\n}\n});",
     "cleanup": {
@@ -307,6 +336,9 @@
     "execpath": "\\d{4,}/\\d{1,}",
     "content": ".entry-content"
   },
+  "thaiboyslove.com": {
+    "content": ".inner"
+  },
   "thaidesolateera.wordpress.com": {
     "execpath": "\\d{4,}/\\d{1,}",
     "remove": ".actionbar",
@@ -319,6 +351,7 @@
        "DE": ""
     }
   },
+  "thainovel.net": {},
   "thai-novel.com": {
     "remove": "div.gdrts-shortcode-wrapper",
     "script": "document.addEventListener('DOMNodeInserted', function () {\nif(document.querySelector('.mycred-sell-this-wrapper') != null && ovr.prototype.setting.autoBuy) {\ndocument.querySelector('.mycred-sell-this-wrapper .btn-primary').click();\n}\nif(document.querySelector('.mycred-sell-this-wrapper') == null && document.querySelector('#ctn-enable-c') == null && document.querySelector('h1.entry-title') != null){\ndocument.querySelector('h1.entry-title').insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"></em>');\novr.prototype.copycontent([document.querySelector('h1.entry-title'), document.querySelector('.td-post-content')]);\nif(ovr.prototype.setting.botDownload && document.querySelectorAll('.td-post-next-prev-content a').length == 6){\nsetTimeout(function(){document.querySelectorAll('.td-post-next-prev-content a')[2].click();}, 3000);\n}\n}\n});",
@@ -350,6 +383,10 @@
       "สารบัญ .*": ""
     }
   },
+  "the1000-stars.blogspot.com": {
+    "title": ".entry-title",
+    "content": ".entry-content"
+  },
   "tunwalai.com": {
     "execpath": "chapter",
     "title": ".story-title-bar",
@@ -365,6 +402,11 @@
     "execpath": "\\d+/\\d+",
     "title": "h1.align-center",
     "content": ".content p:not(.meta)"
+  },
+  "uukanshu.com": {
+    "execpath": "/\\d+/\\d+",
+    "title": "#timu",
+    "content": "#contentbox"
   },
   "versaillesontinent.blogspot.com": {
     "execpath": "\\d{4}/\\d{2}",
