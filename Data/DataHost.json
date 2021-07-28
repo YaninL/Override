@@ -1,5 +1,5 @@
 {
-  "updatetime" : "23-07-64 14:10",
+  "updatetime" : "28-07-64 18:55",
   "aileen-novel.online": {
     "skipsource": true,
     "execpath": "novel/\\d+/.*",
@@ -301,7 +301,7 @@
   },
   "th.booktrk.com": {
     "execpath": "/.*/r\\d+.html",
-    "script": "document.addEventListener('DOMNodeInserted', function () {\nlet contentpart = document.querySelectorAll('.ctp.hidden');\nlet title = document.querySelector('.chapter-title') || false;\nif(contentpart.length == 0 && title.classList.contains('ovrdone') == false){\ntitle.classList.add('ovrdone');\nlet content = [title];\ncontent.push.apply(content, [].slice.call(document.querySelectorAll('.readerbody-wg p')));\ndocument.querySelectorAll('.ctp').forEach(function(e){\ncontent.push.apply(content, [].slice.call(e.shadowRoot.querySelectorAll('p')));\n});\novr.prototype.copycontent(content);\nif(ovr.prototype.setting.botDownload){setTimeout(function(){\ndocument.querySelectorAll('.btn-success.next')[0].click();\n}, 2000)}\n}\n}, false);",
+    "script": "ovr.axios.get(window.location).then(function(response){\ndocument.body.insertAdjacentHTML('beforeend', '<div id=\"tempclip\" class=\"hiddenbox\">' + response.data + '<\/div>');\nlet title = document.querySelector('#tempclip .chapter-title') || false;\nlet contentpart = document.querySelectorAll('#tempclip .ctp.hidden');\nlet content = [title];\ncontent.push.apply(content, [].slice.call(document.querySelectorAll('#tempclip .readerbody-wg p')));\ncontentpart.forEach((e)=>{\ne.innerHTML= window.decrypt(e.innerText);\ncontent.push.apply(content, [].slice.call(e.querySelectorAll('p')));\n});\ndocument.querySelectorAll('#tempclip').forEach(e => e.parentNode.removeChild(e));\novr.prototype.copycontent(content);\nif(ovr.prototype.setting.botDownload){setTimeout(function(){\ndocument.querySelectorAll('.btn-success.next')[0].click();\n}, 2000)}\n}).catch((error)=>{\novr.prototype.notification('ถอดรหัสข้อมูลไม่ได้...');\n});",
     "cleanup": {
       "[\u0000-\u0010]": ""
     }
