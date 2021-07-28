@@ -1,5 +1,5 @@
 {
-  "updatetime" : "28-07-64 18:55",
+  "updatetime" : "28-07-64 19:20",
   "aileen-novel.online": {
     "skipsource": true,
     "execpath": "novel/\\d+/.*",
@@ -180,13 +180,10 @@
   },
   "nekopost.net": {
     "execpath": "novel/\\d+/\\d+",
-    "script": "var loop = setInterval(function() {\nif(document.querySelector('#chapterContent').childElementCount){\novr.prototype.copycontent(\ndocument.querySelectorAll('#ipChapterName, #chapterContent p')\n);\nclearInterval(loop);\n}\n}, 100);",
+    "script": "var loop = setInterval(function() {\nlet panel = document.querySelector('.panel-reader') || false;\nif(panel.childElementCount){\novr.prototype.copycontent(\ndocument.querySelectorAll('.panel-intro h2, .panel-reader p')\n);\nif(ovr.prototype.setting.botDownload){setTimeout(function(){\ndocument.querySelector('button.btn.bg-primary').click()\n}, 2000)}\nclearInterval(loop);\n}\n}, 100);",
     "cleanup": {
       "ตอนที่": "",
-      "\\[นิยายแปล\\].*": "",
-      "เทพยุทธ์สะท้านภพ": "",
-      "Ch.(\\d+) -": "ตอนที่ $1",
-      "Genius Sword Immortal :": ""
+      "\\[นิยายแปล\\].*": ""
     }
   },
   "novel-lucky.com": {
@@ -378,7 +375,8 @@
     "execpath": "(writer|story)/viewlongc.php",
     "title": "h2.chaptername",
     "content": "#story-content",
-    "script": "if(ovr.prototype.setting.botDownload){\nsetTimeout(function(){document.querySelectorAll('.chapter-action-button')[3].click();}, 4000);\nreturn;\n}"
+    "next": ".chapter-action-button[title='ตอนถัดไป']",
+    "script": "let container = document.querySelector('#story-content') || false;\nif(container) {\nlet novelcontent = container.innerHTML;\nfor (let i=3585; i<=3605; i++) {\nnovelcontent = novelcontent.replace(\nnew RegExp(String.fromCharCode(i + 100), 'g'),\nString.fromCharCode(i));\n}\ncontainer.innerHTML = novelcontent;\n}"
   },
   "wuxiaworld.com": {
     "execpath": "novel/.*/.*\\d+",
