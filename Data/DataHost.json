@@ -1,5 +1,5 @@
 {
-  "updatetime" : "28-07-64 23:00",
+  "updatetime" : "25-08-64 11:15",
   "aileen-novel.online": {
     "skipsource": true,
     "execpath": "novel/\\d+/.*",
@@ -175,6 +175,14 @@
   },
   "kingdomthainovel.com": {
     "autodetect": true
+  },
+  "manganov.com":{
+    "execpath": "novel/.*/\\d+",
+    "title": "h2.mt-1",
+    "content": ".mn-novel-chapter-content-body",
+    "cleanup": {
+      "Please consider viewing.*": ""
+    }
   },
   "mknovel.blogspot.com": {
     "execpath": "\\d+\\d+",
