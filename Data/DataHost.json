@@ -1,5 +1,5 @@
 {
-  "updatetime" : "25-08-64 11:15",
+  "updatetime" : "22-03-65 18:40",
   "aileen-novel.online": {
     "skipsource": true,
     "execpath": "novel/\\d+/.*",
@@ -362,35 +362,13 @@
   },
   "thainovel.net": {},
   "thai-novel.com": {
-    "remove": "div.gdrts-shortcode-wrapper",
-    "script": "document.addEventListener('DOMNodeInserted', function () {\nif(document.querySelector('.mycred-sell-this-wrapper') != null && ovr.prototype.setting.autoBuy) {\ndocument.querySelector('.mycred-sell-this-wrapper .btn-primary').click();\n}\nif(document.querySelector('.mycred-sell-this-wrapper') == null && document.querySelector('#ctn-enable-c') == null && document.querySelector('h1.entry-title') != null){\ndocument.querySelector('h1.entry-title').insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"></em>');\novr.prototype.copycontent([document.querySelector('h1.entry-title'), document.querySelector('.td-post-content')]);\nif(ovr.prototype.setting.botDownload && document.querySelectorAll('.td-post-next-prev-content a').length == 6){\nsetTimeout(function(){document.querySelectorAll('.td-post-next-prev-content a')[2].click();}, 3000);\n}\n}\n});",
-    "cleanup": {
-      "ฝาก.*เลย": "",
-      "Face.*กดเลย": "",
-      "ฝากติดตามเพจ.*": "",
-      "ขอฝาก.*ครับ": "",
-      "โปรดติดตาม.*": "",
-      "http.*Techniqu/?": "",
-      "http.*realm/?": "",
-      "http.*domains/?": "",
-      "http.*ark/?": "",
-      "http.*cultivation/?": "",
-      "ติดตาม.*แฟนเพจ": "",
-      "\\*\\*เปิดกลุ่มลับแล้ว.*": "",
-      "^ติดตาม.*": "",
-      "^\\*{1,}": "",
-      "^เฟซบุ๊คแฟนเพจ": "",
-      "^กลุ่มถึงตอนที่.*": "",
-      "^เรื่องอื่นที่ทางค่ายแปล": "",
-      "^={10,}": "",
-      "\\[อ่านฟรี.*\\]": "",
-      "(\\s|^)\\(\\d{4,}\\)": "",
-      "\\[ฟรี .*\\]": "",
-      "Facebook Fanpage.*": "",
-      "•{5,}": "",
-      "นิยาย.*ค่ายแปล": "",
-      "สารบัญ .*": ""
-    }
+    "execpath": "/\\d+/\\d+/\\d+/.*/",
+    "css": [
+      "@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@100;400;700&display=swap');",
+      ".pvc-content::after, .pvc-content::before{content: normal !important;}",
+      ".pvc-content p{font-family: 'Sarabun', sans-serif;}",
+    ],
+    "script": "let encryptfonts = {\r\n'f7QR63h4b5gY,f7QR63h474xp': 'กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถลฤรบปผฝพฟภมยนธทฦวศษสหฬอฮ', \/\/106B044B\r\n'f7QR63h45Kh,f7QR63h48G2': 'กขฃคฅฆงถตดซฌญฎฏฐฑฒณชฉจทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮ', \/\/89D43766\r\n'f7QR63h495fZ,f7QR63h465nj': 'กขฃคฅฆงลฉรซฌญฎฏฐฑฒณบธถทตนดปผฝพฟภมยชฤจฦวศษสหฬอฮ', \/\/E626EF23\r\n}\r\nlet decode = (t)=>{\r\nif (!t || !t.length) return;\r\nlet e, n = \"\", o = {}, i = String.fromCharCode;\r\nfor (e = 0; e < 25; e++){o[i(39 + e)] = i(97 + e); o[i(65 + e)] = i(39 + e); o[i(97 + e)] = i(65 + e);}\r\nfor (e = 0; e < t.length; e++){n += o[t[e]] || t[e];}\r\nreturn atob(n)\r\n}\r\nlet fontfilter = (obj, query) => {\r\nreturn Object.entries(obj).filter(([key, value]) => key.indexOf(query) !== -1)[0][1];\r\n}\r\novr.axios.get(window.location).then((response)=>{\r\nlet jsdecode = decode(response.data.match(\/\\(\"(phn0.*)\"\\)\\)\/)[1]);\r\nlet jsf = jsdecode.match(\/f=(\\d+)\/);\r\nlet jsu = JSON.parse(jsdecode.match(\/u=(\\[.*\\]),r=m\/)[1]);\r\nlet jsmatch = jsdecode.match(\/v\\.match\\(\\\/(.*)\\\/\\);\/);\r\nlet jsreplace = jsdecode.match(\/v\\.replace\\(\\\/(.*)\\\/gm,\"\"\\)\/);\r\nlet start = response.data.indexOf('<div class=\"pvc-content');\r\nlet stop = response.data.indexOf('<footer>');\r\nlet clip = response.data.substr(start, stop-start);\r\ndocument.body.insertAdjacentHTML('beforeend', '<div id=\"ovrclipboard\" class=\"hiddenbox\">' + clip + '<\/div>');\r\nlet nodes = document.querySelectorAll('#ovrclipboard .pvc-content p') || [];\r\nnodes.forEach((node)=>{\r\nlet innerhtml = node.innerHTML;\r\nlet math = innerhtml.match(new RegExp(jsmatch[1]));\r\nif (math) {\r\nlet selectfont = fontfilter(encryptfonts, jsu[math[0].charCodeAt(0) - jsf[1]]);\r\nfor (let idx in selectfont) {\r\ninnerhtml = innerhtml.replace(new RegExp(selectfont[idx], 'g'), escape(String.fromCharCode(3585 + parseInt(idx))));\r\n}\r\nnode.innerHTML = unescape(innerhtml.replace(new RegExp(jsreplace[1], 'gm'), ''));\r\n};\r\n});\r\nlet title = document.querySelector(\".entry-title\");\r\nlet content = document.querySelector('#ovrclipboard');\r\ndocument.querySelector('.pvc-content').innerHTML = content.innerHTML;\r\novr.prototype.copycontent([title, content]);\r\nif(ovr.prototype.setting.botDownload){\r\nconsole.log(document.querySelectorAll('.td-post-next-prev-content'))\r\nsetTimeout(()=>{document.querySelectorAll('.td-post-next-prev-content a')[2].click();}, 1000)\r\n}\r\n}).catch((error)=>{\r\nconsole.log(error);\r\n\/\/ovr.prototype.notification('ดาวน์โหลดข้อมูลไม่ได้...');\r\n});"
   },
   "the1000-stars.blogspot.com": {
     "title": ".entry-title",
