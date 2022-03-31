@@ -1,5 +1,5 @@
 {
-  "updatetime" : "22-03-65 18:40",
+  "updatetime" : "31-03-65 12:40",
   "aileen-novel.online": {
     "skipsource": true,
     "execpath": "novel/\\d+/.*",
@@ -147,6 +147,13 @@
     "execpath": "novel/\\d+",
     "title": "h1.header",
     "content": "#article"
+  },
+  "jinovel.com":{
+    "script": "const decryptthai = 'กขคฆงจฉชซฑฒณดตถทธนบผพภมยรลวศษสหอ';\nconst encryptcsprajad1 = '๷๠๳๦๫๯๬๰๤๸๜๟๨๻๝๡๴๞๢๵๩๥๣๶๹๧๭๲๺๱๮๪';\nconst encryptcsprajad2 = '๠๳๦๫๹๽๯๰๢๴๧๸๪๻๭๿๡๲๤๶๨๺๬๾๱๣๥๷๩๼๮๵';\nconst textReplace = (str, find, replace)=>{\nfor (let i = 0; i < find.length; i++) {\nstr = str.replace(new RegExp(find[i], 'g'), replace[i]);\n}\nreturn str;\n}\ndocument.addEventListener('DOMNodeInserted', ()=>{\nconst istitle = document.querySelector('.nuxt-link-exact-active') || false;\nconst iscontent = document.querySelector('.content') || false;\nconst iscopy = document.querySelector('#ovrcopy')|| false;\nconst exepath = \/novel\\\/chapter\\\/.*\/.test(window.location.pathname);\nif(exepath && iscontent.childElementCount > 10 && iscopy == false){\niscontent.insertAdjacentHTML('beforeend', '<em id=\"ovrcopy\"><\/em>');\ndocument.querySelectorAll('.content [class*=csprajad2]').forEach((e)=>{\ne.innerHTML = textReplace(e.innerHTML, encryptcsprajad2, decryptthai);\n});\ndocument.querySelectorAll('.content [class*=csprajad1]').forEach((e)=>{\ne.innerHTML = textReplace(e.innerHTML, encryptcsprajad1, decryptthai);\n});\novr.prototype.copycontent([istitle, iscontent], iscontent);\nif(ovr.prototype.setting.botDownload){\nlet next = document.querySelector('.items-center.flex-grow a') || false;\nif(next){\nsetTimeout(()=>{next.click()}, 1000);\n}\n}\n}\n});",
+    "cleanup": {
+       "\"?[!-/:-@\\[-`]{4,7}\"?": "",
+       "[\\.`]{1,10}$": ""
+    }
   },
   "laosoofung.com": {
     "execpath": "Readers/Read",
