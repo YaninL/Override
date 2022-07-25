@@ -1,5 +1,5 @@
 {
-  "updatetime": "23-07-65 21:00",
+  "updatetime": "25-07-65 10:00",
   "aileen-novel.online": {
     "skipsource": true,
     "execpath": "novel/\\d+.*/.*/",
@@ -36,6 +36,12 @@
   },
   "bjknovel.com": {
     "script": "if(window.location.pathname.startsWith('/pdfReader.php') == false) return;\novr('#download').nodes[0].style.display = 'block';\novr('#sidebarToggle').nodes[0].style.display = 'block';\nsetInterval(function () {\novr('[class^=waterLayer]').nodes.forEach(e => e.parentNode.removeChild(e));\n}, 100);"
+  },
+  "bookcatcat.com": {
+    "execpath": "r/.*",
+    "title": "#ep option:selected",
+    "content": ".readbook",
+    "next": "button .fa-share"
   },
   "boxnovel.com": {
     "execpath": "novel/.*/chapter.*",
@@ -84,7 +90,7 @@
     "script": "if(window.location.pathname.endsWith('mobilebasic')){\novr.prototype.copycontent([document.getElementsByClassName('doc-container')[0]]);\nreturn;\n}\nif(window.location.pathname.endsWith('edit') != true) return;\novr.axios.get(window.location.href.replace('edit', 'mobilebasic')\n).then(function (response) {\ndocument.body.insertAdjacentHTML('beforeend', '<div id=\"tempclip\" class=\"hiddenbox\">' + response.data + '</div>');\novr.prototype.copycontent([document.getElementById('tempclip')]);\n}).catch(function (error) {\nconsole.log(error);\n});"
   },
   "fictionlog.co": {
-    "script": "sessionStorage.setItem('lasttitle', 'first');\ndocument.addEventListener('DOMNodeInserted', function () {\nlet iscontent = document.querySelector('[class^=\"ChapterContent_chapterWrapper\"]') || false;\nlet istitle = document.querySelector('[class^=\"ChapterTitle_chapterTitleWrapper\"] div') || false;\nlet isnext = document.querySelector('[class^=\"ChapterNext_nextChapterRight\"] a') || false;\nlet ispurchase = document.querySelector('[class^=\"PurchaseChapter__ConfirmWrapper\"] button') || false;\nlet iscopy = document.querySelector('#ctn-enable-c') || false;\nlet ispurchasealready = document.querySelector('#ctn-enable-b') || false;\nlet ispath = window.location.pathname.startsWith('/c/');\nlet ispurchasebutton = document.querySelector('div.items-center button.Button_button__2RxXb') || false;\nif(ispath == false) return;\nif(sessionStorage.getItem('lasttitle') == istitle.innerText) return;\nif(iscontent && iscopy == false && ispurchase == false && istitle) {\nsessionStorage.setItem('lasttitle', istitle.innerText);\niscontent.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"></em>');\novr.prototype.copycontent([istitle, iscontent], '[class^=\"ChapterContent_chapterWrapper\"]');\nsessionStorage.setItem('waitcontent', false);\n}\nif(ovr.prototype.setting.botDownload && sessionStorage.getItem('waitcontent') == 'false' && isnext){\nsessionStorage.setItem('waitcontent', true);\nsetTimeout(function(){isnext.click();}, 2000);\n}\nif(iscontent == false && ispurchasealready == false &&\n ispurchase && ovr.prototype.setting.autoBuy && ispurchasebutton && istitle){\nistitle.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-b\"></em>');\nsetTimeout(function(){ispurchasebutton.click();}, 1000);\n}\n}, false);"
+    "script": "sessionStorage.setItem('lasttitle', 'first');\ndocument.addEventListener('DOMNodeInserted', function () {\nlet iscontent = document.querySelector('[class^=\"ChapterContent_chapterWrapper\"]') || false;\nlet istitle = document.querySelector('[class^=\"ChapterTitle_chapterTitleWrapper\"] div') || false;\nlet isnext = document.querySelector('[class^=\"ChapterNext_nextChapterRight\"] a') || false;\nlet ispurchase = document.querySelector('[class^=\"PurchaseChapter__ConfirmWrapper\"] button') || false;\nlet iscopy = document.querySelector('#ctn-enable-c') || false;\nlet ispurchasealready = document.querySelector('#ctn-enable-b') || false;\nlet ispath = window.location.pathname.startsWith('/c/');\nlet ispurchasebutton = document.querySelector('div.items-center button.Button_button__2RxXb') || false;\nif(ispath == false) return;\n//if(sessionStorage.getItem('lasttitle') == istitle.innerText) return;\nif(iscontent && iscopy == false && ispurchase == false && istitle) {\nsessionStorage.setItem('lasttitle', istitle.innerText);\niscontent.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"></em>');\novr.prototype.copycontent([istitle, iscontent], '[class^=\"ChapterContent_chapterWrapper\"]');\nsessionStorage.setItem('waitcontent', false);\n}\nif(ovr.prototype.setting.botDownload && sessionStorage.getItem('waitcontent') == 'false' && isnext){\nsessionStorage.setItem('waitcontent', true);\nsetTimeout(function(){isnext.click();}, 2000);\n}\nif(iscontent == false && ispurchasealready == false &&\n ispurchase && ovr.prototype.setting.autoBuy && ispurchasebutton && istitle){\nistitle.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-b\"></em>');\nsetTimeout(function(){ispurchasebutton.click();}, 1000);\n}\n}, false);"
   },
   "gateofgodth.blogspot.com": {
     "execpath": "/p/",
@@ -99,26 +105,9 @@
   },
   "hellfact.com": {
     "skipsource": true,
-    "execpath": "chapter",
-    "remove": ".headline-top, .seed-social",
-    "title": ".main-title",
-    "content": ".entry-content",
-    "cleanup": {
-      "The Book.*magician : ": "",
-      "Close.*จอมเวทย์ : ": "",
-      "^โดย(.*)": "",
-      "^แปล(.*)": "",
-      "^เรียบเรียง(.*)": "",
-      "^ติดตามข่าวสาร(.*)": "",
-      "^ฝากนิยาย(.*)": "",
-      "^TL(.*)": "",
-      "^TWO Chapter.*": "",
-      "TWO": "",
-      "\\d+ Views": "",
-      "-{10,}": "",
-      "Facebook.*": "",
-      "ตอนนี้กลุ่มลับ.*": ""
-    }
+    "execpath": "story/.*/chapter.*",
+    "title": "#chapter-heading",
+    "content": ".reading-content"
   },
   "hf-novel-thai.blogspot.com": {
     "execpath": "\\d{4,}/\\d{1,}",
@@ -134,7 +123,7 @@
   },
   "hongsamut.com": {
     "execpath": "fiction/chapter",
-    "script": "document.addEventListener('DOMNodeInserted', function () {\nvar istitle = ovr('h3 strong').nodes[0] || false;\nvar iscontent = ovr('#fiction-detail').nodes[0] || false;\nvar iscopy = ovr('#ctn-enable-c').nodes[0] || false;\nif(iscontent.childElementCount > 10 && iscopy == false){\nistitle.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"></em>');\novr.prototype.copycontent([istitle, iscontent], iscontent);\n}\n});"
+    "script": "document.addEventListener('DOMNodeInserted', function () {\nconst istitle = document.querySelector('h3 strong')|| false;\nconst iscontent = document.querySelector('#fiction-detail') || false;\nconst iscopy = document.querySelector('#ctn-enable-c')|| false;\nif(iscontent.childElementCount > 10 && iscopy == false){\nistitle.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"></em>');\novr.prototype.copycontent([istitle, iscontent], iscontent);\nif(ovr.prototype.setting.botDownload){\nlet next = document.querySelectorAll('.panel-footer a') || false;\nif(next && next.length >= 3){\nsetTimeout(()=>{next[2].click();}, 1000)\n}\n}\n}\n});"
   },
   "imakeuread.blogspot.com": {
     "execpath": "\\d{4,}/\\d{1,}",
@@ -158,17 +147,27 @@
     "content": "#article"
   },
   "jinovel.com": {
-    "script": "const decryptthai = 'กขคฆงจฉชซฑฒณดตถทธนบผพภมยรลวศษสหอ';\nconst encryptcsprajad1 = '๷๠๳๦๫๯๬๰๤๸๜๟๨๻๝๡๴๞๢๵๩๥๣๶๹๧๭๲๺๱๮๪';\nconst encryptcsprajad2 = '๠๳๦๫๹๽๯๰๢๴๧๸๪๻๭๿๡๲๤๶๨๺๬๾๱๣๥๷๩๼๮๵';\nconst textReplace = (str, find, replace)=>{\nfor (let i = 0; i < find.length; i++) {\nstr = str.replace(new RegExp(find[i], 'g'), replace[i]);\n}\nreturn str;\n}\ndocument.addEventListener('DOMNodeInserted', ()=>{\nconst istitle = document.querySelector('.nuxt-link-exact-active') || false;\nconst iscontent = document.querySelector('.content') || false;\nconst iscopy = document.querySelector('#ovrcopy')|| false;\nconst exepath = /novel\\/chapter\\/.*/.test(window.location.pathname);\nif(exepath && iscontent.childElementCount > 10 && iscopy == false){\niscontent.insertAdjacentHTML('beforeend', '<em id=\"ovrcopy\"></em>');\ndocument.querySelectorAll('.content [class*=csprajad2]').forEach((e)=>{\ne.innerHTML = textReplace(e.innerHTML, encryptcsprajad2, decryptthai);\n});\ndocument.querySelectorAll('.content [class*=csprajad1]').forEach((e)=>{\ne.innerHTML = textReplace(e.innerHTML, encryptcsprajad1, decryptthai);\n});\novr.prototype.copycontent([istitle, iscontent], iscontent);\nif(ovr.prototype.setting.botDownload){\nlet next = document.querySelector('.items-center.flex-grow a') || false;\nif(next){\nsetTimeout(()=>{next.click()}, 1000);\n}\n}\n}\n});",
+    "script": "const decryptthai = 'กขคฆงจฉชซฑฒณดตถทธนบผพภมยรลวศษสหอ';\nconst encryptcsprajad1 = '๷๠๳๦๫๯๬๰๤๸๜๟๨๻๝๡๴๞๢๵๩๥๣๶๹๧๭๲๺๱๮๪';\nconst encryptcsprajad2 = '๠๳๦๫๹๽๯๰๢๴๧๸๪๻๭๿๡๲๤๶๨๺๬๾๱๣๥๷๩๼๮๵';\nconst textReplace = (str, find, replace)=>{\nfor (let i = 0; i < find.length; i++) {\nstr = str.replace(new RegExp(find[i], 'g'), replace[i]);\n}\nreturn str;\n}\ndocument.addEventListener('DOMNodeInserted', ()=>{\nconst istitle = document.querySelector('.text-gray-800.nuxt-link-active.cursor-default') || false;\nconst iscontent = document.querySelector('.content') || false;\nconst iscopy = document.querySelector('#ovrcopy')|| false;\nconst exepath = /novel\\/chapter\\/.*/.test(window.location.pathname);\nif(exepath && iscontent.childElementCount > 5 && iscopy == false){\niscontent.insertAdjacentHTML('beforeend', '<em id=\"ovrcopy\"></em>');\ndocument.querySelectorAll('.content [class*=csprajad2]').forEach((e)=>{\ne.innerHTML = textReplace(e.innerHTML, encryptcsprajad2, decryptthai);\n});\ndocument.querySelectorAll('.content [class*=csprajad1]').forEach((e)=>{\ne.innerHTML = textReplace(e.innerHTML, encryptcsprajad1, decryptthai);\n});\novr.prototype.copycontent([istitle, iscontent], iscontent);\nif(ovr.prototype.setting.botDownload){\nlet next = document.querySelector('a.bg-yellow-500') || false;\nif(next){\nsetTimeout(()=>{next.click()}, 1000);\n}\n}\n}\n});",
     "cleanup": {
       "\"?[!-/:-@\\[-`]{4,7}\"?": "",
       "[\\.`]{1,10}$": ""
     }
   },
+  "landnovel.com": {
+    "execpath": "read/\\d+/\\d+",
+    "css": [
+      "@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@100;400;700&display=swap');",
+      "#read-ckv5 p{font-family: 'Sarabun', sans-serif;}"
+    ],
+    "script": "let encryptfonts = {'Rkoz548EzcBC' : 'ภฉฃบฅฆงถขดอฌญฎฏฐฑฒณชมจหลผคษนฝวฟกตยฮฤธฦพศปสทฬซร',\n'Rkoz548EzcAE' : 'คจดกฅฆตขฉถทฌฐฎฏญฑฒณฃงชซธปบนผฝรสภลวพฤมฦยศอฟฮฬษห',\n'Rkoz548EzrUQ' : 'อฮฃนฅฆดตฉทซฌญฎฏฐฑฒณงจบชธคถยผฝวรภมปฟฤลฦพศษฬหสกข',\n'Rkoz548EzZDW' : 'ขกฃจฅฆชคฉงซฌญฎฏฐดฒณฑทถตบพธปผฝนมภฟยวฤลฦรฮษอหฬสศ',\n'Rkoz548EWeOP' : 'บปฃนฅฆทตฉดซฌญฎฏพมฒณชจถงธคกขอฝฐฟภฑรยฤวฦลศฮสหฬผษ',\n'Rkoz548EUdzE' : 'งฉฃจชฆกคขฅบฌญฎฏฐฑฒณทธถดตปซนผฝมฟภพหศฤสฦวรษลยฬฮอ'\n};\nlet noveltitle = document.querySelector('#chapter-name');\nlet novelcontent = document.querySelector('#read-ckv5');\nlet fontname = /(\\w+)/.exec(novelcontent.style['font-family'])[1];\nlet selectfont = encryptfonts[fontname];\nlet innerhtml = novelcontent.innerHTML;\nfor (let idx in selectfont) {\ninnerhtml = innerhtml .replace(\nnew RegExp(selectfont[idx], 'g'),\nescape(String.fromCharCode(3585 + parseInt(idx))));\n}\nnovelcontent.innerHTML = unescape(innerhtml);\novr.prototype.copycontent([noveltitle, novelcontent]);"
+  },
   "laosoofung.com": {
     "execpath": "Readers/Read",
-    "remove": ".container style",
-    "title": ".form-group",
-    "content": ".d-print-none"
+    "title": "#chapterContent h3",
+    "content": "#nContent .d-print-none",
+    "css": [
+      "#nContent{background-image:url('') !important;}"
+    ]
   },
   "lightnovelpub.com": {
     "execpath": "novel/.*/\\d+",
@@ -233,12 +232,8 @@
     }
   },
   "nekopost.net": {
-    "execpath": "novel/\\d+/\\d+",
-    "script": "var loop = setInterval(function() {\nlet panel = document.querySelector('.panel-reader') || false;\nif(panel.childElementCount){\novr.prototype.copycontent(\ndocument.querySelectorAll('.panel-intro h2, .panel-reader p')\n);\nif(ovr.prototype.setting.botDownload){setTimeout(function(){\ndocument.querySelector('button.btn.bg-primary').click()\n}, 2000)}\nclearInterval(loop);\n}\n}, 100);",
-    "cleanup": {
-      "ตอนที่": "",
-      "\\[นิยายแปล\\].*": ""
-    }
+    "execpath": "(fiction|novel)/\\d+/\\d+",
+    "script": "var loop = setInterval(function() {\nlet panel = document.querySelectorAll('.novel-content .card-body p') || false;\nif(panel.length >= 4){\novr.prototype.copycontent([document.querySelector('.novel-content .card-body')]);\nif(ovr.prototype.setting.botDownload){\nlet next = document.querySelector('.d-lg-block .text-right button') || false;\nsetTimeout(()=>{next.click();}, 1000)\n}\nclearInterval(loop);\n}\n}, 100);"
   },
   "novel-lucky.com": {
     "skipsource": true,
@@ -247,7 +242,14 @@
     "content": ".read-container",
     "next": ".next_page",
     "css": [
-      ".dropovr input[type=\"checkbox\"] {display: inline !important;}"
+      ".wp-manga-chapter a:link{color:#000 !important;}",
+      ".wp-manga-chapter a:visited{color:#999 !important;}",
+      ".summary__content{height:inherit!important;}",
+      ".version-chap{max-height: none !important;}",
+      ".sub-chap{display: inline !important;}",
+      ".c-content-readmore, .c-chapter-readmore{display: none}",
+      ".dropovr input[type=\"checkbox\"] {display: inline !important;}",
+      ".main-navigation_wrap{padding:0px!important;}"
     ]
   },
   "novelfull.com": {
@@ -288,6 +290,12 @@
     "execpath": ".*-(ตอน|บท)",
     "title": ".entry-title",
     "content": ".reading-content"
+  },
+  "novels108.com": {
+    "execpath": "/.*\\d+/.*",
+    "title": ".entry-title",
+    "content": ".entry-content p",
+    "next": ".default-wp-page .next a"
   },
   "numberxxi.blogspot.com": {
     "script": "document.addEventListener('dblclick', function() {\nvar xhttp = new XMLHttpRequest();\nxhttp.open('POST', 'https://translation.lazywizardmaster.com/ajax/view_canvas.php', true);\nxhttp.setRequestHeader(\"Content-Type\", \"application/x-www-form-urlencoded\");\nxhttp.onreadystatechange = function() {\nif (this.readyState === XMLHttpRequest.DONE && this.status === 200) {\nvar html = xhttp.responseText.replace(/<style[^\\0]*?<\\/style>/, '');\ndocument.body.insertAdjacentHTML('beforeend', '<div id=\"tempclip\">' + html + '</div>');\nvar tempclip = document.getElementById('tempclip');\novr.prototype.copycontent([tempclip]);\ntempclip.parentNode.removeChild(tempclip);\n}\n}\nxhttp.send('action=getContent&chapter=' + window.chapter);\n});"
@@ -476,6 +484,14 @@
     "execpath": "chapter-\\d+",
     "title": "h1.entry-title",
     "content": ".content-area p"
+  },
+  "xn--72c5afc3e6a4acd3tpa.com": {
+    "note": "อ่านทั้งวัน.com",
+    "skipsource": true,
+    "execpath": "novel/.*/.*/",
+    "title": "#chapter-heading",
+    "content": ".read-container",
+    "next": ".next_page"
   },
   "1stkissnovel.love": {
     "execpath": "novel/.*/.*/",
