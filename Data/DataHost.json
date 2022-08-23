@@ -1,5 +1,5 @@
 {
-  "updatetime": "25-07-65 10:00",
+  "updatetime": "23-08-65 16:20",
   "aileen-novel.online": {
     "skipsource": true,
     "execpath": "novel/\\d+.*/.*/",
@@ -292,7 +292,6 @@
     "content": ".reading-content"
   },
   "novels108.com": {
-    "execpath": "/.*\\d+/.*",
     "title": ".entry-title",
     "content": ".entry-content p",
     "next": ".default-wp-page .next a"
@@ -472,7 +471,7 @@
     "execpath": "(writer|story)/viewlongc.php",
     "title": "h2.chaptername",
     "content": "#story-content",
-    "next": ".chapter-action-button[title='ตอนถัดไป']",
+    "next": ".chapter-action-button-header[title='ตอนถัดไป']",
     "script": "let container = document.querySelector('#story-content') || false;\nif(container) {\nlet novelcontent = container.innerHTML;\nfor (let i=3585; i<=3605; i++) {\nnovelcontent = novelcontent.replace(\nnew RegExp(String.fromCharCode(i + 100), 'g'),\nString.fromCharCode(i));\n}\ncontainer.innerHTML = novelcontent;\n}"
   },
   "wuxiaworld.com": {
