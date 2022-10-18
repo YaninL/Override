@@ -1,5 +1,5 @@
 {
-  "updatetime": "17-10-65 19:20",
+  "updatetime": "18-10-65 9:55",
   "aileen-novel.online": {
     "skipsource": true,
     "execpath": "novel/\\d+.*/.*/",
@@ -136,10 +136,9 @@
     }
   },
   "ispoil.blogspot.com": {
-    "autodetect": true,
-    "cleanup": {
-      "เดชคัมภีร์เทพฤทธิ์": ""
-    }
+    "execpath": "\\d{4,}/\\d{1,}",
+    "title": ".entry-title",
+    "content": ".entry-content"
   },
   "i-here.info": {
     "execpath": "novel/\\d+",
