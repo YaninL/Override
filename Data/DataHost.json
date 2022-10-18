@@ -1,5 +1,5 @@
 {
-  "updatetime": "18-10-65 9:55",
+  "updatetime": "18-10-65 19:35",
   "aileen-novel.online": {
     "skipsource": true,
     "execpath": "novel/\\d+.*/.*/",
@@ -442,9 +442,9 @@
   },
   "tunwalai.com": {
     "execpath": "chapter",
-    "title": ".story-title-bar",
-    "content": ".story-detail",
-    "script": "if(document.querySelector('[href$=\"next\"]') != null && ovr.prototype.setting.botDownload){\nsetTimeout(function(){document.querySelector('[href$=\"next\"]').click();}, 3000);\nreturn;\n}\nif(document.querySelector('#redeem_form') != null && ovr.prototype.setting.autoBuy){\ndocument.getElementById('redeem_form').submit();\nreturn;\n}"
+    "title": ".chapter-subject",
+    "content": ".chapter-detail",
+    "script": "if(document.querySelector('#btnNextChapter') != null && ovr.prototype.setting.botDownload){\nsetTimeout(function(){document.querySelector('#btnNextChapter').click();}, 3000);\nreturn;\n}\nif(document.querySelector('#redeem_form') != null && ovr.prototype.setting.autoBuy){\ndocument.getElementById('redeem_form').submit();\nreturn;\n}"
   },
   "wangushendi.blogspot.com": {
     "execpath": "\\d{4}/\\d{2}",
