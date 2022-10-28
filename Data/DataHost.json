@@ -1,5 +1,5 @@
 {
-  "updatetime": "18-10-65 19:35",
+  "updatetime": "28-10-65 22:35",
   "aileen-novel.online": {
     "skipsource": true,
     "execpath": "novel/\\d+.*/.*/",
@@ -233,6 +233,12 @@
   "nekopost.net": {
     "execpath": "(fiction|novel)/\\d+/\\d+",
     "script": "var loop = setInterval(function() {\nlet panel = document.querySelectorAll('.novel-content .card-body p') || false;\nif(panel.length >= 4){\novr.prototype.copycontent([document.querySelector('.novel-content .card-body')]);\nif(ovr.prototype.setting.botDownload){\nlet next = document.querySelector('.d-lg-block .text-right button') || false;\nsetTimeout(()=>{next.click();}, 1000)\n}\nclearInterval(loop);\n}\n}, 100);"
+  },
+  "new.amnovel.com": {
+    "execpath": "read/.*/.*/",
+    "title": "#chapter-heading",
+    "content": ".reading-content",
+    "next": ".next_page"
   },
   "novel-lucky.com": {
     "skipsource": true,
