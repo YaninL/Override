@@ -1,5 +1,5 @@
 {
-  "updatetime": "28-10-65 22:35",
+  "updatetime": "31-10-65 9:05",
   "aileen-novel.online": {
     "skipsource": true,
     "execpath": "novel/\\d+.*/.*/",
@@ -49,7 +49,7 @@
   },
   "cat2auto.com": {
     "skipsource": true,
-    "execpath": "novel/.*/.*\\d+/.*",
+    "execpath": "novel/.*/.*\\d+",
     "title": "#chapter-heading",
     "content": ".read-container",
     "next": ".next_page"
