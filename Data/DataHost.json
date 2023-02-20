@@ -1,252 +1,269 @@
 {
-  "updatetime": "8-11-65 9:05",
-  "aileen-novel.online": {
-    "skipsource": true,
-    "execpath": "novel/\\d+.*/.*/",
-    "title": "#chapter-heading",
-    "content": ".reading-content",
-    "next": ".next_page",
-    "css": [
+  "updatetime":"20-02-66 11:00",
+  "aileen-novel.online":{
+    "skipsource":true,
+    "execpath":"novel/\\d+.*/.*/",
+    "title":"#chapter-heading",
+    "content":".reading-content",
+    "next":".next_page",
+    "css":[
       ".wp-manga-chapter a:link{color:#000 !important;}",
       ".wp-manga-chapter a:visited{color:#999 !important;}",
       ".wrap_branding img{height:100px}",
       ".main-navigation_wrap{padding:0px!important;}"
     ],
-    "script": "const content = document.querySelector('.reading-content')\ncontent.innerHTML = content.innerHTML.replace(/\\s{10,}/ig, '<br/>')"
+    "script":"const content = document.querySelector('.reading-content')\ncontent.innerHTML = content.innerHTML.replace(/\\s{10,}/ig, '<br/>')"
   },
-  "axelms.blogspot.com": {
-    "execpath": "p/",
-    "title": ".entry-title",
-    "content": ".entry-content"
-  },
-  "amnovel.com": {
-    "skipsource": true,
-    "execpath": "/view.php",
-    "title": ".container > h1",
-    "content": ".container > p",
-    "next": "#next1",
-    "cleanup": {
-      "เรื่อง : .*": ""
+  "amnovel.com":{
+    "skipsource":true,
+    "execpath":"/view.php",
+    "title":".container > h1",
+    "content":".container > p",
+    "next":"#next1",
+    "cleanup":{
+      "เรื่อง : .*":""
     }
   },
-  "beginsbook.com": {
-    "execpath": "read-",
-    "title": ".readhead h4",
-    "content": ".readdetail"
+  "aksornngern.com":{
+    "execpath":"/chapter/\\d+/\\d+",
+    "title":".blog-details-content h3",
+    "content":"article#example"
   },
-  "bjknovel.com": {
-    "script": "if(window.location.pathname.startsWith('/pdfReader.php') == false) return;\novr('#download').nodes[0].style.display = 'block';\novr('#sidebarToggle').nodes[0].style.display = 'block';\nsetInterval(function () {\novr('[class^=waterLayer]').nodes.forEach(e => e.parentNode.removeChild(e));\n}, 100);"
+  "axelms.blogspot.com":{
+    "execpath":"p/",
+    "title":".entry-title",
+    "content":".entry-content"
   },
-  "bookcatcat.com": {
-    "execpath": "r/.*",
-    "title": "#ep option:selected",
-    "content": ".readbook",
-    "next": "button .fa-share"
+  "beginsbook.com":{
+    "execpath":"read-",
+    "title":".readhead h4",
+    "content":".readdetail"
   },
-  "boxnovel.com": {
-    "execpath": "novel/.*/chapter.*",
-    "content": ".reading-content"
+  "bjknovel.com":{
+    "script":"if(window.location.pathname.startsWith('/pdfReader.php') == false) return;\novr('#download').nodes[0].style.display = 'block';\novr('#sidebarToggle').nodes[0].style.display = 'block';\nsetInterval(function () {\novr('[class^=waterLayer]').nodes.forEach(e => e.parentNode.removeChild(e));\n}, 100);"
   },
-  "cat2auto.com": {
-    "skipsource": true,
-    "execpath": "novel/.*/.*\\d+",
-    "title": "#chapter-heading",
-    "content": ".read-container",
-    "next": ".next_page"
+  "bookcatcat.com":{
+    "execpath":"r/.*",
+    "title":"#ep option:selected",
+    "content":".readbook",
+    "next":"button .fa-share"
   },
-  "c-novelbyemptymind.blogspot.com": {
-    "execpath": "\\d{4}/\\d{2}",
-    "title": ".entry-title",
-    "content": ".entry-content"
+  "boxnovel.com":{
+    "execpath":"novel/.*/chapter.*",
+    "content":".reading-content"
   },
-  "clubzap.org": {
-    "skipsource": true,
-    "script": "if(ovr('h1 a').first() == false) return;\nif(ovr('h1 a').first().href.endsWith('forumid=28') != true) return;\novr('td.quote .spoil').nodes.forEach(function(e){e.className = \"subspoil\";});\novr('.spoil').nodes.forEach(function(e){\nif(e.childElementCount <= 10) return;\nvar commentid = 'fnc' + Math.random();\ne.parentNode.insertAdjacentHTML('afterend', ' <button id=\"' + commentid + '\">Copy</button> ');\ndocument.getElementById(commentid).addEventListener('click', function(event) {\nevent.preventDefault();\nvar nodetitle = e.parentNode.previousElementSibling;\nvar title = \"\";\nfor(var t=0; t<=4; t++){\nif(nodetitle.previousElementSibling != null){\nnodetitle = nodetitle.previousElementSibling;\n}\ntitle = nodetitle.previousSibling.textContent.trim();\nif(title != \"\") break;\n}\nif(/^(บทที่|ตอนที่)/i.test(e.textContent.substr(0, 100))){title = \"\";}\nvar textcontent = title + '\\n' + e.textContent;\ndocument.body.insertAdjacentHTML('beforeend', '<div id=\"tempclip\">' + textcontent.replace(/\\n/g, '<br/>') + '</div>');\nvar tempclip = document.getElementById('tempclip');\novr.prototype.setclipboard([tempclip]);\ntempclip.parentNode.removeChild(tempclip);\n});\n});",
-    "cleanup": {
-      "โดย.*Zyphon": "",
-      ".*สนับสนุน.*": "",
-      "ดูข้อความที่ซ่อนไว้": "",
-      "\\[\\\\?spoil\\]": "",
-      "ตอนที่\\s?\\d+$": ""
-    }
+  "cat2auto.com":{
+    "skipsource":true,
+    "execpath":"novel/.*/.*\\d+",
+    "title":"#chapter-heading",
+    "content":".read-container",
+    "next":".next_page"
   },
-  "enjoybook.co": {
-    "css": [
+  "cat-novel.net":{
+    "execpath":"/.*-\\d+",
+    "title":"#chapter-heading",
+    "content":".reading-content",
+    "next":".btn.next_page"
+  },
+  "c-novelbyemptymind.blogspot.com":{
+    "execpath":"\\d{4}/\\d{2}",
+    "title":".entry-title",
+    "content":".entry-content"
+  },
+  "clubzap.org":{
+    "skipsource":true,
+    "script":"const forum = document.querySelector('h1 a') || false;\nif(forum && forum.href.endsWith('forumid=28') != true) return;\ndocument.querySelectorAll('td.quote .spoil').forEach(e=>{e.className = \"subspoil\";});\ndocument.querySelectorAll('.norm, .matchuser').forEach((node, idx)=>{\nconst button = node.querySelector('.user_egg');\nconst comment = node.querySelectorAll('.comment.read>div')[2].textContent.trim();\nif(comment.length <= ovr.prototype.setting.detectlength) return\nbutton.insertAdjacentHTML('afterend', '<span id=\"ovr'+ idx + '\" class=\"button ovrbutton\" >Copy</span>');\ndocument.getElementById('ovr'+ idx).addEventListener('click', (e)=>{\ndocument.body.insertAdjacentHTML('beforeend', '<div id=\"tempclip\">' + comment.replace(/\\n/g, '<br/>') + '</div>');\nvar tempclip = document.getElementById('tempclip');\novr.prototype.setclipboard([tempclip]);\ntempclip.parentNode.removeChild(tempclip);\n})\n})",
+    "cleanup":{
+      "\\[\\\\?spoil\\]":"",
+      "ดูข้อความที่ซ่อนไว้":""
+    },
+    "css":[
+      ".ovrbutton{margin:0 0 0 15px;padding:2px 10px 2px 10px;}"
+    ]
+  },
+  "enjoybook.co":{
+    "css":[
       "#scrollUp{bottom:20px!important;z-index:10!important}"
     ],
-    "execpath": "/r/",
-    "title": ".card-body h4",
-    "content": ".read_detail p",
-    "next": ".card-body div.text-right a.f0"
+    "execpath":"/r/",
+    "title":".card-body h4",
+    "content":".read_detail p, .read_detail div",
+    "next":".card-body div.text-right a.f0"
   },
-  "facebook.com": {
-    "skipremove": true,
-    "execpath": "notes",
-    "title": "._4lmk",
-    "content": "._39k5"
+  "facebook.com":{
+    "skipremove":true,
+    "execpath":"notes",
+    "title":"._4lmk",
+    "content":"._39k5"
   },
-  "docs.google.com": {
-    "execpath": "document/.*(edit|mobilebasic)",
-    "script": "if(window.location.pathname.endsWith('mobilebasic')){\novr.prototype.copycontent([document.getElementsByClassName('doc-container')[0]]);\nreturn;\n}\nif(window.location.pathname.endsWith('edit') != true) return;\novr.axios.get(window.location.href.replace('edit', 'mobilebasic')\n).then(function (response) {\ndocument.body.insertAdjacentHTML('beforeend', '<div id=\"tempclip\" class=\"hiddenbox\">' + response.data + '</div>');\novr.prototype.copycontent([document.getElementById('tempclip')]);\n}).catch(function (error) {\nconsole.log(error);\n});"
+  "docs.google.com":{
+    "execpath":"document/.*(edit|mobilebasic)",
+    "script":"if(window.location.pathname.endsWith('mobilebasic')){\novr.prototype.copycontent([document.getElementsByClassName('doc-container')[0]]);\nreturn;\n}\nif(window.location.pathname.endsWith('edit') != true) return;\novr.axios.get(window.location.href.replace('edit', 'mobilebasic')\n).then(function (response) {\ndocument.body.insertAdjacentHTML('beforeend', '<div id=\"tempclip\" class=\"hiddenbox\">' + response.data + '</div>');\novr.prototype.copycontent([document.getElementById('tempclip')]);\n}).catch(function (error) {\nconsole.log(error);\n});"
   },
-  "fictionlog.co": {
-    "script": "sessionStorage.setItem('lasttitle', 'first');\ndocument.addEventListener('DOMNodeInserted', function () {\nlet iscontent = document.querySelector('[class^=\"ChapterContent_chapterWrapper\"]') || false;\nlet istitle = document.querySelector('[class^=\"ChapterTitle_chapterTitleWrapper\"] div') || false;\nlet isnext = document.querySelector('[class^=\"ChapterNext_nextChapterRight\"] a') || false;\nlet ispurchase = document.querySelector('[class^=\"PurchaseChapter__ConfirmWrapper\"] button') || false;\nlet iscopy = document.querySelector('#ctn-enable-c') || false;\nlet ispurchasealready = document.querySelector('#ctn-enable-b') || false;\nlet ispath = window.location.pathname.startsWith('/c/');\nlet ispurchasebutton = document.querySelector('div.items-center button.Button_button__2RxXb') || false;\nif(ispath == false) return;\n//if(sessionStorage.getItem('lasttitle') == istitle.innerText) return;\nif(iscontent && iscopy == false && ispurchase == false && istitle) {\nsessionStorage.setItem('lasttitle', istitle.innerText);\niscontent.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"></em>');\novr.prototype.copycontent([istitle, iscontent], '[class^=\"ChapterContent_chapterWrapper\"]');\nsessionStorage.setItem('waitcontent', false);\n}\nif(ovr.prototype.setting.botDownload && sessionStorage.getItem('waitcontent') == 'false' && isnext){\nsessionStorage.setItem('waitcontent', true);\nsetTimeout(function(){isnext.click();}, 2000);\n}\nif(iscontent == false && ispurchasealready == false &&\n ispurchase && ovr.prototype.setting.autoBuy && ispurchasebutton && istitle){\nistitle.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-b\"></em>');\nsetTimeout(function(){ispurchasebutton.click();}, 1000);\n}\n}, false);"
+  "farfalle00.blogspot.com":{
+    "baseon":"blogspot.com"
   },
-  "gateofgodth.blogspot.com": {
-    "execpath": "/p/",
-    "title": ".post-title",
-    "content": ".post-body"
+  "fictionlog.co":{
+    "script":"sessionStorage.setItem('lasttitle', 'first');\ndocument.addEventListener('DOMNodeInserted', function () {\nlet iscontent = document.querySelector('[class^=\"ChapterContent_chapterWrapper\"]') || false;\nlet istitle = document.querySelector('[class*=\"Typography_title2-db-heavent\"]') || false;\nlet isnext = document.querySelector('[class^=\"ChapterNext_nextChapterRight\"] a') || false;\nlet ispurchase = document.querySelector('[class^=\"PurchaseChapter__ConfirmWrapper\"] button') || false;\nlet iscopy = document.querySelector('#ctn-enable-c') || false;\nlet ispurchasealready = document.querySelector('#ctn-enable-b') || false;\nlet ispath = window.location.pathname.startsWith('/c/');\nlet ispurchasebutton = document.querySelector('div.items-center button.Button_button__2RxXb') || false;\nif(ispath == false) return;\n//if(sessionStorage.getItem('lasttitle') == istitle.innerText) return;\nif(iscontent && iscopy == false && ispurchase == false && istitle) {\nsessionStorage.setItem('lasttitle', istitle.innerText);\niscontent.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"></em>');\novr.prototype.copycontent([istitle, iscontent], '[class^=\"ChapterContent_chapterWrapper\"]');\nsessionStorage.setItem('waitcontent', false);\n}\nif(ovr.prototype.setting.botDownload && sessionStorage.getItem('waitcontent') == 'false' && isnext){\nsessionStorage.setItem('waitcontent', true);\nsetTimeout(function(){isnext.click();}, 2000);\n}\nif(iscontent == false && ispurchasealready == false &&\n ispurchase && ovr.prototype.setting.autoBuy && ispurchasebutton && istitle){\nistitle.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-b\"></em>');\nsetTimeout(function(){ispurchasebutton.click();}, 500);\n}\n}, false);"
   },
-  "goshujin.tk": {
-    "script": "var decode = function () {\novr('.canvas').nodes.forEach(function(e) {\nif(typeof e.attributes.decode === 'undefined'){\nvar id = e.nextElementSibling.id;\ne.setAttribute(\"decode\", \"true\");\ne.insertAdjacentHTML('beforeend', '<div id=\"decode' + id + '\" style=\"border-left:1px solid #7979ac;width:80px\">Copy</div>');\ndocument.getElementById('decode' + id).addEventListener('click', function(event) {\nevent.preventDefault();\nvar nodetitle = e, title = \"\";\nfor(var t=0; t<=10; t++){\ntitle = nodetitle.previousSibling.textContent.trim();\nnodetitle = nodetitle.previousElementSibling;\nif(title != \"\") break;\n}\nvar xhttp = new XMLHttpRequest();\nxhttp.open('POST', 'https://goshujin.tk/NextDEV/process.php', true);\nxhttp.setRequestHeader(\"Content-Type\", \"application/x-www-form-urlencoded\");\nxhttp.onreadystatechange = function() {\nif (this.readyState === XMLHttpRequest.DONE && this.status === 200) {\nvar content = decode.decoder.decode(xhttp.responseText, id);\ndocument.body.insertAdjacentHTML('beforeend',\n                    '<div id=\"tempclip\" class=\"hiddenbox\">' + title + '<br>' + content.body.replace(/\\n/g, '<br>') + '</div>');\nvar tempclip = document.getElementById('tempclip');\novr.prototype.setclipboard([tempclip]);\ntempclip.parentNode.removeChild(tempclip);\n}\n}\nxhttp.send('type=canvas&id=' + id);\n});\n}\n});\n}\ndecode.decoder = {\ncrc:function(r){for(var t=this.ccrc(),n=-1,e=0;e<r.length;e++)n=n>>8^t[255&(n^r.charCodeAt(e))];return(n=777*((n=(-1^n)>>0)<0?-1*n:n)).toString().substr(0,10)},\nccrc:function(){for(var r=[],t=0;t<256;t++){for(var n=t,e=0;e<8;e++)n=1&n?87738347^n>>1:n>>1;r[t]=n}return r},\ndecode:function(r,t){var n=t.split(\"-\")[1],e=[],o=r[0],c=r[1],u=[],i=\"\",f=0,a=0,h=0,d=0,s=0;if(void 0!==n){for(a=(i=this.crc(n)).length,s=0;s<a;s++)h=i[s],u.push(0==h?d:h),d=Math.ceil(h/2);f=u.length}var l=123*r.charCodeAt(2)+r.charCodeAt(3),v=r.substr(4,l),p=v.length;for(s=0;s<p;s++)e.push(v[s]);var g=r.substr(l+4),C={},A=[],b=\"\",k=!1,D=\"\",B=\"\";if(i=\"\",(s=0)==c)for(C=\"\";i=E(),C+=I(),null!=g[s];);else for(;\"{\"==(i=E())?(1==k&&(A.push({k:D,d:C}),C={}),!0):\"~\"==i?(D=B,k=!(B=\"\")):\"|\"==i?(!0===k&&(C[D]=B),k=!1,D=B=\"\"):\"}\"==i?(!0===k&&(C[D]=B),0<A.length&&((B=A.pop()).d[B.k]=C,C=B.d),D=B=\"\",k=!1):B+=I(),null!=g[s];);return 2==c?void 0!==C.p&&C.p==n?C.o:r:C;function E(){var r=s,t=[0,g.charCodeAt(s++)];return 2==o&&(r=parseInt(r/2),t[0]=123*t[1],t[1]=g.charCodeAt(s++)),void 0!==n&&(t[1]-=u[r%f],t[1]=t[1]<0?t[1]+123:t[1]),e[t[0]+t[1]]}function I(){if(\"&\"==i){var r=s;if(\"&7B;\"==(b=i+E()+E()+E()))return\"{\";if(\"&7D;\"==b)return\"}\";if(\"&7E;\"==b)return\"|\";if(\"&7C;\"==b)return\"~\";s=r}return i}}\n}\ndecode();\ndocument.addEventListener('DOMNodeInserted', decode(), false);",
-    "cleanup": {
-      "\\[/?(font|size|color|b|i|u).*?\\]": ""
+  "gateofgodth.blogspot.com":{
+    "execpath":"/p/",
+    "title":".post-title",
+    "content":".post-body"
+  },
+  "goshujin.tk":{
+    "script":"var decode = function () {\novr('.canvas').nodes.forEach(function(e) {\nif(typeof e.attributes.decode === 'undefined'){\nvar id = e.nextElementSibling.id;\ne.setAttribute(\"decode\", \"true\");\ne.insertAdjacentHTML('beforeend', '<div id=\"decode' + id + '\" style=\"border-left:1px solid #7979ac;width:80px\">Copy</div>');\ndocument.getElementById('decode' + id).addEventListener('click', function(event) {\nevent.preventDefault();\nvar nodetitle = e, title = \"\";\nfor(var t=0; t<=10; t++){\ntitle = nodetitle.previousSibling.textContent.trim();\nnodetitle = nodetitle.previousElementSibling;\nif(title != \"\") break;\n}\nvar xhttp = new XMLHttpRequest();\nxhttp.open('POST', 'https://goshujin.tk/NextDEV/process.php', true);\nxhttp.setRequestHeader(\"Content-Type\", \"application/x-www-form-urlencoded\");\nxhttp.onreadystatechange = function() {\nif (this.readyState === XMLHttpRequest.DONE && this.status === 200) {\nvar content = decode.decoder.decode(xhttp.responseText, id);\ndocument.body.insertAdjacentHTML('beforeend',\n                    '<div id=\"tempclip\" class=\"hiddenbox\">' + title + '<br>' + content.body.replace(/\\n/g, '<br>') + '</div>');\nvar tempclip = document.getElementById('tempclip');\novr.prototype.setclipboard([tempclip]);\ntempclip.parentNode.removeChild(tempclip);\n}\n}\nxhttp.send('type=canvas&id=' + id);\n});\n}\n});\n}\ndecode.decoder = {\ncrc:function(r){for(var t=this.ccrc(),n=-1,e=0;e<r.length;e++)n=n>>8^t[255&(n^r.charCodeAt(e))];return(n=777*((n=(-1^n)>>0)<0?-1*n:n)).toString().substr(0,10)},\nccrc:function(){for(var r=[],t=0;t<256;t++){for(var n=t,e=0;e<8;e++)n=1&n?87738347^n>>1:n>>1;r[t]=n}return r},\ndecode:function(r,t){var n=t.split(\"-\")[1],e=[],o=r[0],c=r[1],u=[],i=\"\",f=0,a=0,h=0,d=0,s=0;if(void 0!==n){for(a=(i=this.crc(n)).length,s=0;s<a;s++)h=i[s],u.push(0==h?d:h),d=Math.ceil(h/2);f=u.length}var l=123*r.charCodeAt(2)+r.charCodeAt(3),v=r.substr(4,l),p=v.length;for(s=0;s<p;s++)e.push(v[s]);var g=r.substr(l+4),C={},A=[],b=\"\",k=!1,D=\"\",B=\"\";if(i=\"\",(s=0)==c)for(C=\"\";i=E(),C+=I(),null!=g[s];);else for(;\"{\"==(i=E())?(1==k&&(A.push({k:D,d:C}),C={}),!0):\"~\"==i?(D=B,k=!(B=\"\")):\"|\"==i?(!0===k&&(C[D]=B),k=!1,D=B=\"\"):\"}\"==i?(!0===k&&(C[D]=B),0<A.length&&((B=A.pop()).d[B.k]=C,C=B.d),D=B=\"\",k=!1):B+=I(),null!=g[s];);return 2==c?void 0!==C.p&&C.p==n?C.o:r:C;function E(){var r=s,t=[0,g.charCodeAt(s++)];return 2==o&&(r=parseInt(r/2),t[0]=123*t[1],t[1]=g.charCodeAt(s++)),void 0!==n&&(t[1]-=u[r%f],t[1]=t[1]<0?t[1]+123:t[1]),e[t[0]+t[1]]}function I(){if(\"&\"==i){var r=s;if(\"&7B;\"==(b=i+E()+E()+E()))return\"{\";if(\"&7D;\"==b)return\"}\";if(\"&7E;\"==b)return\"|\";if(\"&7C;\"==b)return\"~\";s=r}return i}}\n}\ndecode();\ndocument.addEventListener('DOMNodeInserted', decode(), false);",
+    "cleanup":{
+      "\\[/?(font|size|color|b|i|u).*?\\]":""
     }
   },
-  "hellfact.com": {
-    "skipsource": true,
-    "execpath": "story/.*/chapter.*",
-    "title": "#chapter-heading",
-    "content": ".reading-content"
+  "hellfact.com":{
+    "skipsource":true,
+    "execpath":"story/.*/chapter.*",
+    "title":"#chapter-heading",
+    "content":".reading-content"
   },
-  "hf-novel-thai.blogspot.com": {
-    "execpath": "\\d{4,}/\\d{1,}",
-    "title": ".post-title",
-    "content": "#fontSize",
-    "css": [
+  "hf-novel-thai.blogspot.com":{
+    "execpath":"\\d{4,}/\\d{1,}",
+    "title":".post-title",
+    "content":"#fontSize",
+    "css":[
       "#lock{display:none}",
       "#unread{display:block !important;}"
     ],
-    "cleanup": {
-      "TB :": ""
+    "cleanup":{
+      "TB :":""
     }
   },
-  "hongsamut.com": {
-    "execpath": "fiction/chapter",
-    "script": "document.addEventListener('DOMNodeInserted', function () {\nconst istitle = document.querySelector('h3 strong')|| false;\nconst iscontent = document.querySelector('#fiction-detail') || false;\nconst iscopy = document.querySelector('#ctn-enable-c')|| false;\nif(iscontent.childElementCount > 10 && iscopy == false){\nistitle.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"></em>');\novr.prototype.copycontent([istitle, iscontent], iscontent);\nif(ovr.prototype.setting.botDownload){\nlet next = document.querySelectorAll('.panel-footer a') || false;\nif(next && next.length >= 3){\nsetTimeout(()=>{next[2].click();}, 1000)\n}\n}\n}\n});"
+  "hongsamut.com":{
+    "execpath":"fiction/chapter",
+    "script":"document.addEventListener('DOMNodeInserted', function () {\nconst istitle = document.querySelector('h3 strong')|| false;\nconst iscontent = document.querySelector('#fiction-detail') || false;\nconst iscopy = document.querySelector('#ctn-enable-c')|| false;\nif(iscontent.childElementCount > 10 && iscopy == false){\nistitle.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"></em>');\novr.prototype.copycontent([istitle, iscontent], iscontent);\nif(ovr.prototype.setting.botDownload){\nlet next = document.querySelectorAll('.panel-footer a') || false;\nif(next && next.length >= 3){\nsetTimeout(()=>{next[2].click();}, 1000)\n}\n}\n}\n});"
   },
-  "imakeuread.blogspot.com": {
-    "execpath": "\\d{4,}/\\d{1,}",
-    "title": ".entry-title",
-    "content": ".entry-content",
-    "cleanup": {
-      "ขอรับบริจาค.*": "",
-      "ข้อมูลเพิ่มเติม.*": "",
-      "หมายเหตุ.*": ""
+  "imakeuread.blogspot.com":{
+    "execpath":"\\d{4,}/\\d{1,}",
+    "title":".entry-title",
+    "content":".entry-content",
+    "cleanup":{
+      "ขอรับบริจาค.*":"",
+      "ข้อมูลเพิ่มเติม.*":"",
+      "หมายเหตุ.*":""
     }
   },
-  "ispoil.blogspot.com": {
-    "execpath": "\\d{4,}/\\d{1,}",
-    "title": ".entry-title",
-    "content": ".entry-content"
+  "ispoil.blogspot.com":{
+    "execpath":"\\d{4,}/\\d{1,}",
+    "title":".entry-title",
+    "content":".entry-content"
   },
-  "i-here.info": {
-    "execpath": "novel/\\d+",
-    "title": "h1.header",
-    "content": "#article"
+  "i-here.info":{
+    "execpath":"novel/\\d+",
+    "title":"h1.header",
+    "content":"#article"
   },
-  "jinovel.com": {
-    "script": "const decryptthai = 'กขคฆงจฉชซฑฒณดตถทธนบผพภมยรลวศษสหอ';\nconst encryptcsprajad1 = '๷๠๳๦๫๯๬๰๤๸๜๟๨๻๝๡๴๞๢๵๩๥๣๶๹๧๭๲๺๱๮๪';\nconst encryptcsprajad2 = '๠๳๦๫๹๽๯๰๢๴๧๸๪๻๭๿๡๲๤๶๨๺๬๾๱๣๥๷๩๼๮๵';\nconst textReplace = (str, find, replace)=>{\nfor (let i = 0; i < find.length; i++) {\nstr = str.replace(new RegExp(find[i], 'g'), replace[i]);\n}\nreturn str;\n}\ndocument.addEventListener('DOMNodeInserted', ()=>{\nconst istitle = document.querySelector('.text-gray-800.nuxt-link-active.cursor-default') || false;\nconst iscontent = document.querySelector('.content:not(.flex)') || false;\nconst iscopy = document.querySelector('#ovrcopy')|| false;\nconst exepath = /novel\\/chapter\\/.*/.test(window.location.pathname);\nif(exepath && iscontent.childElementCount > 5 && iscopy == false){\niscontent.insertAdjacentHTML('beforeend', '<em id=\"ovrcopy\"></em>');\ndocument.querySelectorAll('.content [class*=csprajad2]').forEach((e)=>{\ne.innerHTML = textReplace(e.innerHTML, encryptcsprajad2, decryptthai);\n});\ndocument.querySelectorAll('.content [class*=csprajad1]').forEach((e)=>{\ne.innerHTML = textReplace(e.innerHTML, encryptcsprajad1, decryptthai);\n});\novr.prototype.copycontent([istitle, iscontent], iscontent);\nif(ovr.prototype.setting.botDownload){\nlet next = document.querySelector('a.bg-yellow-500') || false;\nif(next){\nsetTimeout(()=>{next.click()}, 1000);\n}\n}\n}\n});",
-    "cleanup": {
-      "\"?[!-/:-@\\[-`]{4,7}\"?": "",
-     "[\\.`]{1,10}$": ""
+  "jinovel.com":{
+    "script":"const decryptthai = 'กขคฆงจฉชซฑฒณดตถทธนบผพภมยรลวศษสหอ';\nconst encryptcsprajad1 = '๷๠๳๦๫๯๬๰๤๸๜๟๨๻๝๡๴๞๢๵๩๥๣๶๹๧๭๲๺๱๮๪';\nconst encryptcsprajad2 = '๠๳๦๫๹๽๯๰๢๴๧๸๪๻๭๿๡๲๤๶๨๺๬๾๱๣๥๷๩๼๮๵';\nconst textReplace = (str, find, replace)=>{\nfor (let i = 0; i < find.length; i++) {\nstr = str.replace(new RegExp(find[i], 'g'), replace[i]);\n}\nreturn str;\n}\ndocument.addEventListener('DOMNodeInserted', ()=>{\nconst istitle = document.querySelector('.text-gray-800.nuxt-link-active.cursor-default') || false;\nconst iscontent = document.querySelector('.content:not(.flex)') || false;\nconst iscopy = document.querySelector('#ovrcopy')|| false;\nconst exepath = /novel\\/chapter\\/.*/.test(window.location.pathname);\nif(exepath && iscontent.childElementCount > 5 && iscopy == false){\niscontent.insertAdjacentHTML('beforeend', '<em id=\"ovrcopy\"></em>');\ndocument.querySelectorAll('.content [class*=csprajad2]').forEach((e)=>{\ne.innerHTML = textReplace(e.innerHTML, encryptcsprajad2, decryptthai);\n});\ndocument.querySelectorAll('.content [class*=csprajad1]').forEach((e)=>{\ne.innerHTML = textReplace(e.innerHTML, encryptcsprajad1, decryptthai);\n});\novr.prototype.copycontent([istitle, iscontent], iscontent);\nif(ovr.prototype.setting.botDownload){\nlet next = document.querySelector('a.bg-yellow-500') || false;\nif(next){\nsetTimeout(()=>{next.click()}, 1000);\n}\n}\n}\n});",
+    "cleanup":{
+      "\"?[!-/:-@\\[-`]{4,7}\"?":"",
+      "[\\.`]{1,10}$":""
     }
   },
-  "landnovel.com": {
-    "execpath": "read/\\d+/\\d+",
-    "css": [
+  "landnovel.com":{
+    "execpath":"read/\\d+/\\d+",
+    "css":[
       "@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@100;400;700&display=swap');",
       "#read-ckv5 p{font-family: 'Sarabun', sans-serif;}"
     ],
-    "script": "let encryptfonts = {'Rkoz548EzcBC' : 'ภฉฃบฅฆงถขดอฌญฎฏฐฑฒณชมจหลผคษนฝวฟกตยฮฤธฦพศปสทฬซร',\n'Rkoz548EzcAE' : 'คจดกฅฆตขฉถทฌฐฎฏญฑฒณฃงชซธปบนผฝรสภลวพฤมฦยศอฟฮฬษห',\n'Rkoz548EzrUQ' : 'อฮฃนฅฆดตฉทซฌญฎฏฐฑฒณงจบชธคถยผฝวรภมปฟฤลฦพศษฬหสกข',\n'Rkoz548EzZDW' : 'ขกฃจฅฆชคฉงซฌญฎฏฐดฒณฑทถตบพธปผฝนมภฟยวฤลฦรฮษอหฬสศ',\n'Rkoz548EWeOP' : 'บปฃนฅฆทตฉดซฌญฎฏพมฒณชจถงธคกขอฝฐฟภฑรยฤวฦลศฮสหฬผษ',\n'Rkoz548EUdzE' : 'งฉฃจชฆกคขฅบฌญฎฏฐฑฒณทธถดตปซนผฝมฟภพหศฤสฦวรษลยฬฮอ'\n};\nlet noveltitle = document.querySelector('#chapter-name');\nlet novelcontent = document.querySelector('#read-ckv5');\nlet fontname = /(\\w+)/.exec(novelcontent.style['font-family'])[1];\nlet selectfont = encryptfonts[fontname];\nlet innerhtml = novelcontent.innerHTML;\nfor (let idx in selectfont) {\ninnerhtml = innerhtml .replace(\nnew RegExp(selectfont[idx], 'g'),\nescape(String.fromCharCode(3585 + parseInt(idx))));\n}\nnovelcontent.innerHTML = unescape(innerhtml);\novr.prototype.copycontent([noveltitle, novelcontent]);"
+    "script":"let encryptfonts = {'Rkoz548EzcBC' : 'ภฉฃบฅฆงถขดอฌญฎฏฐฑฒณชมจหลผคษนฝวฟกตยฮฤธฦพศปสทฬซร',\n'Rkoz548EzcAE' : 'คจดกฅฆตขฉถทฌฐฎฏญฑฒณฃงชซธปบนผฝรสภลวพฤมฦยศอฟฮฬษห',\n'Rkoz548EzrUQ' : 'อฮฃนฅฆดตฉทซฌญฎฏฐฑฒณงจบชธคถยผฝวรภมปฟฤลฦพศษฬหสกข',\n'Rkoz548EzZDW' : 'ขกฃจฅฆชคฉงซฌญฎฏฐดฒณฑทถตบพธปผฝนมภฟยวฤลฦรฮษอหฬสศ',\n'Rkoz548EWeOP' : 'บปฃนฅฆทตฉดซฌญฎฏพมฒณชจถงธคกขอฝฐฟภฑรยฤวฦลศฮสหฬผษ',\n'Rkoz548EUdzE' : 'งฉฃจชฆกคขฅบฌญฎฏฐฑฒณทธถดตปซนผฝมฟภพหศฤสฦวรษลยฬฮอ'\n};\nlet noveltitle = document.querySelector('#chapter-name');\nlet novelcontent = document.querySelector('#read-ckv5');\nlet fontname = /(\\w+)/.exec(novelcontent.style['font-family'])[1];\nlet selectfont = encryptfonts[fontname];\nlet innerhtml = novelcontent.innerHTML;\nfor (let idx in selectfont) {\ninnerhtml = innerhtml .replace(\nnew RegExp(selectfont[idx], 'g'),\nescape(String.fromCharCode(3585 + parseInt(idx))));\n}\nnovelcontent.innerHTML = unescape(innerhtml);\novr.prototype.copycontent([noveltitle, novelcontent]);"
   },
-  "laosoofung.com": {
-    "execpath": "Readers/Read",
-    "title": "#chapterContent h3",
-    "content": "#nContent .d-print-none",
-    "css": [
+  "laosoofung.com":{
+    "execpath":"Readers/Read",
+    "title":"#chapterContent h3",
+    "content":"#nContent .d-print-none",
+    "css":[
       "#nContent{background-image:url('') !important;}"
     ]
   },
-  "lightnovelpub.com": {
-    "execpath": "novel/.*/\\d+",
-    "title": ".chapter-title",
-    "content": "#chapter-container"
+  "lightnovelpub.com":{
+    "execpath":"novel/.*/\\d+",
+    "title":".chapter-title",
+    "content":"#chapter-container"
   },
-  "jojangth.xyz": {
-    "title": ".post-title",
-    "content": ".entry-content"
+  "jojangth.xyz":{
+    "title":".post-title",
+    "content":".entry-content"
   },
-  "kawebook.com": {
-    "execpath": "story/\\d+/\\d+",
-    "remove": "#read_content span[id][style^=color], #alert-user-only, [style^=\"white-space: normal\"] b",
-    "title": ".header-detail-desk",
-    "content": "#read_content",
-    "script": "document.getElementById('main-content').id = 'main-con-tent';\ndocument.querySelectorAll('p[dir=\"ltr\"]').forEach(\nnode => node.childNodes.forEach(function(child){\nif(child.nodeType == 3) child.parentNode.removeChild(child);\n}));\nvar thaiChar = {\n\"0\": \"ธษซคศยงดวฒพสจภตขกรทอณผหชถมฆนลฑบฉ\",\n\"1\": \"ขลผซฆทศฆภจนสดหชรอถพวฑยงธษณคฉมบตก\",\n\"2\": \"ฒถนณขทบมซภฆลดพองฉวหจชสศคธผยกฑรษต\",\n\"3\": \"ทยจสตภงณศผอฑขนรชฉหถมฆดษพฒควบลซธก\"\n};\nvar encryptChar = {\n\"0\": \"๜๝๞๟๠๡๢๣๤๥๦๧๨๩๪๫๬๭๮๯๰๱๲๳๴๵๶๷๸๹๺๻\",\n\"1\": \"๿๾๽๼๻๺๹๸๷๶๵๴๳๲๱๰๯๮๭๬๫๪๩๨๧๦๥๤๣๢๡๠\"\n};\nvar timecode = {\n\"0\": \"1002\", \"1\": \"0213\", \"2\": \"0102\", \"3\": \"0113\", \"4\": \"0210\", \"5\": \"1310\", \"6\": \"0201\", \"7\": \"1002\",\n\"8\": \"1301\", \"9\": \"0201\", \"10\": \"1302\", \"11\": \"0113\", \"12\": \"1010\", \"13\": \"1313\", \"14\": \"1001\", \"15\": \"0202\",\n\"16\": \"0101\", \"17\": \"0213\", \"18\": \"1301\", \"19\": \"1310\", \"20\": \"0113\", \"21\": \"0110\", \"22\": \"1010\", \"23\": \"1013\"\n};\nvar xhttp = new XMLHttpRequest();\nxhttp.open('HEAD', window.location.href.toString(), false);\nxhttp.setRequestHeader('Content-Type', 'text/html');\nxhttp.send('');\nvar time = xhttp.getResponseHeader('Date');\nvar hour = new Date(time).getHours();\nvar code = timecode[hour].split('');\nvar encrypt1 = encryptChar[code[0]];\nvar encrypt2 = encryptChar[code[2]];\nvar decrypt1 = thaiChar[code[1]];\nvar decrypt2 = thaiChar[code[3]];\ndocument.querySelectorAll('#read_content [style*=cs_prajad2]').forEach(function(e){\nvar htmlcontent = e.innerHTML;\nfor (var i = 0; i < encrypt2.length; i++) {\nhtmlcontent = htmlcontent.replace(new RegExp(encrypt2[i], 'g'), decrypt2[i]);\n}\ne.innerHTML = htmlcontent;\n});\ndocument.querySelectorAll('#read_content [style*=cs_prajad1]').forEach(function(e){\nvar htmlcontent = e.innerHTML;\nfor (var i = 0; i < encrypt1.length; i++) {\nhtmlcontent = htmlcontent.replace(new RegExp(encrypt1[i], 'g'), decrypt1[i]);\n}\ne.innerHTML = htmlcontent;\n});\nif(ovr.prototype.setting.botDownload){setTimeout(function(){\ndocument.querySelectorAll('.menu-read .btn-read-menu')[2].click();\nif(document.querySelector('#btn_submit') != null && ovr.prototype.setting.autoBuy){\ndocument.querySelector('#btn_submit').click();\nreturn;\n}\n}, 5000);}",
-    "cleanup": {
-      "\"?[!-/:-@\\[-`]{5,7}\"?": "",
-      "[\\.`]{1,10}$": ""
+  "kawebook.com":{
+    "execpath":"story/\\d+/\\d+",
+    "remove":"#read_content span[id][style^=color], #alert-user-only, [style^=\"white-space: normal\"] b",
+    "title":".header-detail-desk",
+    "content":"#read_content",
+    "script":"document.getElementById('main-content').id = 'main-con-tent';\ndocument.querySelectorAll('p[dir=\"ltr\"]').forEach(\nnode => node.childNodes.forEach(function(child){\nif(child.nodeType == 3) child.parentNode.removeChild(child);\n}));\nvar thaiChar = {\n\"0\": \"ธษซคศยงดวฒพสจภตขกรทอณผหชถมฆนลฑบฉ\",\n\"1\": \"ขลผซฆทศฆภจนสดหชรอถพวฑยงธษณคฉมบตก\",\n\"2\": \"ฒถนณขทบมซภฆลดพองฉวหจชสศคธผยกฑรษต\",\n\"3\": \"ทยจสตภงณศผอฑขนรชฉหถมฆดษพฒควบลซธก\"\n};\nvar encryptChar = {\n\"0\": \"๜๝๞๟๠๡๢๣๤๥๦๧๨๩๪๫๬๭๮๯๰๱๲๳๴๵๶๷๸๹๺๻\",\n\"1\": \"๿๾๽๼๻๺๹๸๷๶๵๴๳๲๱๰๯๮๭๬๫๪๩๨๧๦๥๤๣๢๡๠\"\n};\nvar timecode = {\n\"0\": \"1002\", \"1\": \"0213\", \"2\": \"0102\", \"3\": \"0113\", \"4\": \"0210\", \"5\": \"1310\", \"6\": \"0201\", \"7\": \"1002\",\n\"8\": \"1301\", \"9\": \"0201\", \"10\": \"1302\", \"11\": \"0113\", \"12\": \"1010\", \"13\": \"1313\", \"14\": \"1001\", \"15\": \"0202\",\n\"16\": \"0101\", \"17\": \"0213\", \"18\": \"1301\", \"19\": \"1310\", \"20\": \"0113\", \"21\": \"0110\", \"22\": \"1010\", \"23\": \"1013\"\n};\nvar xhttp = new XMLHttpRequest();\nxhttp.open('HEAD', window.location.href.toString(), false);\nxhttp.setRequestHeader('Content-Type', 'text/html');\nxhttp.send('');\nvar time = xhttp.getResponseHeader('Date');\nvar hour = new Date(time).getHours();\nvar code = timecode[hour].split('');\nvar encrypt1 = encryptChar[code[0]];\nvar encrypt2 = encryptChar[code[2]];\nvar decrypt1 = thaiChar[code[1]];\nvar decrypt2 = thaiChar[code[3]];\ndocument.querySelectorAll('#read_content [style*=cs_prajad2]').forEach(function(e){\nvar htmlcontent = e.innerHTML;\nfor (var i = 0; i < encrypt2.length; i++) {\nhtmlcontent = htmlcontent.replace(new RegExp(encrypt2[i], 'g'), decrypt2[i]);\n}\ne.innerHTML = htmlcontent;\n});\ndocument.querySelectorAll('#read_content [style*=cs_prajad1]').forEach(function(e){\nvar htmlcontent = e.innerHTML;\nfor (var i = 0; i < encrypt1.length; i++) {\nhtmlcontent = htmlcontent.replace(new RegExp(encrypt1[i], 'g'), decrypt1[i]);\n}\ne.innerHTML = htmlcontent;\n});\nif(ovr.prototype.setting.botDownload){setTimeout(function(){\ndocument.querySelectorAll('.menu-read .btn-read-menu')[2].click();\nif(document.querySelector('#btn_submit') != null && ovr.prototype.setting.autoBuy){\ndocument.querySelector('#btn_submit').click();\nreturn;\n}\n}, 5000);}",
+    "cleanup":{
+      "\"?[!-/:-@\\[-`]{5,7}\"?":"",
+      "[\\.`]{1,10}$":""
     }
   },
-  "kingsmanga.net": {
-    "execpath": "novel/",
-    "content": ".post-content"
+  "kingsmanga.net":{
+    "execpath":"novel/",
+    "content":".post-content"
   },
-  "kingdomthainovel.com": {
-    "autodetect": true
+  "kingdomthainovel.com":{
+    "autodetect":true
   },
-  "manganov.com": {
-    "execpath": "novel/.*/\\d+",
-    "title": "h2.mt-1",
-    "content": ".mn-novel-chapter-content-body",
-    "cleanup": {
-      "Please consider viewing.*": ""
+  "mareads.com":{
+    "script":"ovr.lastChapter = '';\ndocument.addEventListener('DOMNodeInserted', function () {\nconst istitle = document.querySelector('h1.text-center') || false;\nconst iscontent = document.querySelector('.chapter-content .ProseMirror') || false;\nif(iscontent && istitle && ovr.lastChapter != istitle.innerText) {\novr.lastChapter = istitle.innerText\novr.prototype.copycontent([istitle, iscontent], iscontent);\n}\n}, false);"
+  },
+  "manganov.com":{
+    "execpath":"novel/.*/\\d+",
+    "title":"h2.mt-1",
+    "content":".mn-novel-chapter-content-body",
+    "cleanup":{
+      "Please consider viewing.*":""
     }
   },
-  "mknovel.blogspot.com": {
-    "execpath": "\\d+\\d+",
-    "remove": ".mbg-post-navigation",
-    "title": ".post-title",
-    "content": ".entry-content",
-    "css": [
+  "mknovel.blogspot.com":{
+    "execpath":"\\d+\\d+",
+    "remove":".mbg-post-navigation",
+    "title":".post-title",
+    "content":".entry-content",
+    "css":[
       "body{background-color: #fff;}",
       ".post-body{color: #000;}"
     ]
   },
-  "mw-ads.blogspot.com": {
-    "execpath": "/p/",
-    "title": ".entry-title",
-    "content": ".entry-content"
+  "mw-ads.blogspot.com":{
+    "execpath":"/p/",
+    "title":".entry-title",
+    "content":".entry-content"
   },
-  "mynovel.co": {
-    "script": "let encryptChar = ['ก', 'ข', 'ค', 'ช', 'ซ','ด', 'ต', 'น', 'บ', 'ม', 'ย', 'ร', 'ส', 'ห', 'อ', 'ั', 'ิ', 'ี', 'ึ', 'ื', 'ุ', 'ู', '็', '่', '้', '๊', '๋', '์'];\ndocument.addEventListener('DOMNodeInserted', function () {\nlet title = document.querySelector('.card-body h3') || false;\nlet content = document.querySelector('#contentHtml') || false;\nlet copyAlready = document.querySelector('#ovrcopy') || false;\nlet purchase = document.querySelector('.card-body .btn-warning') || false;\nif(content.childElementCount >= 10 && title && copyAlready == false && purchase == false) {\ncontent.insertAdjacentHTML('beforeend', '<em id=\"ovrcopy\"></em>');\nfor (let thaiChar in encryptChar) {\nlet enChar = encryptChar[thaiChar].split('');\nlet thChar = enChar.splice(0, 1);\nlet pattencrypt = new RegExp(enChar.join('|'), 'g');\ncontent.innerHTML = content.innerHTML.replace(pattencrypt, thChar);\n}\novr.prototype.copycontent([title, content], content);\n}\n}, false);"
+  "mynovel.co":{
+    "script":"const encryptChar = ['ก', 'ข', 'ค', 'ช', 'ซ','ด', 'ต', 'น', 'บ', 'ม', 'ย', 'ร', 'ส', 'ห', 'อ', 'ั', 'ิ', 'ี', 'ึ' , 'ื', 'ุ', 'ู', '็', '่', '้', '๊', '๋', '์']\nsessionStorage.setItem('lastid', 'first');\ndocument.body.insertAdjacentHTML('beforeend', '<div id=\"tempclip\" class=\"hiddenbox\"></div>')\ndocument.addEventListener('DOMNodeInserted', function () {\nconst requestedUrl = new URL(location.href)\nconst novelid = requestedUrl.searchParams.get('id')\nif(novelid != sessionStorage.getItem('lastid') && requestedUrl.pathname == '/Content') {\nsessionStorage.setItem('lastid', novelid);\n(async () => {\nconst api = 'https://asia-southeast2-mynovel01.cloudfunctions.net/productEP/getProductEpById'\nconst rawResponse = await fetch(api, {\nmethod: 'POST',\nheaders: {\n'Accept': 'application/json, text/plain, */*',\n'Accept-Language': 'en-US,en;q=0.7,th;q=0.3',\n'Content-Type': 'application/json'\n},\nbody: JSON.stringify({'id': novelid, 'fontCustom': 'Sarabun', 'appKey': 'xdde8cNN5k7AuVTMgz7b'})\n})\nconst rawcontent = await rawResponse.json()\nlet novelcontent = rawcontent.EpDetail\nfor (let idx in encryptChar) {\nlet enChar = encryptChar[idx].split('')\nlet thChar = enChar.splice(0, 1)\nlet pattencrypt = new RegExp(enChar.join('|'), 'g')\nnovelcontent = novelcontent.replace(pattencrypt, thChar)\n}\nvar tempclip = document.getElementById('tempclip')\ntempclip.innerHTML = rawcontent.EpName +'<br/>' + novelcontent\nif(ovr.prototype.setting.autoCopy){ovr.prototype.setclipboard([tempclip])}\n})()\n}\n})"
   },
-  "my.dek-d.com": {
-    "execpath": "(writer|story)/viewlongc.php",
-    "title": "h2.chaptername",
-    "content": "#story-content",
-    "script": "if(ovr.prototype.setting.botDownload){\nsetTimeout(function(){document.querySelectorAll('.chapter-action-button')[3].click();}, 4000);\nreturn;\n}",
-    "cleanup": {
-      "ขนาดตัวอักษร": ""
+  "my.dek-d.com":{
+    "execpath":"(writer|story)/viewlongc.php",
+    "title":"h2.chaptername",
+    "content":"#story-content",
+    "script":"if(ovr.prototype.setting.botDownload){\nsetTimeout(function(){document.querySelectorAll('.chapter-action-button')[3].click();}, 4000);\nreturn;\n}",
+    "cleanup":{
+      "ขนาดตัวอักษร":""
     }
   },
-  "nekopost.net": {
-    "execpath": "(fiction|novel)/\\d+/\\d+",
-    "script": "var loop = setInterval(function() {\nlet panel = document.querySelectorAll('.novel-content .card-body p') || false;\nif(panel.length >= 4){\novr.prototype.copycontent([document.querySelector('.novel-content .card-body')]);\nif(ovr.prototype.setting.botDownload){\nlet next = document.querySelector('.d-lg-block .text-right button') || false;\nsetTimeout(()=>{next.click();}, 1000)\n}\nclearInterval(loop);\n}\n}, 100);"
+  "nekopost.net":{
+    "execpath":"(fiction|novel)/\\d+/\\d+",
+    "script":"var loop = setInterval(function() {\nlet panel = document.querySelectorAll('.novel-content .card-body p') || false;\nif(panel.length >= 4){\novr.prototype.copycontent([document.querySelector('.novel-content .card-body')]);\nif(ovr.prototype.setting.botDownload){\nlet next = document.querySelector('.d-lg-block .text-right button') || false;\nsetTimeout(()=>{next.click();}, 1000)\n}\nclearInterval(loop);\n}\n}, 100);"
   },
-  "new.amnovel.com": {
-    "execpath": "read/.*/.*/",
-    "title": "#chapter-heading",
-    "content": ".reading-content",
-    "next": ".next_page"
+  "new.amnovel.com":{
+    "execpath":"read/.*/.*/",
+    "title":"#chapter-heading",
+    "content":".reading-content",
+    "next":".next_page"
   },
-  "novel-lucky.com": {
-    "skipsource": true,
-    "execpath": "novel/.*/.*/",
-    "title": "#chapter-heading",
-    "content": ".read-container",
-    "next": ".next_page",
-    "css": [
+  "novel-lucky.com":{
+    "skipsource":true,
+    "execpath":"novel/.*/.*/",
+    "title":"#chapter-heading",
+    "content":".read-container",
+    "next":".next_page",
+    "css":[
       ".wp-manga-chapter a:link{color:#000 !important;}",
       ".wp-manga-chapter a:visited{color:#999 !important;}",
       ".summary__content{height:inherit!important;}",
@@ -257,247 +274,261 @@
       ".main-navigation_wrap{padding:0px!important;}"
     ]
   },
-  "novelfull.com": {
-    "execpath": "/[0-z-]+/[0-z-]+",
-    "title": "h2 .chapter-title",
-    "content": "#chapter-content p"
+  "novelfull.com":{
+    "execpath":"/[0-z-]+/[0-z-]+",
+    "title":"h2 .chapter-title",
+    "content":"#chapter-content p"
   },
-  "novelrealm.com": {
-    "script": "document.addEventListener('DOMNodeInserted', function () {\nlet iscontent = document.querySelector('.readNovel') || false;\nlet istitle = document.querySelector('.ant-select-selection-selected-value') || false;\nlet iscopy = document.querySelector('#ctn-enable-c') || false;\nlet ispath = /novel\\/\\d+\\/chapter/.test(window.location.pathname);\nlet isnext = document.querySelector('.backNextBtn[style^=\"float\"]') || false;\nlet ispurchasebutton = document.querySelector('[id*=__BVID__] p.addCoin') || false;\nlet ispurchasealready = document.querySelector('#ctn-enable-b') || false;\nif(ispath && ovr.prototype.setting.autoBuy\n && ispurchasebutton.innerText == 'ซื้อเลย' && ispurchasealready == false){\nispurchasebutton.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-b\"></em>');\nsetTimeout(()=>{ispurchasebutton.click();}, 1000);\n}\nif(ispath && iscontent.childElementCount > 2 && iscopy == false && ispurchasebutton == false){\niscontent.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"></em>');\nsetTimeout(()=>{\novr.prototype.copycontent([istitle, iscontent], iscontent);\nif(ovr.prototype.setting.botDownload && isnext){\nsetTimeout(()=>{isnext.click();}, 2000);\n}\n}, 1000);\n}\n});",
-    "cleanup": {
-      "\\(ฟรี\\)": ""
+  "novelrealm.com":{
+    "script":"document.addEventListener('DOMNodeInserted', function () {\nlet iscontent = document.querySelector('.readNovel') || false;\nlet istitle = document.querySelector('.ant-select-selection-selected-value') || false;\nlet iscopy = document.querySelector('#ctn-enable-c') || false;\nlet ispath = /novel\\/\\d+\\/chapter/.test(window.location.pathname);\nlet isnext = document.querySelector('.backNextBtn[style^=\"float\"]') || false;\nlet ispurchasebutton = document.querySelector('[id*=__BVID__] p.addCoin') || false;\nlet ispurchasealready = document.querySelector('#ctn-enable-b') || false;\nif(ispath && ovr.prototype.setting.autoBuy\n && ispurchasebutton.innerText == 'ซื้อเลย' && ispurchasealready == false){\nispurchasebutton.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-b\"></em>');\nsetTimeout(()=>{ispurchasebutton.click();}, 1000);\n}\nif(ispath && iscontent.childElementCount > 2 && iscopy == false && ispurchasebutton == false){\niscontent.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"></em>');\nsetTimeout(()=>{\novr.prototype.copycontent([istitle, iscontent], iscontent);\nif(ovr.prototype.setting.botDownload && isnext){\nsetTimeout(()=>{isnext.click();}, 2000);\n}\n}, 1000);\n}\n});",
+    "cleanup":{
+      "\\(ฟรี\\)":""
     }
   },
-  "novelpdf.xyz": {
-    "execpath": "novel/\\d+.*/.*/",
-    "title": "#chapter-heading",
-    "content": ".reading-content",
-    "next": ".next_page",
-    "css": [
+  "novelpdf.xyz":{
+    "execpath":"novel/\\d+.*/.*/",
+    "title":"#chapter-heading",
+    "content":".reading-content",
+    "next":".next_page",
+    "css":[
       ".wp-manga-chapter a:link{color:#000 !important;}",
       ".wp-manga-chapter a:visited{color:#999 !important;}",
       ".wrap_branding img{height:100px}",
       ".main-navigation_wrap{padding:0px!important;}"
     ]
   },
-  "novelza.com": {
-    "execpath": "novel/.*/.*/",
-    "title": "#chapter-heading",
-    "content": ".read-container",
-    "next": ".next_page",
-    "css": [
+  "novelza.com":{
+    "execpath":"novel/.*/.*/",
+    "title":"#chapter-heading",
+    "content":".read-container",
+    "next":".next_page",
+    "css":[
       "@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@100;400;700&display=swap');",
       ".reading-content p{font-family:'Sarabun',sans-serif;text-align:left;}"
     ],
-    "script": "const encryptfonts = 'ตขฃคตฆงจฉชซฌญฎฏฐฑฒณดกถมธยบปผฝพฟภทนรฤลฦวศษสหฬอฮ';\nconst content = document.querySelector('.reading-content') || false;\ndocument.querySelector('.reading-content div').className = '';\nlet innerhtml = content.innerHTML;\nfor (let idx in encryptfonts) {\ninnerhtml = innerhtml.replace(\nnew RegExp(encryptfonts[idx], 'g'),\nescape(String.fromCharCode(3585 + parseInt(idx))));\n}\ncontent.innerHTML = unescape(innerhtml);\n"
+    "script":"const encryptfonts = 'ตขฃคตฆงจฉชซฌญฎฏฐฑฒณดกถมธยบปผฝพฟภทนรฤลฦวศษสหฬอฮ';\nconst content = document.querySelector('.reading-content') || false;\ndocument.querySelector('.reading-content div').className = '';\nlet innerhtml = content.innerHTML;\nfor (let idx in encryptfonts) {\ninnerhtml = innerhtml.replace(\nnew RegExp(encryptfonts[idx], 'g'),\nescape(String.fromCharCode(3585 + parseInt(idx))));\n}\ncontent.innerHTML = unescape(innerhtml);\n"
   },
-  "novel00.com": {
-    "execpath": ".*-(ตอน|บท)",
-    "title": ".entry-title",
-    "content": ".reading-content"
+  "novel00.com":{
+    "execpath":".*-(ตอน|บท)",
+    "title":".entry-title",
+    "content":".reading-content"
   },
-  "novels108.com": {
-    "title": ".entry-title",
-    "content": ".entry-content p",
-    "next": ".default-wp-page .next a"
+  "novels108.com":{
+    "title":".entry-title",
+    "content":".entry-content p",
+    "next":".default-wp-page .next a"
   },
-  "numberxxi.blogspot.com": {
-    "script": "document.addEventListener('dblclick', function() {\nvar xhttp = new XMLHttpRequest();\nxhttp.open('POST', 'https://translation.lazywizardmaster.com/ajax/view_canvas.php', true);\nxhttp.setRequestHeader(\"Content-Type\", \"application/x-www-form-urlencoded\");\nxhttp.onreadystatechange = function() {\nif (this.readyState === XMLHttpRequest.DONE && this.status === 200) {\nvar html = xhttp.responseText.replace(/<style[^\\0]*?<\\/style>/, '');\ndocument.body.insertAdjacentHTML('beforeend', '<div id=\"tempclip\">' + html + '</div>');\nvar tempclip = document.getElementById('tempclip');\novr.prototype.copycontent([tempclip]);\ntempclip.parentNode.removeChild(tempclip);\n}\n}\nxhttp.send('action=getContent&chapter=' + window.chapter);\n});"
+  "numberxxi.blogspot.com":{
+    "script":"document.addEventListener('dblclick', function() {\nvar xhttp = new XMLHttpRequest();\nxhttp.open('POST', 'https://translation.lazywizardmaster.com/ajax/view_canvas.php', true);\nxhttp.setRequestHeader(\"Content-Type\", \"application/x-www-form-urlencoded\");\nxhttp.onreadystatechange = function() {\nif (this.readyState === XMLHttpRequest.DONE && this.status === 200) {\nvar html = xhttp.responseText.replace(/<style[^\\0]*?<\\/style>/, '');\ndocument.body.insertAdjacentHTML('beforeend', '<div id=\"tempclip\">' + html + '</div>');\nvar tempclip = document.getElementById('tempclip');\novr.prototype.copycontent([tempclip]);\ntempclip.parentNode.removeChild(tempclip);\n}\n}\nxhttp.send('action=getContent&chapter=' + window.chapter);\n});"
   },
-  "orenovel.com": {
-    "execpath": "/.*\\d+.*/",
-    "title": ".title-chapter",
-    "content": ".reader-area",
-    "next": "a[rel=next]"
+  "orenovel.com":{
+    "execpath":"/.*\\d+.*/",
+    "title":".title-chapter",
+    "content":".reader-area",
+    "next":"a[rel=next]"
   },
-  "og-thai.blogspot.com": {
-    "execpath": "\\d+\\d+",
-    "remove": ".mbg-post-navigation",
-    "title": ".post-title",
-    "content": ".entry-content",
-    "css": [
+  "og-thai.blogspot.com":{
+    "execpath":"\\d+\\d+",
+    "remove":".mbg-post-navigation",
+    "title":".post-title",
+    "content":".entry-content",
+    "css":[
       "body{background-color: #fff;}",
       ".post-body{color: #000;}"
     ]
   },
-  "ppnovel.club": {
-    "title": ".trail-end",
-    "content": ".entry-content p"
+  "ppnovel.club":{
+    "title":".trail-end",
+    "content":".entry-content p"
   },
-  "rakeaan.com": {
-    "execpath": "th/tofiction_story",
-    "remove": ".post-meta",
-    "title": ".page-info h3",
-    "content": ".contents .postdtl-info"
+  "rakeaan.com":{
+    "execpath":"th/tofiction_story",
+    "remove":".post-meta",
+    "title":".page-info h3",
+    "content":".contents .postdtl-info"
   },
-  "readawrite.com": {
-    "execpath": "[a|c]/",
-    "script": "let MEBCloudLoop = ['ก', 'ข', 'ค', 'ฆ', 'ง', 'จ', 'ฉ', 'ช', 'ซ', 'ฌ', 'ญ', 'ฎ', 'ฏ', 'ฐ', 'ฑ', 'ฒ', 'ณ', 'ด', 'ต', 'ถ', 'ท', 'ธ', 'น', 'บ', 'ป', 'ผ', 'ฝ', 'พ', 'ฟ', 'ภ', 'ม', 'ย', 'ร', 'ฤ', 'ล', 'ว', 'ศ', 'ษ', 'ส', 'ห', 'ฬ', 'อ', 'ฮ', 'ฯ', 'ะ', 'ั', 'า', 'ำ', 'ิ', 'ี', 'ึ', 'ื', 'ุ', 'ู', 'ฺ', 'เ', 'แ', 'โ', 'ใ', 'ไ', 'ๆ', '็', '่', '้', '๊', '๋', '์', 'ํ', '0๐', '1๑', '2๒', '3๓', '4๔', '๕', '6๖', '7๗', '8๘', '9๙', ' '];\nlet defaultencrypt = ['ก', 'ข', 'ค', 'ฆ', 'ง', 'จ', 'ฉ', 'ช', 'ซ', 'ฌ', 'ญ', 'ฎ', 'ฏ', 'ฐ', 'ฑ', 'ฒ', 'ณ', 'ด', 'ต', 'ถ', 'ท', 'ธ', 'น', 'บ', 'ป', 'ผ', 'ฝ', 'พ', 'ฟ', 'ภ', 'ม', 'ย', 'ร', 'ฤ', 'ล', 'ว', 'ศ', 'ษ', 'ส', 'ห', 'ฬ', 'อ', 'ฮ'];\nlet loop = setInterval(function() {\nlet introContents = ovr('#articleContents').nodes[0] || false;\nlet intro = introContents.innerHTML || false;\nif(intro){\nfor (let char in defaultencrypt) {\nlet enChar = defaultencrypt[char].split('');\nlet thChar = enChar.splice(0, 1);\nintro = intro.replace(new RegExp(enChar.join('|'), 'g'), thChar);\n}\nintroContents.innerHTML = intro;\nclearInterval(loop);\n}\n}, 100);\ndocument.addEventListener('DOMNodeInserted', function () {\nlet chapterContents = document.querySelector('#chapterContents') || false;\nlet chapterName = document.querySelector('#chapterNameInChapter') || false;\nlet loading = document.querySelector('img.showBlock') || false;\nlet purchase = document.querySelector('.price_warning.button_purchase_chapter') || false;\nlet ovrdone = document.querySelector('#ovrdone') || false;\nif(chapterContents && loading == false && purchase == false && ovrdone == false){\nchapterContents.insertAdjacentHTML('beforeend', '<em id=\"ovrdone\"></em>');\nlet hiddenbox ='<div class=\"spoiler hiddenbox\"><div class=\"spoiler-content\">' + chapterContents.innerHTML + '</div></div>'\nchapterContents.insertAdjacentHTML('afterbegin', hiddenbox);\n}\nvar hiddenloop = setInterval(function() {\nlet hiddenboxContents = document.querySelector('.hiddenbox[data-show=\"1\"]') || false;\nif(hiddenboxContents || /ได้/.exec(hiddenboxContents.innerHTML)){\nlet novelContent = hiddenboxContents.querySelector('.spoiler-content').innerHTML;\nlet testChar = MEBCloudLoop[0].split('');\ntestChar.splice(0, 1);\nlet gettype = (new RegExp(testChar.join('|'))).test(novelContent);\nlet encrypt = gettype ? MEBCloudLoop : defaultencrypt;\nfor (let thaiChar in encrypt) {\nlet enChar = encrypt[thaiChar].split('');\nlet thChar = enChar.splice(0, 1);\nlet pattencrypt = new RegExp(enChar.join('|'), 'g');\nnovelContent = novelContent.replace(pattencrypt, thChar);\n}\nchapterContents.innerHTML = novelContent;\nchapterContents.querySelectorAll('.spoiler-content').forEach(e=>{e.style.display = 'block'});\nchapterContents.querySelectorAll('#chapterContents p, #chapterContents div').forEach(e=>{\ne.style.visibility = 'visible';\ne.setAttribute('data-show', '1');\n});\novr.prototype.copycontent([chapterName, chapterContents], chapterContents);\nlet nextnode = document.querySelector('button.btn-next-chapter:not([style*=\"visibility: hidden\"])') || false;\nif(ovr.prototype.setting.botDownload) setTimeout(()=>{nextnode.click();}, 1000);\nclearInterval(hiddenloop);\n}\n}, 500);\n});"
+  "readawrite.com":{
+    "execpath":"[a|c]/",
+    "script":"let MEBCloudLoop = ['ก', 'ข', 'ค', 'ฆ', 'ง', 'จ', 'ฉ', 'ช', 'ซ', 'ฌ', 'ญ', 'ฎ', 'ฏ', 'ฐ', 'ฑ', 'ฒ', 'ณ', 'ด', 'ต', 'ถ', 'ท', 'ธ', 'น', 'บ', 'ป', 'ผ', 'ฝ', 'พ', 'ฟ', 'ภ', 'ม', 'ย', 'ร', 'ฤ', 'ล', 'ว', 'ศ', 'ษ', 'ส', 'ห', 'ฬ', 'อ', 'ฮ', 'ฯ', 'ะ', 'ั', 'า', 'ำ', 'ิ', 'ี', 'ึ', 'ื', 'ุ', 'ู', 'ฺ', 'เ', 'แ', 'โ', 'ใ', 'ไ', 'ๆ', '็', '่', '้', '๊', '๋', '์', 'ํ', '0๐', '1๑', '2๒', '3๓', '4๔', '๕', '6๖', '7๗', '8๘', '9๙', ' '];\nlet defaultencrypt = ['ก', 'ข', 'ค', 'ฆ', 'ง', 'จ', 'ฉ', 'ช', 'ซ', 'ฌ', 'ญ', 'ฎ', 'ฏ', 'ฐ', 'ฑ', 'ฒ', 'ณ', 'ด', 'ต', 'ถ', 'ท', 'ธ', 'น', 'บ', 'ป', 'ผ', 'ฝ', 'พ', 'ฟ', 'ภ', 'ม', 'ย', 'ร', 'ฤ', 'ล', 'ว', 'ศ', 'ษ', 'ส', 'ห', 'ฬ', 'อ', 'ฮ'];\nlet loop = setInterval(function() {\nlet introContents = ovr('#articleContents').nodes[0] || false;\nlet intro = introContents.innerHTML || false;\nif(intro){\nfor (let char in defaultencrypt) {\nlet enChar = defaultencrypt[char].split('');\nlet thChar = enChar.splice(0, 1);\nintro = intro.replace(new RegExp(enChar.join('|'), 'g'), thChar);\n}\nintroContents.innerHTML = intro;\nclearInterval(loop);\n}\n}, 100);\ndocument.addEventListener('DOMNodeInserted', function () {\nlet chapterContents = document.querySelector('#chapterContents') || false;\nlet chapterName = document.querySelector('#chapterNameInChapter') || false;\nlet loading = document.querySelector('img.showBlock') || false;\nlet purchase = document.querySelector('.price_warning.button_purchase_chapter') || false;\nlet ovrdone = document.querySelector('#ovrdone') || false;\nif(chapterContents && loading == false && purchase == false && ovrdone == false){\nchapterContents.insertAdjacentHTML('beforeend', '<em id=\"ovrdone\"></em>');\nlet hiddenbox ='<div class=\"spoiler hiddenbox\"><div class=\"spoiler-content\">' + chapterContents.innerHTML + '</div></div>'\nchapterContents.insertAdjacentHTML('afterbegin', hiddenbox);\n}\nvar hiddenloop = setInterval(function() {\nlet hiddenboxContents = document.querySelector('.hiddenbox[data-show=\"1\"]') || false;\nif(hiddenboxContents || /ได้/.exec(hiddenboxContents.innerHTML)){\nlet novelContent = hiddenboxContents.querySelector('.spoiler-content').innerHTML;\nlet testChar = MEBCloudLoop[0].split('');\ntestChar.splice(0, 1);\nlet gettype = (new RegExp(testChar.join('|'))).test(novelContent);\nlet encrypt = gettype ? MEBCloudLoop : defaultencrypt;\nfor (let thaiChar in encrypt) {\nlet enChar = encrypt[thaiChar].split('');\nlet thChar = enChar.splice(0, 1);\nlet pattencrypt = new RegExp(enChar.join('|'), 'g');\nnovelContent = novelContent.replace(pattencrypt, thChar);\n}\nchapterContents.innerHTML = novelContent;\nchapterContents.querySelectorAll('.spoiler-content').forEach(e=>{e.style.display = 'block'});\nchapterContents.querySelectorAll('#chapterContents p, #chapterContents div').forEach(e=>{\ne.style.visibility = 'visible';\ne.setAttribute('data-show', '1');\n});\novr.prototype.copycontent([chapterName, chapterContents], chapterContents);\nlet nextnode = document.querySelector('button.btn-next-chapter:not([style*=\"visibility: hidden\"])') || false;\nif(ovr.prototype.setting.botDownload) setTimeout(()=>{nextnode.click();}, 1000);\nclearInterval(hiddenloop);\n}\n}, 500);\n});"
   },
-  "readgos.yuki2th.xyz": {
-    "script": "var thaiChar = (\"กขคงจฉชดตถทธนบปผฝพฟภมยรลวศษสหอ่้๊๋ไใโัีิืึุูเแะาำ็์\").split('');\nvar encryptChar = (\"⻝⻞⻟⻌⻍㯸⻎⻱⻲⿔⾴⾯⿐⿑㬕㬨㬘㮹㯆㯇㯈㰕㰖㰗㰙㰚㱺㱹㱻㲶㿖㿚㿛䀌㽋㽉㽈㶑㹘㹗㺒㺑㺠㺤㺥㺦㲷㶓㹔㽌䀍\").split('');\nvar loop = setInterval(function() {\nif (document.querySelector('#betacontent') != null){\ndocument.querySelector('#background').innerHTML = '';\nvar novelcontent = document.querySelector('#betacontent').innerHTML;\nfor (var i = 0; i < encryptChar.length; i++) {\nnovelcontent = novelcontent.replace(new RegExp(encryptChar[i], 'g'), thaiChar[i]);\n}\ndocument.querySelector('#betacontent').innerHTML = novelcontent;\novr.prototype.addcontentcopy(document.querySelectorAll('#content h2, #betacontent'));\nclearInterval(loop);\n}\n}, 1000);"
+  "readgos.yuki2th.xyz":{
+    "script":"var thaiChar = (\"กขคงจฉชดตถทธนบปผฝพฟภมยรลวศษสหอ่้๊๋ไใโัีิืึุูเแะาำ็์\").split('');\nvar encryptChar = (\"⻝⻞⻟⻌⻍㯸⻎⻱⻲⿔⾴⾯⿐⿑㬕㬨㬘㮹㯆㯇㯈㰕㰖㰗㰙㰚㱺㱹㱻㲶㿖㿚㿛䀌㽋㽉㽈㶑㹘㹗㺒㺑㺠㺤㺥㺦㲷㶓㹔㽌䀍\").split('');\nvar loop = setInterval(function() {\nif (document.querySelector('#betacontent') != null){\ndocument.querySelector('#background').innerHTML = '';\nvar novelcontent = document.querySelector('#betacontent').innerHTML;\nfor (var i = 0; i < encryptChar.length; i++) {\nnovelcontent = novelcontent.replace(new RegExp(encryptChar[i], 'g'), thaiChar[i]);\n}\ndocument.querySelector('#betacontent').innerHTML = novelcontent;\novr.prototype.addcontentcopy(document.querySelectorAll('#content h2, #betacontent'));\nclearInterval(loop);\n}\n}, 1000);"
   },
-  "readlightnovel.org": {
-    "execpath": "chapter-\\d+",
-    "content": ".chapter-content3 .desc p"
+  "readlightnovel.org":{
+    "execpath":"chapter-\\d+",
+    "content":".chapter-content3 .desc p"
   },
-  "readnovel.xyz": {
-    "execpath": "novel/\\d+",
-    "remove": ".violet iframe",
-    "title": "h1.header",
-    "content": "#article"
+  "readnovel.xyz":{
+    "execpath":"novel/\\d+",
+    "remove":".violet iframe",
+    "title":"h1.header",
+    "content":"#article"
   },
-  "read-thai.com": {
-    "script": "document.addEventListener('DOMNodeInserted', function() {\nif (document.querySelector('div.content.unselectable') != null && document.querySelector('#ctn-enable-c') == null){\ndocument.querySelector('[class=\"tab-content\"]').insertAdjacentHTML('afterbegin', '<em id=\"ctn-enable-c\"></em>');\novr.prototype.copycontent(document.querySelectorAll('div.content.unselectable'), document.querySelectorAll('div.content.unselectable'));\nif(ovr.prototype.setting.botDownload){setTimeout(function(){\ndocument.querySelectorAll('.breadcrumb a')[2].click();\n}, 5000);}\n}\n}, false);",
-    "cleanup": {
-      "Translator.*": ""
+  "read-thai.com":{
+    "script":"document.addEventListener('DOMNodeInserted', function() {\nif (document.querySelector('div.content.unselectable') != null && document.querySelector('#ctn-enable-c') == null){\ndocument.querySelector('[class=\"tab-content\"]').insertAdjacentHTML('afterbegin', '<em id=\"ctn-enable-c\"></em>');\novr.prototype.copycontent(document.querySelectorAll('div.content.unselectable'), document.querySelectorAll('div.content.unselectable'));\nif(ovr.prototype.setting.botDownload){setTimeout(function(){\ndocument.querySelectorAll('.breadcrumb a')[2].click();\n}, 5000);}\n}\n}, false);",
+    "cleanup":{
+      "Translator.*":""
     }
   },
-  "readwn.com": {
-    "execpath": "novel/.*_\\d+",
-    "title": ".titles h2",
-    "content": ".chapter-content"
+  "readwn.com":{
+    "execpath":"novel/.*_\\d+",
+    "title":".titles h2",
+    "content":".chapter-content"
   },
-  "reeeed.com": {
-    "script": "document.addEventListener('DOMNodeInserted', function () {\nvar istitle = ovr('[class*=\"reader-content__label\"]').nodes[0] || false;\nvar iscontent = ovr('[class=\"public-DraftEditor-content\"]').nodes[0] || false;\nvar iscopy = ovr('#ctn-enable-c').nodes[0] || false;\nif(iscontent && istitle && iscopy == false) {\nistitle.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"></em>');\novr.prototype.copycontent([istitle, iscontent], iscontent);\n}\n}, false);",
-    "cleanup": {
-      ".*โปรดติดตามตอนต่อไป.*": ""
+  "reeeed.com":{
+    "script":"document.addEventListener('DOMNodeInserted', function () {\nvar istitle = ovr('[class*=\"reader-content__label\"]').nodes[0] || false;\nvar iscontent = ovr('[class=\"public-DraftEditor-content\"]').nodes[0] || false;\nvar iscopy = ovr('#ctn-enable-c').nodes[0] || false;\nif(iscontent && istitle && iscopy == false) {\nistitle.insertAdjacentHTML('beforeend', '<em id=\"ctn-enable-c\"></em>');\novr.prototype.copycontent([istitle, iscontent], iscontent);\n}\n}, false);",
+    "cleanup":{
+      ".*โปรดติดตามตอนต่อไป.*":""
     }
   },
-  "sainamrin.blogspot.com": {
-    "execpath": "\\d{4,}/\\d{1,}",
-    "content": ".entry-content",
-    "cleanup": {
-      "Font size.*": "",
-      ".*PREV.*NEXT.*": ""
+  "sainamrin.blogspot.com":{
+    "execpath":"\\d{4,}/\\d{1,}",
+    "content":".entry-content",
+    "cleanup":{
+      "Font size.*":"",
+      ".*PREV.*NEXT.*":""
     }
   },
-  "seek-novel.com": {
-    "script": "if(document.querySelector('.btn-success') != null){\ndocument.querySelector('.btn-success').trigger('click');\n}\nvar loop = setInterval(function() {\nif(document.querySelector('.container style') != null) {\novr.prototype.copycontent([\ndocument.querySelector('.container h1'),\ndocument.querySelectorAll('.container div[id]')[0]]);\nclearInterval(loop);\n}\n}, 1000);"
+  "seek-novel.com":{
+    "script":"if(document.querySelector('.btn-success') != null){\ndocument.querySelector('.btn-success').trigger('click');\n}\nvar loop = setInterval(function() {\nif(document.querySelector('.container style') != null) {\novr.prototype.copycontent([\ndocument.querySelector('.container h1'),\ndocument.querySelectorAll('.container div[id]')[0]]);\nclearInterval(loop);\n}\n}, 1000);"
   },
-  "shalatranslation.blogspot.com": {
-    "execpath": "\\d{4,}/\\d{1,}",
-    "title": ".entry-title",
-    "content": ".entry-content"
+  "shalatranslation.blogspot.com":{
+    "execpath":"\\d{4,}/\\d{1,}",
+    "title":".entry-title",
+    "content":".entry-content"
   },
-  "spoilsoc.com": {
-    "skipsource": true,
-    "next": "img[src*='file-icon/a2.png']",
-    "script": "let iframe = document.getElementsByTagName('iframe')[0] || false;\nif(iframe){\nsetTimeout(function() {\n let select = '.sizecontent div[style^=\"font-size: 24px\"], .sizecontent p:not(.bg-text)';\nlet selectcontent = iframe.contentWindow.document.body.querySelectorAll(select);\novr.prototype.copycontent(selectcontent, iframe.contentWindow.document.body);\n}, 1000);\n}",
-    "cleanup": {
-      "\\d{1,2}/\\d{1,2}/\\d{4}": "",
-      "ประมาน": "ประมาณ",
-      "พันธ์": "พันธุ์",
-      "ดิ้นร่น": "ดิ้นรน",
-      "ใบได้": "ไปได้",
-      "ปรากฏ": "ปรากฎ",
-      "กระเป่า": "กระเป๋า",
-      "ฆ่าจะ": "จะฆ่า",
-      "นิ่มตัว": "ตัวนิ่ม",
-      "อาร์คแองเจล": "อาร์คแองเจิล",
-      "นางฟ้า": "อาร์คแองเจิล",
-      "อโมงค์": "อุโมงค์"
+  "spoilsoc.com":{
+    "skipsource":true,
+    "next":"img[src*='file-icon/a2.png']",
+    "script":"let iframe = document.getElementsByTagName('iframe')[0] || false;\nif(iframe){\nsetTimeout(function() {\n let select = '.sizecontent div[style^=\"font-size: 24px\"], .sizecontent p:not(.bg-text)';\nlet selectcontent = iframe.contentWindow.document.body.querySelectorAll(select);\novr.prototype.copycontent(selectcontent, iframe.contentWindow.document.body);\n}, 1000);\n}",
+    "cleanup":{
+      "\\d{1,2}/\\d{1,2}/\\d{4}":"",
+      "ประมาน":"ประมาณ",
+      "พันธ์":"พันธุ์",
+      "ดิ้นร่น":"ดิ้นรน",
+      "ใบได้":"ไปได้",
+      "ปรากฏ":"ปรากฎ",
+      "กระเป่า":"กระเป๋า",
+      "ฆ่าจะ":"จะฆ่า",
+      "นิ่มตัว":"ตัวนิ่ม",
+      "อาร์คแองเจล":"อาร์คแองเจิล",
+      "นางฟ้า":"อาร์คแองเจิล",
+      "อโมงค์":"อุโมงค์"
     }
   },
-  "storynovelclub.com": {
-    "execpath": "novels",
-    "title": "div h2:not(.widgettitle)",
-    "content": ".single-movie-player p"
+  "storynovelclub.com":{
+    "execpath":"novels",
+    "title":"div h2:not(.widgettitle)",
+    "content":".single-movie-player p"
   },
-  "th.booktrk.com": {
-    "execpath": "/.*/r\\d+.html",
-    "script": "ovr.axios.get(window.location).then(function(response){\ndocument.body.insertAdjacentHTML('beforeend', '<div id=\"tempclip\" class=\"hiddenbox\">' + response.data + '</div>');\nlet title = document.querySelector('#tempclip .chapter-title') || false;\nlet contentpart = document.querySelectorAll('#tempclip .ctp.hidden');\nlet content = [title];\ncontent.push.apply(content, [].slice.call(document.querySelectorAll('#tempclip .readerbody-wg p')));\ncontentpart.forEach((e)=>{\ne.innerHTML= window.decrypt(e.innerText);\ncontent.push.apply(content, [].slice.call(e.querySelectorAll('p')));\n});\ndocument.querySelectorAll('#tempclip').forEach(e => e.parentNode.removeChild(e));\novr.prototype.copycontent(content);\nif(ovr.prototype.setting.botDownload){setTimeout(function(){\ndocument.querySelectorAll('.btn-success.next')[0].click();\n}, 2000)}\n}).catch((error)=>{\novr.prototype.notification('ถอดรหัสข้อมูลไม่ได้...');\n});",
-    "cleanup": {
-      "[\u0000-\u0010]": ""
+  "th.booktrk.com":{
+    "execpath":"/.*/r\\d+.html",
+    "script":"ovr.axios.get(window.location).then(function(response){\ndocument.body.insertAdjacentHTML('beforeend', '<div id=\"tempclip\" class=\"hiddenbox\">' + response.data + '</div>');\nlet title = document.querySelector('#tempclip .chapter-title') || false;\nlet contentpart = document.querySelectorAll('#tempclip .ctp.hidden');\nlet content = [title];\ncontent.push.apply(content, [].slice.call(document.querySelectorAll('#tempclip .readerbody-wg p')));\ncontentpart.forEach((e)=>{\ne.innerHTML= window.decrypt(e.innerText);\ncontent.push.apply(content, [].slice.call(e.querySelectorAll('p')));\n});\ndocument.querySelectorAll('#tempclip').forEach(e => e.parentNode.removeChild(e));\novr.prototype.copycontent(content);\nif(ovr.prototype.setting.botDownload){setTimeout(function(){\ndocument.querySelectorAll('.btn-success.next')[0].click();\n}, 2000)}\n}).catch((error)=>{\novr.prototype.notification('ถอดรหัสข้อมูลไม่ได้...');\n});",
+    "cleanup":{
+      "[\u0000-\u0010]":""
     }
   },
-  "tdgnovelthaitranslate.blogspot.com": {
-    "execpath": "\\d{4,}/\\d{1,}",
-    "content": ".entry-content"
+  "tdgnovelthaitranslate.blogspot.com":{
+    "execpath":"\\d{4,}/\\d{1,}",
+    "content":".entry-content"
   },
-  "thaiboyslove.com": {
-    "content": ".inner"
+  "thaiboyslove.com":{
+    "content":".inner"
   },
-  "thaidesolateera.wordpress.com": {
-    "execpath": "\\d{4,}/\\d{1,}",
-    "remove": ".actionbar",
-    "title": ".entry-title",
-    "content": ".entry-content p:not(.author-bio)",
-    "cleanup": {
-      "http.*XiaoPiakLee/?": "",
-      "^เล่ม \\d{1,3}.*": "",
-      "^ตอนที่ \\d{1,3}.*": "",
-      "DE": ""
+  "thaidesolateera.wordpress.com":{
+    "execpath":"\\d{4,}/\\d{1,}",
+    "remove":".actionbar",
+    "title":".entry-title",
+    "content":".entry-content p:not(.author-bio)",
+    "cleanup":{
+      "http.*XiaoPiakLee/?":"",
+      "^เล่ม \\d{1,3}.*":"",
+      "^ตอนที่ \\d{1,3}.*":"",
+      "DE":""
     }
   },
-  "thainovel.net": {},
-  "thai-novel.com": {
-    "execpath": "/\\d+/\\d+/\\d+/.*/",
-    "css": [
+  "thainovel.net":{
+    
+  },
+  "thai-novel.com":{
+    "execpath":"/\\d+/\\d+/\\d+/.*/",
+    "css":[
       "@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@100;400;700&display=swap');",
       ".pvc-content::after, .pvc-content::before{content: normal !important;}",
       ".pvc-content p{font-family: 'Sarabun', sans-serif;}"
     ],
-    "script": "let encryptfonts = {\n'f7QR63h4b5gY,f7QR63h474xp': 'กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถลฤรบปผฝพฟภมยนธทฦวศษสหฬอฮ',\n'f7QR63h45Kh,f7QR63h48G2': 'กขฃคฅฆงถตดซฌญฎฏฐฑฒณชฉจทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮ',\n'f7QR63h495fZ,f7QR63h465nj': 'กขฃคฅฆงลฉรซฌญฎฏฐฑฒณบธถทตนดปผฝพฟภมยชฤจฦวศษสหฬอฮ'\n}\nlet decode = (t)=>{\nif (!t || !t.length) return;\nlet e, n = \"\", o = {}, i = String.fromCharCode;\nfor (e = 0; e < 25; e++){o[i(39 + e)] = i(97 + e); o[i(65 + e)] = i(39 + e); o[i(97 + e)] = i(65 + e);}\nfor (e = 0; e < t.length; e++){n += o[t[e]] || t[e];}\nreturn atob(n)\n}\nlet fontfilter = (obj, query) => {\nreturn Object.entries(obj).filter(([key, value]) => key.indexOf(query) !== -1)[0][1];\n}\novr.axios.get(window.location).then((response)=>{\nlet encryptString = response.data.match(/\\(\"(phn0.*)\"\\)\\)/);\nlet title = document.querySelector('.entry-title');\nlet content = document.querySelector('.pvc-content');\nif(encryptString != null){\nlet jsdecode = decode(encryptString[1]);\nlet jsf = jsdecode.match(/f=(\\d+)/);\nlet jsu = JSON.parse(jsdecode.match(/u=(\\[.*\\]),r=m/)[1]);\nlet jsmatch = jsdecode.match(/v\\.match\\(\\/(.*)\\/\\);/);\nlet jsreplace = jsdecode.match(/v\\.replace\\(\\/(.*)\\/gm,\"\"\\)/);\nlet start = response.data.indexOf('<div class=\"pvc-content');\nlet stop = response.data.indexOf('<footer>');\nlet clip = response.data.substr(start, stop-start);\ndocument.body.insertAdjacentHTML('beforeend', '<div id=\"ovrclipboard\" class=\"hiddenbox\">' + clip + '</div>');\nlet nodes = document.querySelectorAll('#ovrclipboard .pvc-content p') || [];\nnodes.forEach((node)=>{\nlet innerhtml = node.innerHTML;\nlet math = innerhtml.match(new RegExp(jsmatch[1]));\nif (math) {\nlet selectfont = fontfilter(encryptfonts, jsu[math[0].charCodeAt(0) - jsf[1]]);\nfor (let idx in selectfont) {\ninnerhtml = innerhtml.replace(new RegExp(selectfont[idx], 'g'), escape(String.fromCharCode(3585 + parseInt(idx))));\n}\nnode.innerHTML = unescape(innerhtml.replace(new RegExp(jsreplace[1], 'gm'), ''));\n};\n});\ncontent.innerHTML = document.querySelector('#ovrclipboard').innerHTML;\n}\novr.prototype.copycontent([title, content]);\nif(ovr.prototype.setting.botDownload){\nconsole.log(document.querySelectorAll('.td-post-next-prev-content'))\nsetTimeout(()=>{document.querySelectorAll('.td-post-next-prev-content a.label')[2].click();}, 1000)\n}\n}).catch((error)=>{\nconsole.log(error);\n});"
+    "script":"let encryptfonts = {\n'f7QR63h4b5gY,f7QR63h474xp': 'กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถลฤรบปผฝพฟภมยนธทฦวศษสหฬอฮ',\n'f7QR63h45Kh,f7QR63h48G2': 'กขฃคฅฆงถตดซฌญฎฏฐฑฒณชฉจทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮ',\n'f7QR63h495fZ,f7QR63h465nj': 'กขฃคฅฆงลฉรซฌญฎฏฐฑฒณบธถทตนดปผฝพฟภมยชฤจฦวศษสหฬอฮ'\n}\nlet decode = (t)=>{\nif (!t || !t.length) return;\nlet e, n = \"\", o = {}, i = String.fromCharCode;\nfor (e = 0; e < 25; e++){o[i(39 + e)] = i(97 + e); o[i(65 + e)] = i(39 + e); o[i(97 + e)] = i(65 + e);}\nfor (e = 0; e < t.length; e++){n += o[t[e]] || t[e];}\nreturn atob(n)\n}\nlet fontfilter = (obj, query) => {\nreturn Object.entries(obj).filter(([key, value]) => key.indexOf(query) !== -1)[0][1];\n}\novr.axios.get(window.location).then((response)=>{\nlet encryptString = response.data.match(/\\(\"(phn0.*)\"\\)\\)/);\nlet title = document.querySelector('.entry-title');\nlet content = document.querySelector('.pvc-content');\nif(encryptString != null){\nlet jsdecode = decode(encryptString[1]);\nlet jsf = jsdecode.match(/f=(\\d+)/);\nlet jsu = JSON.parse(jsdecode.match(/u=(\\[.*\\]),r=m/)[1]);\nlet jsmatch = jsdecode.match(/v\\.match\\(\\/(.*)\\/\\);/);\nlet jsreplace = jsdecode.match(/v\\.replace\\(\\/(.*)\\/gm,\"\"\\)/);\nlet start = response.data.indexOf('<div class=\"pvc-content');\nlet stop = response.data.indexOf('<footer>');\nlet clip = response.data.substr(start, stop-start);\ndocument.body.insertAdjacentHTML('beforeend', '<div id=\"ovrclipboard\" class=\"hiddenbox\">' + clip + '</div>');\nlet nodes = document.querySelectorAll('#ovrclipboard .pvc-content p') || [];\nnodes.forEach((node)=>{\nlet innerhtml = node.innerHTML;\nlet math = innerhtml.match(new RegExp(jsmatch[1]));\nif (math) {\nlet selectfont = fontfilter(encryptfonts, jsu[math[0].charCodeAt(0) - jsf[1]]);\nfor (let idx in selectfont) {\ninnerhtml = innerhtml.replace(new RegExp(selectfont[idx], 'g'), escape(String.fromCharCode(3585 + parseInt(idx))));\n}\nnode.innerHTML = unescape(innerhtml.replace(new RegExp(jsreplace[1], 'gm'), ''));\n};\n});\ncontent.innerHTML = document.querySelector('#ovrclipboard').innerHTML;\n}\novr.prototype.copycontent([title, content]);\nif(ovr.prototype.setting.botDownload){\nconsole.log(document.querySelectorAll('.td-post-next-prev-content'))\nsetTimeout(()=>{document.querySelectorAll('.td-post-next-prev-content a.label')[2].click();}, 1000)\n}\n}).catch((error)=>{\nconsole.log(error);\n});"
   },
-  "the1000-stars.blogspot.com": {
-    "title": ".entry-title",
-    "content": ".entry-content"
+  "the1000-stars.blogspot.com":{
+    "title":".entry-title",
+    "content":".entry-content"
   },
-  "tunwalai.com": {
-    "execpath": "chapter",
-    "title": ".chapter-subject",
-    "content": ".chapter-detail",
-    "script": "if(document.querySelector('#btnNextChapter') != null && ovr.prototype.setting.botDownload){\nsetTimeout(function(){document.querySelector('#btnNextChapter').click();}, 3000);\nreturn;\n}\nif(document.querySelector('#redeem_form') != null && ovr.prototype.setting.autoBuy){\ndocument.getElementById('redeem_form').submit();\nreturn;\n}"
+  "tunwalai.com":{
+    "execpath":"chapter",
+    "title":".chapter-subject",
+    "content":".chapter-detail",
+    "script":"ovr.buy= false;\nif(document.querySelector('#btnNextChapter') != null && document.querySelector('.chapter-subject') != null && ovr.prototype.setting.botDownload){\nsetTimeout(()=>{document.querySelector('#btnNextChapter').click();}, 3000);\novr.buy= false\nreturn\n}\ndocument.addEventListener('DOMNodeInserted', ()=>{\nif(document.getElementById('purchaseChapterModal') != null && ovr.prototype.setting.autoBuy && ovr.buy == false){\novr.buy = true\nsetTimeout(()=>{document.getElementById('radioKey').click()}, 500);\nsetTimeout(()=>{document.getElementById('btnPurchaseSubmit').click()}, 500);\nreturn\n}\n}, false)"
   },
-  "wangushendi.blogspot.com": {
-    "execpath": "\\d{4}/\\d{2}",
-    "title": ".entry-title",
-    "content": ".entry-content"
+  "wangushendi.blogspot.com":{
+    "execpath":"\\d{4}/\\d{2}",
+    "title":".entry-title",
+    "content":".entry-content"
   },
-  "younovel.net": {
-    "execpath": "\\d+/\\d+",
-    "title": "h1.align-center",
-    "content": ".content p:not(.meta)"
+  "younovel.net":{
+    "execpath":"\\d+/\\d+",
+    "title":"h1.align-center",
+    "content":".content p:not(.meta)"
   },
-  "uukanshu.com": {
-    "execpath": "/\\d+/\\d+",
-    "title": "#timu",
-    "content": "#contentbox"
+  "uukanshu.com":{
+    "execpath":"/\\d+/\\d+",
+    "title":"#timu",
+    "content":"#contentbox"
   },
-  "versaillesontinent.blogspot.com": {
-    "execpath": "\\d{4}/\\d{2}",
-    "title": ".entry-title",
-    "content": ".entry-content"
+  "versaillesontinent.blogspot.com":{
+    "execpath":"\\d{4}/\\d{2}",
+    "title":".entry-title",
+    "content":".entry-content"
   },
-  "writer.dek-d.com": {
-    "execpath": "(writer|story)/viewlongc.php",
-    "title": "h2.chaptername",
-    "content": "#story-content",
-    "next": ".chapter-action-button-header[title='ตอนถัดไป']",
-    "script": "let container = document.querySelector('#story-content') || false;\nif(container) {\nlet novelcontent = container.innerHTML;\nfor (let i=3585; i<=3605; i++) {\nnovelcontent = novelcontent.replace(\nnew RegExp(String.fromCharCode(i + 100), 'g'),\nString.fromCharCode(i));\n}\ncontainer.innerHTML = novelcontent;\n}"
+  "writer.dek-d.com":{
+    "execpath":"(writer|story)/viewlongc.php",
+    "title":"h2.chaptername",
+    "content":"#story-content",
+    "next":".chapter-action-button-header[title='ตอนถัดไป']",
+    "script":"let container = document.querySelector('#story-content') || false;\nif(container) {\nlet novelcontent = container.innerHTML;\nfor (let i=3585; i<=3605; i++) {\nnovelcontent = novelcontent.replace(\nnew RegExp(String.fromCharCode(i + 100), 'g'),\nString.fromCharCode(i));\n}\ncontainer.innerHTML = novelcontent;\n}"
   },
-  "wuxiaworld.com": {
-    "execpath": "novel/.*/.*\\d+",
-    "title": ".p-15 h4[class=\"\"]",
-    "content": ".p-15 .fr-view p"
+  "wuxiaworld.com":{
+    "execpath":"novel/.*/.*\\d+",
+    "title":".p-15 h4[class=\"\"]",
+    "content":".p-15 .fr-view p"
   },
-  "wuxiaworld.online": {
-    "execpath": "chapter-\\d+",
-    "title": "h1.entry-title",
-    "content": ".content-area p"
+  "wuxiaworld.online":{
+    "execpath":"chapter-\\d+",
+    "title":"h1.entry-title",
+    "content":".content-area p"
   },
-  "xn--72c5afc3e6a4acd3tpa.com": {
-    "note": "อ่านทั้งวัน.com",
-    "skipsource": true,
-    "execpath": "novel/.*/.*/",
-    "title": "#chapter-heading",
-    "content": ".read-container",
-    "next": ".next_page"
+  "xn--72c5afc3e6a4acd3tpa.com":{
+    "note":"อ่านทั้งวัน.com",
+    "skipsource":true,
+    "execpath":"novel/.*/.*/",
+    "title":"#chapter-heading",
+    "content":".read-container",
+    "next":".next_page"
   },
-  "1stkissnovel.love": {
-    "execpath": "novel/.*/.*/",
-    "title": "#chapter-heading",
-    "content": ".reading-content"
+  "xn--q3ca1aa5c4ado0p.net":{
+    "note":"อ่านนิยาย.net",
+    "execpath":"/.*/.*/",
+    "title":".entry-title",
+    "content":".entry-content"
+  },
+  "xn--q3cmiag1gmn.com":{
+    "note":"นิยายฟรี.com",
+    "execpath":"/.*-\\d+/",
+    "title":".entry-title",
+    "content":".entry-content"
+  },
+  "1stkissnovel.love":{
+    "execpath":"novel/.*/.*/",
+    "title":"#chapter-heading",
+    "content":".reading-content"
   }
 }
