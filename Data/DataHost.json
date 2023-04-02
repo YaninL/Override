@@ -1,5 +1,5 @@
 {
-  "updatetime":"20-02-66 11:00",
+  "updatetime":"02-04-66 11:15",
   "aileen-novel.online":{
     "skipsource":true,
     "execpath":"novel/\\d+.*/.*/",
@@ -463,11 +463,11 @@
     "title":".entry-title",
     "content":".entry-content"
   },
-  "tunwalai.com":{
-    "execpath":"chapter",
-    "title":".chapter-subject",
-    "content":".chapter-detail",
-    "script":"ovr.buy= false;\nif(document.querySelector('#btnNextChapter') != null && document.querySelector('.chapter-subject') != null && ovr.prototype.setting.botDownload){\nsetTimeout(()=>{document.querySelector('#btnNextChapter').click();}, 3000);\novr.buy= false\nreturn\n}\ndocument.addEventListener('DOMNodeInserted', ()=>{\nif(document.getElementById('purchaseChapterModal') != null && ovr.prototype.setting.autoBuy && ovr.buy == false){\novr.buy = true\nsetTimeout(()=>{document.getElementById('radioKey').click()}, 500);\nsetTimeout(()=>{document.getElementById('btnPurchaseSubmit').click()}, 500);\nreturn\n}\n}, false)"
+  "tunwalai.com": {
+    "execpath": "chapter",
+    "title": ".chapter-subject",
+    "content": ".chapter-detail",
+    "script": "const encryptChar = [3585, 3591, 3604, 3609, 3610, 3617, 3618, 3623, 3629]\r\nconst contentNode = document.querySelector('.chapter-content > .chapter-detail')\r\nlet decryptContent = contentNode.innerHTML\r\nencryptChar.map((char)=>{\r\ndecryptContent = decryptContent.replace(\r\nnew RegExp(String.fromCharCode(char + 53759), 'g'),\r\nString.fromCharCode(char)\r\n)\r\n})\r\ncontentNode.innerHTML= decryptContent\r\novr.buy= false;\r\nif(document.querySelector('#btnNextChapter') != null && document.querySelector('.chapter-subject') != null && ovr.prototype.setting.botDownload){\r\nsetTimeout(()=>{document.querySelector('#btnNextChapter').click();}, 3000);\r\novr.buy= false\r\nreturn\r\n}\r\ndocument.addEventListener('DOMNodeInserted', ()=>{\r\nif(document.getElementById('purchaseChapterModal') != null && ovr.prototype.setting.autoBuy && ovr.buy == false){\r\novr.buy = true\r\nsetTimeout(()=>{document.getElementById('radioKey').click()}, 500);\r\nsetTimeout(()=>{document.getElementById('btnPurchaseSubmit').click()}, 500);\r\nreturn\r\n}\r\n}, false)"
   },
   "wangushendi.blogspot.com":{
     "execpath":"\\d{4}/\\d{2}",
