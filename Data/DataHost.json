@@ -1,5 +1,5 @@
 {
-  "updatetime":"19-12-66 13:32",
+  "updatetime":"3-5-67 19:25",
   "aileen-novel.online":{
     "skipsource":true,
     "execpath":"novel/\\d+.*/.*/",
@@ -81,14 +81,9 @@
       ".ovrbutton{margin:0 0 0 15px;padding:2px 10px 2px 10px;}"
     ]
   },
-  "enjoybook.co":{
-    "css":[
-      "#scrollUp{bottom:20px!important;z-index:10!important}"
-    ],
-    "execpath":"/r/",
-    "title":".card-body h4",
-    "content":".read_detail p, .read_detail div",
-    "next":".card-body div.text-right a.f0"
+  "enjoybook.co": {
+    "execpath": "/cr/",
+    "script": "ovr.lastChapter = '';\r\ndocument.addEventListener('DOMNodeInserted', function () {\r\nconst title = document.querySelector('.line-clamp-1') || false;\r\nconst content = document.querySelectorAll('p[style^=\"font-family: Prompt;\"]');\r\nif(content.length == 0 || ovr.lastChapter == title.innerText) return;\r\novr.prototype.setclipboard(content);\r\novr.lastChapter = title.innerText;\r\n}, false);"
   },
   "facebook.com":{
     "skipremove":true,
